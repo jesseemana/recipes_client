@@ -7,7 +7,7 @@ import './index.css'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { Provider } from 'react-redux'
 import { configureStore } from "@reduxjs/toolkit"
-import recipeReducer from './state/recipeSlice'
+import appReducer from './state/appSlice'
 import {
     persistStore,
     persistReducer,
@@ -22,17 +22,17 @@ import storage from 'redux-persist/lib/storage'
 import { PersistGate } from 'redux-persist/integration/react'
 
 const persistConfig = { key: 'root', storage, version: 1 };
-const persistedReducer = persistReducer(persistConfig, recipeReducer)
+const persistedReducer = persistReducer(persistConfig, appReducer)
 
 
 const store = configureStore({
     reducer: persistedReducer,
     middleware: (getDefaultMiddleware) =>
-        getDefaultMiddleware({
-            serializableCheck: {
-                ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
-            },
-        })
+      getDefaultMiddleware({
+        serializableCheck: {
+          ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER]
+        },
+      })
 })
 
 

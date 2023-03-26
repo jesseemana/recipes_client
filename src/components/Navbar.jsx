@@ -21,14 +21,14 @@ const Navbar = () => {
  
   if(!user) {
     return (
-      <div className="p-3 bg-blue-200 shadow-sm flex justify-between">
+      <div className="p-3 bg-white shadow-sm flex justify-between">
         <h1 className="text-2xl font-bold capitalize">foodiesss.</h1>
       </div>
     )
   }
 
   return (
-    <div className="p-3 bg-blue-200 shadow-sm flex justify-between">
+    <div className="p-3 bg-white shadow-sm flex justify-between">
         <h1 className="text-2xl font-bold capitalize">foodiesss.</h1>
         <button
           className="font-semibold capitalize"

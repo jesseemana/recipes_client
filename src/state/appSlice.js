@@ -1,4 +1,7 @@
-import {createSlice} from '@reduxjs/toolkit'
+import {createAsyncThunk, createSlice} from '@reduxjs/toolkit'
+
+import axios from '../api/axios'
+const RECIPES_URL = '/recipes'
 
 
 const initialState = {
@@ -7,10 +10,21 @@ const initialState = {
     refresh_token: null,
     users: [],
     recipes: [],
+    status: 'idle',
+    error: null
 }
 
+// export const getRecipes = createAsyncThunk('/recipes/fetchAll', async (state, action) => {
+//     try {
+//         const response = await axios.get(RECIPES_URL, {headers: {Authorization: `Bearer ${initialState.access_token}`}})
+//         return response.data
+//     } catch (error) {
+//         console.log(`An error occured ${error}`)
+//     }
+// })
 
-const recipesSlice = createSlice({
+
+const appSlice = createSlice({
     name: 'recipe',
     initialState,
     reducers: {
@@ -30,8 +44,22 @@ const recipesSlice = createSlice({
         setUsers: function(state, action) {
             state.users = action.payload.user
         },
-    }
+    },
+    // extraReducers(builder){
+    //     builder
+    //         .addCase(getRecipes.pending, (state, action) => {
+    //             state.status = 'loading'
+    //         })
+    //         .addCase(getRecipes.fulfilled, (state, action) => {
+    //             state.status = 'succeeded'
+    //             state.recipes.push(action.payload)
+    //         })
+    //         .addCase(getRecipes.rejected, (state, action) => {
+    //             state.status = 'failed!'
+    //             state.error = action.error.message
+    //         })
+    // }
 })
 
-export const {setLogin, setLogout, setRecipes, setUsers} = recipesSlice.actions
-export default recipesSlice.reducer
+export const {setLogin, setLogout, setRecipes, setUsers} = appSlice.actions
+export default appSlice.reducer

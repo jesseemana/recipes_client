@@ -17,7 +17,7 @@ function App(){
 
       <Routes>
         <Route path='/auth' element={<AuthUser />} />
-        <Route path='/home' element={isAuth ? <Home /> : <Navigate to='/auth' /> } />
+        <Route path='/' element={isAuth ? <Home /> : <Navigate to='/auth' /> } />
         <Route path='/newrecipe' element={isAuth ? <CreateRecipe/> : <Navigate to='/auth' /> } />
         <Route path='/user/:id' element={isAuth ? <User /> : <Navigate to='/auth' />} />
         <Route path='/recipe/:id' element={isAuth ? <Recipe /> : <Navigate to='/auth' />} />

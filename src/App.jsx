@@ -3,8 +3,8 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import AuthUser from './pages/AuthUser'
 import Home from './pages/Home'
-import Recipe from './pages/Recipe'
-import User from './pages/User'
+import Recipe from './components/Recipe'
+import User from './components/User'
 
 
 function App(){ 

@@ -18,6 +18,7 @@ const Navbar = () => {
     navigate('/auth')
   }
 
+  console.log(user)
   
   let content
   if(!user) content = <>
@@ -38,7 +39,7 @@ const Navbar = () => {
           >
             log out
           </button>
-          <Link to={'/user'}>
+          <Link to={`${'/user/'}${user._id}`}>
             Profile
           </Link>
         </div>

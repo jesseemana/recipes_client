@@ -37,7 +37,7 @@ const appSlice = createSlice({
 })
 
 export const {setLogin, setLogout, setRecipes, setUsers} = appSlice.actions
-export default appSlice.reducer;
+export default appSlice.reducer
 
 
 // export const getRecipes = createAsyncThunk('/recipes/fetchAll', async (state, action) => {

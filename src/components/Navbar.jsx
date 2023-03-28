@@ -21,14 +21,15 @@ const Navbar = () => {
  
   if(!user) {
     return (
-      <div className="p-3 bg-white shadow-sm flex justify-between">
+      <div className="p-3 max-w-full px-[8%]  bg-white shadow-sm flex justify-between">
         <h1 className="text-2xl text-blue-600 font-bold capitalize">foodiesss.</h1>
       </div>
     )
   }
 
   return (
-    <div className="p-3 bg-white shadow-sm flex justify-between">
+    <div className="max-w-full px-[8%] bg-white shadow-sm ">
+      <div className="py-4 flex justify-between">
         <h1 className="text-2xl text-blue-600 font-bold capitalize">foodiesss.</h1>
         <button
           onClick={handleLogout}
@@ -36,6 +37,7 @@ const Navbar = () => {
         >
           log out
         </button>
+      </div>
     </div>
   )
 }

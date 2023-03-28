@@ -13,7 +13,7 @@ function App(){
   return (
     <>
       <Navbar />
-      
+
       <Routes>
         <Route path='/auth' element={<AuthUser />} />
         <Route path='/home' element={isAuth ? <Home /> : <Navigate to='/auth' /> } />

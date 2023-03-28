@@ -18,7 +18,7 @@ const Navbar = () => {
     navigate('/auth')
   }
 
-  console.log(user)
+  // console.log(user)
   
   let content
   if(!user) content = <>
@@ -32,16 +32,19 @@ const Navbar = () => {
         <Link to={'/home'}>
           <h1 className="text-2xl text-blue-600 font-bold capitalize">foodiesss.</h1>
         </Link>
-        <div>
+        <div className="flex gap-x-1">
+          <Link to={`${'/user/'}${user._id}`} className="capitalize">
+            profile
+          </Link>
+          <Link to={`newrecipe`} className="capitalize">
+            add recipe
+          </Link>
           <button
             onClick={handleLogout}
             className="font-semibold capitalize text-md text-white bg-blue-600 rounded-full px-4"
           >
             log out
           </button>
-          <Link to={`${'/user/'}${user._id}`}>
-            Profile
-          </Link>
         </div>
       </div>
     </div>

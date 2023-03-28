@@ -14,10 +14,10 @@ function App(){
     <>
       <Navbar />
       <Routes>
-        <Route path='/' element={<AuthUser />} />
-        <Route path='/home' element={isAuth ? <Home /> : <Navigate to='/' /> } />
-        <Route path='/user/:id' element={isAuth ? <User /> : <Navigate to='/' />} />
-        <Route path='/recipe/:id' element={isAuth ? <Recipe /> : <Navigate to='/' />} />
+        <Route path='/auth' element={<AuthUser />} />
+        <Route path='/home' element={isAuth ? <Home /> : <Navigate to='/auth' /> } />
+        <Route path='/user/:id' element={isAuth ? <User /> : <Navigate to='/auth' />} />
+        <Route path='/recipe/:id' element={isAuth ? <Recipe /> : <Navigate to='/auth' />} />
       </Routes>
     </>
   )

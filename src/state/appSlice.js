@@ -10,18 +10,7 @@ const initialState = {
     refresh_token: null,
     users: [],
     recipes: [],
-    status: 'idle',
-    error: null
 }
-
-// export const getRecipes = createAsyncThunk('/recipes/fetchAll', async (state, action) => {
-//     try {
-//         const response = await axios.get(RECIPES_URL, {headers: {Authorization: `Bearer ${initialState.access_token}`}})
-//         return response.data
-//     } catch (error) {
-//         console.log(`An error occured ${error}`)
-//     }
-// })
 
 
 const appSlice = createSlice({
@@ -45,6 +34,22 @@ const appSlice = createSlice({
             state.users = action.payload.user
         },
     },
+})
+
+export const {setLogin, setLogout, setRecipes, setUsers} = appSlice.actions
+export default appSlice.reducer;
+
+
+// export const getRecipes = createAsyncThunk('/recipes/fetchAll', async (state, action) => {
+//     try {
+//         const response = await axios.get(RECIPES_URL, {headers: {Authorization: `Bearer ${initialState.access_token}`}})
+//         return response.data
+//     } catch (error) {
+//         console.log(`An error occured ${error}`)
+//     }
+// })
+
+
     // extraReducers(builder){
     //     builder
     //         .addCase(getRecipes.pending, (state, action) => {
@@ -59,7 +64,3 @@ const appSlice = createSlice({
     //             state.error = action.error.message
     //         })
     // }
-})
-
-export const {setLogin, setLogout, setRecipes, setUsers} = appSlice.actions
-export default appSlice.reducer

@@ -15,7 +15,7 @@ const Navbar = () => {
   const handleLogout = async () => {
     dispatch(setLogout())
     await axios.post(LOGOUT_URL)
-    navigate('/')
+    navigate('/auth')
   }
   
  

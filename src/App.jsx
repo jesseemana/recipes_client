@@ -6,8 +6,8 @@ import Home from './pages/Home'
 import Recipe from './components/Recipe'
 import User from './components/User'
 import CreateRecipe from './components/CreateRecipe';
-import NotFound from './pages/NotFound';
-import ResetPwd from './pages/ResetPwd';
+import NotFound from './components/NotFound';
+import ResetPwd from './components/ResetPwd';
 
 
 function App(){ 

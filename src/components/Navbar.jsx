@@ -11,14 +11,15 @@ const Navbar = () => {
   const navigate = useNavigate()
 
   const user = useSelector(state => state.user)
+  const token = useSelector(state => state.access_token)
   
+
   const handleLogout = async () => {
     dispatch(setLogout())
-    await axios.post(LOGOUT_URL)
+    await axios.post(LOGOUT_URL, { headers: { Authorization: `Bearer ${token}` }})
     navigate('/auth')
   }
 
-  // console.log(user)
   
   let content
   if(!user) content = <>
@@ -30,13 +31,13 @@ const Navbar = () => {
     <div className="max-w-full px-[8%] bg-white shadow-sm ">
       <div className="py-4 flex justify-between">
         <Link to={'/home'}>
-          <h1 className="text-2xl text-blue-600 font-bold capitalize">foodiesss.</h1>
+          <h1 className="text-lg md:text-2xl text-blue-600 font-bold capitalize">foodiesss.</h1>
         </Link>
         <div className="flex gap-x-1">
           <Link to={`${'/user/'}${user._id}`} className="capitalize">
             profile
           </Link>
-          <Link to={`newrecipe`} className="capitalize">
+          <Link to={`/newrecipe`} className="capitalize">
             add recipe
           </Link>
           <button

@@ -6,6 +6,8 @@ import Home from './pages/Home'
 import Recipe from './components/Recipe'
 import User from './components/User'
 import CreateRecipe from './components/CreateRecipe';
+import NotFound from './pages/NotFound';
+import ResetPwd from './pages/ResetPwd';
 
 
 function App(){ 
@@ -17,10 +19,12 @@ function App(){
 
       <Routes>
         <Route path='/auth' element={<AuthUser />} />
+        <Route path='/reset' element={<ResetPwd />} />
         <Route path='/' element={isAuth ? <Home /> : <Navigate to='/auth' /> } />
         <Route path='/newrecipe' element={isAuth ? <CreateRecipe/> : <Navigate to='/auth' /> } />
         <Route path='/user/:id' element={isAuth ? <User /> : <Navigate to='/auth' />} />
         <Route path='/recipe/:id' element={isAuth ? <Recipe /> : <Navigate to='/auth' />} />
+        <Route path='*' element={<NotFound />} />
       </Routes>
     </>
   )

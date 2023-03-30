@@ -1,5 +1,6 @@
 import axios from 'axios';
 
+
 export default axios.create({
     baseURL: 'http://localhost:8080'
 });
@@ -10,7 +11,6 @@ const recipesAPI = axios.create({
 });
 
 export const RECIPE_URL = '/recipes'
-
 
 export const addRecipe = async ({ userId, title, completed }) => {
     const response = await recipesAPI.post(RECIPE_URL, { userId, title, completed })

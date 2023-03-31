@@ -10,7 +10,7 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  const user = useSelector(state => state.user)
+  // const user = useSelector(state => state.user)
   const token = useSelector(state => state.access_token)
   
 
@@ -22,7 +22,7 @@ const Navbar = () => {
 
   
   let content
-  if(!user) content = <>
+  if(!token) content = <>
       <div className="p-3 max-w-full px-[8%]  bg-white shadow-sm flex justify-between">
         <h1 className="text-2xl text-blue-600 font-bold capitalize">foodiesss.</h1>
       </div>

@@ -16,7 +16,7 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     dispatch(setLogout())
-    await axios.post(LOGOUT_URL, { headers: { Authorization: `Bearer ${token}` }})
+    await axios.post(LOGOUT_URL, { headers: { Authorization: `Bearer ${token}` }}) // CLEARS REFRESH TOKEN FROM COOKIE
     navigate('/auth')
   }
 

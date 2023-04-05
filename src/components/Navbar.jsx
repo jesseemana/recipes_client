@@ -10,7 +10,7 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
 
-  // const user = useSelector(state => state.user)
+  const user = useSelector(state => state.user)
   const token = useSelector(state => state.access_token)
   
 
@@ -30,7 +30,7 @@ const Navbar = () => {
   else content = <>
     <div className="max-w-full px-[8%] bg-white shadow-sm ">
       <div className="py-4 flex justify-between">
-        <Link to={'/home'}>
+        <Link to={'/'}>
           <h1 className="text-lg md:text-2xl text-blue-600 font-bold capitalize">foodiesss.</h1>
         </Link>
         <div className="flex gap-x-1">

@@ -33,7 +33,7 @@ const UserRecipes = () =>{
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
     useEffect(() => {
-        document.title = `${owner}'s Recipes`
+        loading ? document.title = 'Loading...': document.title = `${owner}'s Recipes`
     })
   
     let content 

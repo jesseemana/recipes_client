@@ -7,6 +7,7 @@ import { Link } from "react-router-dom"
 import cake from '../assets/cake.jpg'
 
 import axios from "../api/axios"
+import Loader from "./Loader/Loader";
 const RECIPE_URL = '/recipes'
 
 const Recipe = () => { 
@@ -40,7 +41,7 @@ const Recipe = () => {
 
 
   let content
-  if(loading) content = <div className="flex justify-center mt-[50%] lg:mt-[15%]"><ImSpinner8 className="animate-spin text-[60px] text-blue-400" /></div>
+  if(loading) content = <div className='max-w-full px-[8%] border flex justify-center items-center h-[90vh]'><Loader /></div>
   else content = <>
     <div className="max-w-full px-[8%] flex flex-col justify-center gap-x-20 md:flex-row py-4 ">
       <div className="flex flex-col gap-y-3">

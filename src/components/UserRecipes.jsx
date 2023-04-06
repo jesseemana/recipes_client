@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import { ImSpinner8 } from "react-icons/im"
 import axios from '../api/axios';
 import Recipes from '../pages/Recipes';
+import Loader from './Loader/Loader';
 
 const RECIPE_URL = '/recipes/user'
 
@@ -37,10 +38,10 @@ const UserRecipes = () =>{
     })
   
     let content 
-    if(loading) content = <div className="flex justify-center mt-[50%] lg:mt-[15%]"><ImSpinner8 className="animate-spin text-[50px] text-blue-400" /></div>
+    if(loading) content = <div className='max-w-full px-[8%] border flex justify-center items-center h-[90vh]'><Loader /></div>
     else content = <>
             <div>
-                <div className='capitalize text-center py-5'>more recipes by {owner}</div>
+                <div className='capitalize text-center pt-7'>more recipes by {owner}</div>
                 <Recipes recipes={recipes} />
             </div>
         </>

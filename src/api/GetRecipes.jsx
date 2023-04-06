@@ -1,25 +1,14 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux'
-import useSWR from 'swr'
-import Home from '../pages/Home'
 import Recipes from '../pages/Recipes'
-import { setRecipes, setUsers } from '../state/appSlice'
 
 import axios from './axios';
+import Loader from '../components/Loader/Loader';
 
 
 const GetRecipes = () => {
   const dispatch = useDispatch()
   const token = useSelector(state => state.access_token)
-   
-  // const fetcher = (url, token) =>
-  //   fetch(url, {headers: {'Authorization': `Bearer ${token}`}}).then(res => res.json());
-    
-  // const {isLoading, data, error} = useSWR('http://localhost:8080/recipes', (url) => fetcher(url, token))
-
-  // if(isLoading) return <div>Loading...</div>
-  // if(error) return <div>Couldn't get data, refresh page</div>
-  // dispatch(setRecipes({recipes: data}))
 
   const [recipes, setRecipes] = useState([]) 
   const [loading, setLoading] = useState(true)
@@ -42,10 +31,8 @@ const GetRecipes = () => {
   }, []) // eslint-disable-line react-hooks/exhaustive-
   
 
-  if(loading) return <div className='max-w-full px-[8%]'>Loading...</div>
-  
+  if(loading) return <div className='max-w-full px-[8%] border flex justify-center items-center h-[90vh]'><Loader /></div>
   return <Recipes recipes={recipes} />
-  
 }
 
 export default GetRecipes

@@ -15,26 +15,30 @@ const Navbar = () => {
   
 
   const handleLogout = async () => {
-    dispatch(setLogout())
-    await axios.post(LOGOUT_URL, { headers: { Authorization: `Bearer ${token}` }}) // CLEARS REFRESH TOKEN FROM COOKIE
-    navigate('/auth')
+    try {
+      dispatch(setLogout())
+      await axios.post(LOGOUT_URL, { headers: { Authorization: `Bearer ${token}` }}) // CLEARS REFRESH TOKEN FROM COOKIE
+      navigate('/auth')
+    } catch (error) {
+      console.log(`An error occurred ${error}`)
+    }
   }
 
   
   let content
   if(!token) content = <>
-      <div className="p-3 max-w-full px-[8%]  bg-white shadow-sm flex justify-between">
+      <div className="p-3 max-w-full px-[4%] bg-white shadow-sm flex justify-between">
         <h1 className="text-2xl text-blue-600 font-bold capitalize">foodiesss.</h1>
       </div>
     </>
   else content = <>
-    <div className="max-w-full px-[8%] bg-white shadow-sm ">
+    <div className="max-w-full px-[4%] bg-white shadow-sm ">
       <div className="py-4 flex justify-between">
         <Link to={'/'}>
           <h1 className="text-lg md:text-2xl text-blue-600 font-bold capitalize">foodiesss.</h1>
         </Link>
         <div className="flex gap-x-1">
-          <Link to={`${'/user/'}${user._id}`} className="capitalize">
+          <Link to={`${'/profile/'}${user._id}`} className="capitalize">
             profile
           </Link>
           <Link to={`/newrecipe`} className="capitalize">

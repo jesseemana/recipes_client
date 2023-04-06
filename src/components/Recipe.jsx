@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
-import { ImSpinner3 } from "react-icons/im"
+import { ImSpinner8 } from "react-icons/im"
 import { Link } from "react-router-dom"
 
 import cake from '../assets/cake.jpg'
@@ -15,7 +15,6 @@ const Recipe = () => {
   const [owner, setOwner] = useState('')
   const [loading, setLoading] = useState(true)
 
-  const user = useSelector((state) => state.user)
   const token = useSelector((state) => state.access_token)
 
   const getRecipe = async () => {
@@ -29,7 +28,7 @@ const Recipe = () => {
       console.log(`An error occured ${error}`)
     }
   }
-  
+
   useEffect(() => {
     getRecipe()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
@@ -41,11 +40,11 @@ const Recipe = () => {
 
 
   let content
-  if(loading) content = <div className="flex justify-center mt-[50%] lg:mt-[15%]"><ImSpinner3 className="animate-spin text-[60px] text-blue-400" /></div>
+  if(loading) content = <div className="flex justify-center mt-[50%] lg:mt-[15%]"><ImSpinner8 className="animate-spin text-[60px] text-blue-400" /></div>
   else content = <>
     <div className="max-w-full px-[8%] flex flex-col justify-center gap-x-20 md:flex-row py-4 ">
       <div className="flex flex-col gap-y-3">
-        <h1>{recipe.name} by <span><Link to={`${'/user/'}${user._id}`}>{owner}</Link></span></h1>
+        <h1>{recipe.name} by <span><Link to={`${'/user/'}${recipe.user}`}>{owner}</Link></span></h1>
         <img src={cake} alt="a beautiful delicious chockolate cake" className="w-[300px] h-[250px] shadow-lg rounded-md" />
         <p className="text-gray-700">Cooking time: {recipe.time}min.</p>
         <div>

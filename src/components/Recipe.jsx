@@ -1,13 +1,12 @@
-import { useEffect, useState } from "react"
-import { useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
-import { ImSpinner8 } from "react-icons/im"
-import { Link } from "react-router-dom"
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 
 import cake from '../assets/cake.jpg'
 
-import axios from "../api/axios"
-import Loader from "./Loader/Loader";
+import axios from '../api/axios'
+import Loader from './Loader/Loader'
 const RECIPE_URL = '/recipes'
 
 const Recipe = () => { 
@@ -16,7 +15,9 @@ const Recipe = () => {
   const [owner, setOwner] = useState('')
   const [loading, setLoading] = useState(true)
 
+  
   const token = useSelector((state) => state.access_token)
+
 
   const getRecipe = async () => {
     try {
@@ -29,6 +30,7 @@ const Recipe = () => {
       console.log(`An error occured ${error}`)
     }
   }
+
 
   useEffect(() => {
     getRecipe()
@@ -62,7 +64,6 @@ const Recipe = () => {
     </div>
   </>
 
-  
   return content
 }
 

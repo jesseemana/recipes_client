@@ -1,10 +1,9 @@
 import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux';
-import { useParams } from 'react-router-dom';
-import { ImSpinner8 } from "react-icons/im"
-import axios from '../api/axios';
-import Recipes from '../pages/Recipes';
-import Loader from './Loader/Loader';
+import { useSelector } from 'react-redux'
+import { useParams } from 'react-router-dom'
+import axios from '../api/axios'
+import Recipes from '../pages/Recipes'
+import Loader from './Loader/Loader'
 
 const RECIPE_URL = '/recipes/user'
 

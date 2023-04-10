@@ -26,7 +26,7 @@ const GetRecipes = () => {
   
   useEffect(() => {
     getRecipes()
-  }, []) // eslint-disable-line react-hooks/exhaustive-
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
   
 
   if(loading) {

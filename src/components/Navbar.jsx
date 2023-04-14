@@ -1,6 +1,9 @@
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate, Link } from "react-router-dom"
 import { setLogout } from "../state/appSlice"
+import { FiLogOut } from "react-icons/fi"
+import { FiUser } from "react-icons/fi"
+import { MdOutlineAddBox } from "react-icons/md";
 
 import axios from "../api/axios"
 const LOGOUT_URL = '/auth/logout'
@@ -27,28 +30,27 @@ const Navbar = () => {
   
   let content
   if(!token) content = <>
-      <div className="p-3 max-w-full px-[4%] bg-white shadow-sm flex justify-between">
-        <h1 className="text-2xl text-blue-600 font-bold capitalize">foodiesss.</h1>
+      <div className="p-3 max-w-full px-[4%] bg-white border border-l-0 border-r-0 border-t-0 border-gray-800 flex justify-between">
+        <h1 className="text-2xl text-[#38D6C4] font-bold uppercase">foodiesss.</h1>
       </div>
     </>
   else content = <>
-    <div className="max-w-full px-[4%] bg-white shadow-sm ">
-      <div className="py-4 flex justify-between">
+    <div className="max-w-full px-[4%] bg-white border border-l-0 border-r-0 border-t-0 border-gray-300 sticky top-0 left-0 right-0 z-10">
+      <div className="py-4 flex justify-between items-center">
         <Link to={'feed'}>
-          <h1 className="text-lg md:text-2xl text-blue-600 font-bold capitalize">foodiesss.</h1>
+          <h1 className="text-lg md:text-2xl text-[#38D6C4] font-bold uppercase">foodiesss.</h1>
         </Link>
-        <div className="flex gap-x-1">
-          <Link to={`${'/profile/'}${user._id}`} className="capitalize">
-            profile
-          </Link>
+        <div className="flex gap-x-4">
           <Link to={`/newrecipe`} className="capitalize">
-            add recipe
+            <MdOutlineAddBox className="text-2xl text-[#38D6C4]" />
+          </Link>
+          <Link to={`${'/profile/'}${user._id}`} className="capitalize">
+            <FiUser className="text-2xl text-[#38D6C4]" />
           </Link>
           <button
             onClick={handleLogout}
-            className="font-semibold capitalize text-md text-white bg-blue-600 rounded-full px-4"
           >
-            log out
+            <FiLogOut className="text-2xl text-[#38D6C4]" />
           </button>
         </div>
       </div>

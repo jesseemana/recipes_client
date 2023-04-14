@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import { Link } from 'react-router-dom'
+import { FiBookmark } from 'react-icons/fi'
+import { BsClock } from 'react-icons/bs'
+import Loader from './Loader'
 
 import cake from '../assets/cake.jpg'
 
@@ -39,31 +42,33 @@ const Recipe = () => {
   })
 
 
-  return (
-    <>
-      <div className="max-w-full px-[8%] flex flex-col justify-center gap-x-20 md:flex-row py-4 ">
-        <div className="flex flex-col gap-y-3">
-          <h1 className='capitalize'>{recipe.name}</h1>
-          <img src={cake} alt="a beautiful delicious chockolate cake" className="w-[300px] h-[250px] shadow-lg rounded-md" />
-          <p className="text-gray-700">Cooking time: {recipe.time}min.</p>
-          <p>view more by <span><Link to={`${'/user/'}${recipe.user}`}>{owner}</Link></span></p>
-          <div>
-            <h1 className="uppercase text-lg font-medium text-gray-900 underline">ingridients</h1>
-            <p className="max-w-[400px] text-gray-700">{recipe.ingridients}</p>
-          </div>
+  let content
+  if(loading) content = <Loader />
+  else content = <>
+    <div className="max-w-full px-[8%] flex flex-col justify-center gap-y-5 gap-x-20 md:flex-row py-4 ">
+      <div className="flex flex-col gap-y-3">
+        <img src={cake} alt="a beautiful delicious chockolate cake" className="w-[300px] h-[250px] shadow-lg rounded-md" />
+        <h1 className='capitalize font-semibold text-xl'>{recipe.name}</h1>
+        <div className='flex gap-x-5'>
+          <p className="flex items-center gap-x-2 text-gray-700"><span><BsClock  className="text-xl text-[#38D6C4]"/></span>{recipe.time}min</p>
+          <button className="flex items-center gap-x-2 text-gray-700"><span><FiBookmark className="text-2xl text-[#38D6C4]"/></span> save recipe</button>
         </div>
-        <div className="mt-8">
-          <div>
-            <h1 className="uppercase text-lg font-medium text-gray-900 underline">procedure</h1>
-            <p className="max-w-[400px] text-gray-700">{recipe.procedure}</p>
-          </div>
+        <Link to={`${'/user/'}${recipe.user}`} className='text-md font-extralight w-[190px] text-gray-500'>view more by {owner}</Link>
+        <div>
+          <h1 className="uppercase text-lg font-medium text-gray-900 ">ingridients</h1>
+          <p className="max-w-[400px] text-gray-600">{recipe.ingridients}</p>
         </div>
       </div>
-    </>
-  )
+      <div>
+        <div>
+          <h1 className="uppercase text-lg font-medium text-gray-900 ">procedure</h1>
+          <p className="max-w-[400px] text-gray-600">{recipe.procedure}</p>
+        </div>
+      </div>
+    </div>
+  </>
 
-  
-  // return content
+  return content
 }
 
 export default Recipe

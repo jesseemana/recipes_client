@@ -16,11 +16,11 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      dispatch(setLogout())
       await axios.post(LOGOUT_URL, { headers: { Authorization: `Bearer ${token}` }}) // CLEARS REFRESH TOKEN FROM COOKIE
-      navigate('/auth')
+      dispatch(setLogout())
+      navigate('/')
     } catch (error) {
-      console.log(`An error occurred ${error}`)
+      console.log(`An error occurred: ${error}`)
     }
   }
 
@@ -34,7 +34,7 @@ const Navbar = () => {
   else content = <>
     <div className="max-w-full px-[4%] bg-white shadow-sm ">
       <div className="py-4 flex justify-between">
-        <Link to={'/'}>
+        <Link to={'feed'}>
           <h1 className="text-lg md:text-2xl text-blue-600 font-bold capitalize">foodiesss.</h1>
         </Link>
         <div className="flex gap-x-1">

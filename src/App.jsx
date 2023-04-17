@@ -1,11 +1,11 @@
 import { useSelector } from 'react-redux'
-import { Routes, Route, Navigate } from 'react-router-dom'
+import { Routes, Route, Navigate, redirect } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import CreateRecipe from './components/CreateRecipe'
 import ResetPwd from './components/ResetPwd'
 import AuthUser from './pages/AuthUser'
 import NotFound from './pages/NotFound'
-
+import toast, { Toaster } from 'react-hot-toast'
 import Loader from './components/Loader'
 
 import { lazy, Suspense } from 'react'
@@ -23,15 +23,17 @@ function App(){
       <Navbar />
 
       <Routes>
-        <Route path='/' element={!isAuth ? <AuthUser /> : <Navigate to='feed' />} />
-        <Route path='reset' element={<ResetPwd />} />
-        <Route path='feed' element={isAuth ? <Suspense fallback={<Loader />}> <Home /> </Suspense> : <Navigate to='/' /> } />
-        <Route path='recipe/:id' element={isAuth ? <Suspense fallback={<Loader />}> <Recipe /> </Suspense> : <Navigate to='/' /> } />
-        <Route path='user/:id' element={isAuth ? <Suspense fallback={<Loader />}> <UserRecipes /> </Suspense> : <Navigate to='/' />} />
-        <Route path='profile/:id' element={isAuth ? <Suspense fallback={<Loader />}> <Profile /> </Suspense> : <Navigate to='/' />} />
-        <Route path='newrecipe' element={isAuth ? <CreateRecipe/> : <Navigate to='auth' /> } />
+        <Route path='/' element={<Navigate to='/feed'/>} />
+        <Route path='/auth' element={<AuthUser />} />
+        <Route path='/reset' element={<ResetPwd />} />
+        <Route path='/feed' element={<Suspense fallback={<Loader />}> <Home /> </Suspense>} />
+        <Route path='/recipe/:id' element={<Suspense fallback={<Loader />}> <Recipe /> </Suspense>} />
+        <Route path='/user/:id' element={<Suspense fallback={<Loader />}> <UserRecipes /> </Suspense>} />
+        <Route path='/profile/:id' element={isAuth ? <Suspense fallback={<Loader />}> <Profile /> </Suspense> : <Navigate to='/' />} />
+        <Route path='/newrecipe' element={isAuth ? <CreateRecipe/> : <Navigate to='auth' /> } />
         <Route path='*' element={<NotFound />} />
       </Routes>
+      <Toaster />
     </>
   )
 }

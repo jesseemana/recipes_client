@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
-import Recipes from '../pages/Recipes'
+import Recipes from '../components/Recipes'
 import Loader from '../components/Loader'
 
 import axios from './axios'
@@ -21,7 +21,6 @@ const GetRecipes = () => {
       console.log(`An error occured ${error}`)
     }
   }
-  
   
   useEffect(() => {
     getRecipes()

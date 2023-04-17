@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import { BsClock } from 'react-icons/bs'
 import { toast } from 'react-hot-toast'
-import { useNavigate, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import Loader from './Loader'
 
 import cake from '../assets/cake.jpg'
@@ -18,8 +18,6 @@ const Recipe = () => {
   const [owner, setOwner] = useState('')
   const [loading, setLoading] = useState(true)
   const [bookmark, setBookmark] = useState(false)
-
-  const navigate = useNavigate()
 
   const token = useSelector((state) => state.access_token)
 
@@ -78,7 +76,7 @@ const Recipe = () => {
   if(loading) content = <Loader />
   else content = <>
     <div className="max-w-full px-[8%] flex flex-col justify-center gap-y-5 gap-x-20 md:flex-row py-4 ">
-        {/* <button onCklick={() => navigate(-1)}>back</button> */}
+      {/* <button onCklick={() => navigate(-1)}>back</button> */}
       <div className="flex flex-col gap-y-3">
         <img src={cake} alt="a beautiful delicious chockolate cake" className="w-[300px] h-[250px] shadow-lg rounded-md" />
         <h1 className='capitalize font-semibold text-xl'>{recipe.name}</h1>

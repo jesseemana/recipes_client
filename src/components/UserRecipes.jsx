@@ -37,13 +37,15 @@ const UserRecipes = () =>{
     })
   
     let content 
-    if(loading) content = <div className='max-w-full px-[8%] border flex justify-center items-center h-[90vh]'><Loader /></div>
-    else content = <>
-            <div>
+    if(loading) content = <div className='max-w-full px-[4%] border flex justify-center items-center h-[90vh]'><Loader /></div>
+    else content = (
+        <>
+            <div className='max-w-full px-[4%]'>
                 <div className='capitalize text-center pt-7'>more recipes by {owner}</div>
                 <Recipes recipes={recipes} />
             </div>
         </>
+    )
     
     return content
 }

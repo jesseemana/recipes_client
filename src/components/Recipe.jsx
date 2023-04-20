@@ -39,7 +39,7 @@ const Recipe = () => {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 
-  function myPromise() {
+  function saveRecipe() {
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve('Recipe saved')
@@ -51,18 +51,18 @@ const Recipe = () => {
   function toggleBookmark() {
     if(!bookmark) {
       setBookmark(true)
-      toast.promise(myPromise(), {
+      toast.promise(saveRecipe(), {
         loading: 'saving...',
         success: 'Recipe saved',
         error: `couldn't save recipe` 
       })
     } else {
-      toast.promise(myPromise(), {
+      setBookmark(false);
+      toast.promise(saveRecipe(), {
         loading: 'removing...',
         success: 'Recipe removed',
         error: `couldn't remove recipe`
       })
-      setBookmark(false);
     }
   }
 

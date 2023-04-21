@@ -19,10 +19,10 @@ const Recipes = ({ recipes, pages, currentPage, setCurrentPage }) => {
                       {recipe.time}min
                       <span><BsClock /></span>
                     </p>
-                    <div className='flex justify-between'>
-                      <h1 className='font-semibold text-gray-900 capitalize'>{recipe.name}</h1>
-                      <p className='bg-gray-100 text-gray-700 px-3 rounded-full'>{recipe.category}</p>
-                    </div>
+                    {/* <div className='flex justify-between'> */}
+                    <h1 className='font-semibold text-gray-900 capitalize'>{recipe.name}</h1>
+                    {/* </div> */}
+                    <p className='text-gray-700 font-medium'>#{recipe.category}</p>
                     <p className='text-gray-600 font-extralight'>{recipe.username}</p>
                   </div>
                 </div>

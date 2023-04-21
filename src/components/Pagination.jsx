@@ -1,7 +1,7 @@
 const Pagination = ({pages, currentPage, setCurrentPage}) => {
     const handlePageChange = (newPage) => {
-        setCurrentPage(newPage);
-    };
+        setCurrentPage(newPage)
+    }
 
     const pageLinks = []
   
@@ -12,8 +12,8 @@ const Pagination = ({pages, currentPage, setCurrentPage}) => {
             type="button"
             className={`px-3 py-1 rounded-sm ${
               currentPage === i
-                ? 'bg-white text-gray-900'
-                : 'bg-gray-200 text-gray-700 hover:bg-blue-500 hover:text-white'
+                ? 'bg-gray-700 text-white'
+                : 'bg-white text-gray-700 hover:bg-blue-500 hover:text-white'
             }`}
             onClick={() => handlePageChange(i)}
           >
@@ -24,7 +24,7 @@ const Pagination = ({pages, currentPage, setCurrentPage}) => {
     }
 
     return (
-        <nav className="flex justify-center p-2 bg-gray-300">
+        <nav className="flex justify-center p-1 bg-gray-300 rounded-sm">
             <ul className="flex space-x-1">
                 <li>
                     <button
@@ -47,7 +47,7 @@ const Pagination = ({pages, currentPage, setCurrentPage}) => {
                         className={`px-3 py-1 rounded-sm ${
                         currentPage === pages
                             ? 'bg-gray-200 text-gray-700 cursor-not-allowed'
-                            : 'bg-blue-500 text-white hover:bg-blue-700'
+                            : 'bg-white text-gray-700 hover:bg-blue-700'
                         }`}
                         disabled={currentPage === pages}
                         onClick={() => handlePageChange(currentPage + 1)}

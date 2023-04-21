@@ -11,6 +11,7 @@ import cake from '../assets/cake.jpg'
 
 import axios from '../api/axios'
 const RECIPE_URL = '/recipes'
+const BOOKMARK_URL = '/recipes/bookmark'
 
 const Recipe = () => { 
   const { id } = useParams()
@@ -19,17 +20,51 @@ const Recipe = () => {
   const [loading, setLoading] = useState(true)
   const [bookmark, setBookmark] = useState(false)
 
+  const user = useSelector((state) => state.user)
   const token = useSelector((state) => state.access_token)
+
+  console.log(token)
+  console.log(user._id)
 
   const getRecipe = async () => {
     try {
-      const response = await axios.get(`${RECIPE_URL}/${id}`, { headers: { Authorization: `Bearer ${token}` }})
+      const response = await axios.get(`${RECIPE_URL}/${id}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
       const data = response?.data
       setOwner(data.owner)
       setRecipe(data.recipe)
       setLoading(false)
     } catch(error) {
-      console.log(`An error occured: ${error}`)
+      console.log(`AN ERROR OCCURED: ${error}`)
+    }
+  }
+
+  const addBookamrk = async () => {
+    try {
+      const response = await axios.post(`${BOOKMARK_URL}/${id}/${user._id}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+      const results = response?.data
+      console.log(results)
+      setBookmark(true)
+      setLoading(false)
+    } catch(error) {
+      console.log(`AN ERROR OCCURED: ${error}`)
+    }
+  }
+
+  const removeBookamrk = async () => {
+    try {
+      const response = await axios.delete(`${BOOKMARK_URL}/${id}/${user._id}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+      })
+      const results = response?.data
+      console.log(results)
+      setBookmark(false)
+      setLoading(false)
+    } catch(error) {
+      console.log(`AN ERROR OCCURED: ${error}`)
     }
   }
 
@@ -39,26 +74,26 @@ const Recipe = () => {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 
-  function saveRecipe() {
-    return new Promise((resolve, reject) => {
-      setTimeout(() => {
-        resolve('Recipe saved')
-      }, 1000 )
-    })
-  }
+  // function saveRecipe() {
+  //   return new Promise((resolve, reject) => {
+  //     setTimeout(() => {
+  //       resolve('Recipe saved')
+  //     }, 1000 )
+  //   })
+  // }
 
   
   function toggleBookmark() {
     if(!bookmark) {
       setBookmark(true)
-      toast.promise(saveRecipe(), {
+      toast.promise(addBookamrk(), {
         loading: 'saving...',
         success: 'Recipe saved',
         error: `couldn't save recipe` 
       })
     } else {
       setBookmark(false);
-      toast.promise(saveRecipe(), {
+      toast.promise(removeBookamrk(), {
         loading: 'removing...',
         success: 'Recipe removed',
         error: `couldn't remove recipe`

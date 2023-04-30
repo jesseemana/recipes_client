@@ -4,7 +4,8 @@ import Pagination from './Pagination'
 
 import cake from '../assets/cake.jpg'
 
-const Recipes = ({ recipes, pages, currentPage, setCurrentPage }) => {
+const Recipes = ({ recipes, pages, currentPage, totalPages, setCurrentPage }) => {
+  console.log(totalPages)
   return (
     <>
       <div className='py-10 flex flex-col items-center gap-y-10'>

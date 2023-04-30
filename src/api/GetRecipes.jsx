@@ -37,6 +37,7 @@ const GetRecipes = () => {
       recipes={recipes}
       pages={totalPages}
       currentPage={currentPage}
+      totalPages={totalPages}
       setCurrentPage={setCurrentPage}
     />
   )

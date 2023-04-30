@@ -9,7 +9,7 @@ import { Toaster } from 'react-hot-toast'
 import Loader from './components/Loader'
 import { ErrorBoundary } from 'react-error-boundary'
 
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense } from 'react'
 import ErrorFallback from './components/ErrorFallback'
 const Home = lazy(() => import('./pages/Home'))
 const Recipe = lazy(() => import('./components/Recipe'))
@@ -37,7 +37,6 @@ function App(){
         </Routes>
       </ErrorBoundary>
       <Toaster />
-        
     </>
   )
 }

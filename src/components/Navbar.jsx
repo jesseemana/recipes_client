@@ -14,25 +14,15 @@ const Navbar = () => {
   
   const token = useSelector(state => state.access_token)
 
-  const [anchorEl, setAnchorEl] = useState(null)
-  const open = Boolean(anchorEl)
-
-  const handleClick = (event) => {
-    setAnchorEl(event.currentTarget)
-  }
-
-  const handleClose = () => {
-    setAnchorEl(null)
-  }
 
   const handleLogout = async () => {
     try {
       // CLEARS REFRESH TOKEN FROM COOKIE
-      // const response = await axios.post(LOGOUT_URL, {
-      //     headers: { 'Authorization': `Bearer ${token}` },
-      //     withCredentials: true
-      //   })
-      // console.log(response.data.message) // cookie cleared
+      const response = await axios.post(LOGOUT_URL, {
+          headers: { 'Authorization': `Bearer ${token}` },
+          withCredentials: true
+        })
+      console.log(response.data.message) // cookie cleared
       dispatch(setLogout())
       navigate('/auth')
     } catch (error) {
@@ -43,12 +33,7 @@ const Navbar = () => {
   const handleLogin = () => {
     navigate('/auth')
   }
-  
-  const [isOpen, setIsOpen] = useState(false);
 
-  const toggleMenu = () => {
-    setIsOpen(!isOpen);
-  };
 
   let content
   if(!token) content = (

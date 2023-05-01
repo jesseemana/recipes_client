@@ -12,8 +12,8 @@ const Pagination = ({pages, currentPage, setCurrentPage}) => {
             type="button"
             className={`px-3 py-1 rounded-sm ${
               currentPage === i
-                ? 'bg-gray-700 text-white'
-                : 'bg-[#38D6C4] text-gray-700 hover:bg-[#38D6C4] hover:text-white'
+                ? 'bg-[#38D6C4] text-white'
+                : 'bg-gray-200 text-gray-700 hover:bg-[#38D6C4] hover:text-white'
             }`}
             onClick={() => handlePageChange(i)}
           >
@@ -24,7 +24,7 @@ const Pagination = ({pages, currentPage, setCurrentPage}) => {
     }
 
     return (
-        <nav className="flex justify-center p-1 bg-gray-300 rounded-sm">
+        <nav className="flex justify-center mt-10 py-2 px-2 rounded-sm">
             <ul className="flex space-x-1">
                 <li>
                     <button
@@ -32,7 +32,7 @@ const Pagination = ({pages, currentPage, setCurrentPage}) => {
                         className={`px-3 py-1 rounded-sm ${
                         currentPage === 1
                             ? 'bg-gray-200 text-gray-700 cursor-not-allowed'
-                            : 'bg-blue-500 text-white hover:bg-blue-700'
+                            : 'bg-gray-200 text-gray-700 hover:bg-[#38D6C4] hover:text-white'
                         }`}
                         disabled={currentPage === 1}
                         onClick={() => handlePageChange(currentPage - 1)}
@@ -47,7 +47,7 @@ const Pagination = ({pages, currentPage, setCurrentPage}) => {
                         className={`px-3 py-1 rounded-sm ${
                         currentPage === pages
                             ? 'bg-gray-200 text-gray-700 cursor-not-allowed'
-                            : 'bg-[#38D6C4] text-gray-700 hover:bg-[#38D6C4]'
+                            : 'bg-gray-200 text-gray-700 hover:bg-[#38D6C4] hover:text-white'
                         }`}
                         disabled={currentPage === pages}
                         onClick={() => handlePageChange(currentPage + 1)}

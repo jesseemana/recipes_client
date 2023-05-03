@@ -4,6 +4,7 @@ import Navbar from './components/Navbar'
 import CreateRecipe from './components/CreateRecipe'
 import ResetPwd from './components/ResetPwd'
 import AuthUser from './pages/AuthUser'
+import Bookmarks from './components/Bookmarks'
 import NotFound from './pages/NotFound'
 import { Toaster } from 'react-hot-toast'
 import Loader from './components/Loader'
@@ -29,6 +30,7 @@ function App(){
           <Route path='/auth' element={isAuth ? <Navigate to='/feed'/> : <AuthUser />} />
           <Route path='/reset' element={<ResetPwd />} />
           <Route path='/feed' element={<Suspense fallback={<Loader />}> <Home /> </Suspense>} />
+          <Route path='/bookmarks' element={<Suspense fallback={<Loader />}> <Bookmarks /> </Suspense>} />
           <Route path='/recipe/:id' element={<Suspense fallback={<Loader />}> <Recipe /> </Suspense>} />
           <Route path='/user/:id' element={<Suspense fallback={<Loader />}> <UserRecipes /> </Suspense>} />
           <Route path='/profile/:id' element={isAuth ? <Suspense fallback={<Loader />}> <Profile /> </Suspense> : <Navigate to='/'/>} />

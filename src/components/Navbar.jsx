@@ -14,15 +14,14 @@ const Navbar = () => {
   
   const token = useSelector(state => state.access_token)
 
-
   const handleLogout = async () => {
     try {
       // CLEARS REFRESH TOKEN FROM COOKIE
-      const response = await axios.post(LOGOUT_URL, {
-          headers: { 'Authorization': `Bearer ${token}` },
-          withCredentials: true
-        })
-      console.log(response.data.message) // cookie cleared
+      // const response = await axios.post(LOGOUT_URL, {
+      //     headers: { Authorization: `Bearer ${token}` },
+      //     withCredentials: true
+      //   })
+      // console.log(response.data.message) // cookie cleared
       dispatch(setLogout())
       navigate('/auth')
     } catch (error) {
@@ -52,9 +51,14 @@ const Navbar = () => {
         <Link to={'/feed'}>
           <h1 className="text-lg md:text-2xl text-[#38D6C4] font-bold uppercase">foodiesss.</h1>
         </Link>
-        <button onClick={handleLogout}>
-          <BiLogOut className='text-3xl text-[#38D6C4]' />
-        </button>
+        <div className='flex gap-x-4 items-center'>
+          <Link to={'/bookmarks'}>
+            <h1>saved</h1>
+          </Link>
+          <button onClick={handleLogout}>
+            <BiLogOut className='text-3xl text-[#38D6C4]' />
+          </button>
+        </div>
       </div>
     </>
   )

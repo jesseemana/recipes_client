@@ -7,8 +7,8 @@ import cake from '../assets/cake.jpg'
 const Recipes = ({ recipes, pages, currentPage, totalPages, setCurrentPage }) => {
   return (
     <>
-      <div className='py-8 flex flex-col items-center'>
-        <div className='grid gap-x-7 lg:gap-x-10 grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-y-4 px-4 py-4'>
+      <div className='flex flex-col items-center'>
+        <div className='grid gap-x-7 lg:gap-x-10 grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-y-4 py-7'>
           {recipes.map(recipe => {
             return (
               <Link to={`/recipe/${recipe._id}`} key={recipe._id}>
@@ -30,7 +30,7 @@ const Recipes = ({ recipes, pages, currentPage, totalPages, setCurrentPage }) =>
           )})}
         </div>
         <Pagination pages={pages} currentPage={currentPage} setCurrentPage={setCurrentPage} />
-        <p className='text-gray-900 mt-1'>viewing {currentPage} of {totalPages}</p>
+        {/* <p className='text-gray-900 mt-1'>viewing {currentPage} of {totalPages}</p> */}
       </div>
     </>
   )

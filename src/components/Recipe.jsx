@@ -15,54 +15,58 @@ const BOOKMARK_URL = '/recipes/bookmark'
 
 const Recipe = () => { 
   const { id } = useParams()
+  
   const [recipe, setRecipe] = useState({})
   const [owner, setOwner] = useState('')
   const [loading, setLoading] = useState(true)
-  const [bookmark, setBookmark] = useState(false)
+  const [bookmarks, setBookmarks] = useState([])
+  const [bookmarked, setBookmarked] = useState(false)
 
-  const user = useSelector((state) => state.user)
-  const token = useSelector((state) => state.access_token)
+  const userId = useSelector(state => state.user_id)
+  const token = useSelector(state => state.access_token)
 
-  console.log(token)
-  console.log(user._id)
 
   const getRecipe = async () => {
     try {
-      const response = await axios.get(`${RECIPE_URL}/${id}`, {
+      const response = await axios.get(`${RECIPE_URL}/${id}/${userId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
-      const data = response?.data
-      setOwner(data.owner)
-      setRecipe(data.recipe)
+      const results = response?.data
+      console.log(results)
       setLoading(false)
+      setRecipe(results.recipe)
+      setOwner(results.fullName)
+      setBookmarks(results.bookmarks)
     } catch(error) {
       console.log(`AN ERROR OCCURED: ${error}`)
     }
   }
+
 
   const addBookamrk = async () => {
     try {
-      const response = await axios.post(`${BOOKMARK_URL}/${id}/${user._id}`, {
+      const response = await axios.post(`${BOOKMARK_URL}/${id}/${userId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       const results = response?.data
-      console.log(results)
-      setBookmark(true)
       setLoading(false)
+      setBookmarked(true)
+      setBookmarks(results.bookmarks)
     } catch(error) {
       console.log(`AN ERROR OCCURED: ${error}`)
     }
   }
 
+
   const removeBookamrk = async () => {
     try {
-      const response = await axios.delete(`${BOOKMARK_URL}/${id}/${user._id}`, {
+      const response = await axios.delete(`${BOOKMARK_URL}/${id}/${userId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       const results = response?.data
-      console.log(results)
-      setBookmark(false)
       setLoading(false)
+      setBookmarked(false)
+      setBookmarks(results.bookmarks)
     } catch(error) {
       console.log(`AN ERROR OCCURED: ${error}`)
     }
@@ -74,31 +78,32 @@ const Recipe = () => {
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 
-  // function saveRecipe() {
-  //   return new Promise((resolve, reject) => {
-  //     setTimeout(() => {
-  //       resolve('Recipe saved')
-  //     }, 1000 )
-  //   })
-  // }
+  // MANTAINING STATE OF BOOKMARK ICON 
+  useEffect(() => {
+    function hasMatchingId(bookmarks, id) {
+      if (bookmarks.some(bookmark => bookmark._id  === id)) {
+        setBookmarked(true)
+      } 
+    }
+
+    hasMatchingId(bookmarks, id)
+  }) 
 
   
   function toggleBookmark() {
-    if(!bookmark) {
-      setBookmark(true)
-      toast.promise(addBookamrk(), {
+    if(bookmarked) {
+      toast.promise(removeBookamrk(), {
         loading: 'saving...',
-        success: 'Recipe saved',
-        error: `couldn't save recipe` 
+        success: 'Recipe removed',
+        error: `couldn't remove recipe` 
       })
     } else {
-      setBookmark(false);
-      toast.promise(removeBookamrk(), {
+      toast.promise(addBookamrk(), {
         loading: 'removing...',
-        success: 'Recipe removed',
-        error: `couldn't remove recipe`
+        success: 'Recipe added',
+        error: `couldn't save recipe`
       })
-    }
+    } 
   }
 
   
@@ -117,7 +122,14 @@ const Recipe = () => {
         <h1 className='capitalize font-semibold text-xl'>{recipe.name}</h1>
         <div className='flex gap-x-5'>
           <p className="flex items-center gap-x-2 text-gray-700"><span><BsClock  className="text-xl text-[#38D6C4]"/></span>{recipe.time}min</p>
-          {!bookmark ? <button
+          {!token ? <div
+            onClick={toggleBookmark}
+            className="flex items-center gap-x-2 text-gray-700"
+          >
+            <span><BsBookmark className="text-xl text-[#38D6C4]" /></span>
+            login to save recipe
+          </div> : <>
+          {!bookmarked ? <button
             onClick={toggleBookmark}
             className="flex items-center gap-x-2 text-gray-700"
           >
@@ -130,6 +142,7 @@ const Recipe = () => {
             <span><BsBookmarkFill className="text-xl text-[#38D6C4]" /></span>
             saved
           </button>}
+        </>}
         </div>
         <Link to={`${'/user/'}${recipe.user}`} className='text-md font-extralight w-[190px] text-gray-500'>view more by {owner}</Link>
         <div>

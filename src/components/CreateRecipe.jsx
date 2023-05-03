@@ -6,7 +6,6 @@ import Dropzone from 'react-dropzone'
 import axios from '../api/axios'
 const RECIPE_URL = '/recipes'
 
-
 const CreateRecipe = () => {
     const [time, setTime] = useState('')
     const [name, setName] = useState('')
@@ -54,11 +53,9 @@ const CreateRecipe = () => {
         navigate('/')  
     }
     
-
     useEffect(() => {
         document.title = 'Create Recipe'
     })
-
 
     return (
         <div className='max-w-full px-[8%] py-7 flex justify-center'>

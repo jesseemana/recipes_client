@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux'
-import Recipes from '../components/Recipes'
-import Loader from '../components/Loader'
+import Recipes from '../ui/Recipes'
+import Loader from '../ui/Loader'
 
 import axios from './axios'
 

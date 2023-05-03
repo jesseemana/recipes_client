@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import axios from '../api/axios'
-import Recipes from './Recipes'
-import Loader from './Loader'
+import Recipes from '../ui/Recipes'
+import Loader from '../ui/Loader'
 
 const RECIPE_URL = '/recipes/user'
 
@@ -27,7 +27,6 @@ const UserRecipes = () =>{
         }
     }
     
-
     useEffect(() => {
         getUserRecipes()
     }, []) // eslint-disable-line react-hooks/exhaustive-deps
@@ -38,14 +37,12 @@ const UserRecipes = () =>{
   
     let content 
     if(loading) content = <div className='max-w-full px-[4%] border flex justify-center items-center h-[90vh]'><Loader /></div>
-    else content = (
-        <>
-            <div className='max-w-full px-[4%]'>
-                <div className='capitalize text-center pt-7'>more recipes by {owner}</div>
-                <Recipes recipes={recipes} />
-            </div>
-        </>
-    )
+    else content = <>
+        <div className='max-w-full px-[4%]'>
+            <div className='capitalize text-center pt-7'>more recipes by {owner}</div>
+            <Recipes recipes={recipes} />
+        </div>
+    </>
     
     return content
 }

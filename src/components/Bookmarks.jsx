@@ -1,8 +1,8 @@
 import { useState } from 'react'
-import Recipes from '../components/Recipes'
+import Recipes from '../ui/Recipes'
 import axios from 'axios'
 import { useSelector } from 'react-redux'
-import Loader from './Loader'
+import Loader from '../ui/Loader'
 
 const BOOKMARKS_URL = '/bookmarks'
 

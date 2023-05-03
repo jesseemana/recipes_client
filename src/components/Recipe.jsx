@@ -5,7 +5,7 @@ import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import { BsClock } from 'react-icons/bs'
 import { toast } from 'react-hot-toast'
 import { Link } from 'react-router-dom'
-import Loader from './Loader'
+import Loader from '../ui/Loader'
 
 import cake from '../assets/cake.jpg'
 
@@ -31,7 +31,7 @@ const Recipe = () => {
       const response = await axios.get(`${RECIPE_URL}/${id}/${userId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
-      const results = response?.data
+      const results = await response?.data
       console.log(results)
       setLoading(false)
       setRecipe(results.recipe)
@@ -48,7 +48,8 @@ const Recipe = () => {
       const response = await axios.post(`${BOOKMARK_URL}/${id}/${userId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
-      const results = response?.data
+      const results = await response?.data
+      console.log(results)
       setLoading(false)
       setBookmarked(true)
       setBookmarks(results.bookmarks)
@@ -63,7 +64,8 @@ const Recipe = () => {
       const response = await axios.delete(`${BOOKMARK_URL}/${id}/${userId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
-      const results = response?.data
+      const results = await response?.data
+      console.log(results)
       setLoading(false)
       setBookmarked(false)
       setBookmarks(results.bookmarks)
@@ -83,7 +85,9 @@ const Recipe = () => {
     function hasMatchingId(bookmarks, id) {
       if (bookmarks.some(bookmark => bookmark._id  === id)) {
         setBookmarked(true)
-      } 
+      } else {
+        setBookmarked(false)
+      }
     }
 
     hasMatchingId(bookmarks, id)
@@ -144,7 +148,12 @@ const Recipe = () => {
           </button>}
         </>}
         </div>
-        <Link to={`${'/user/'}${recipe.user}`} className='text-md font-extralight w-[190px] text-gray-500'>view more by {owner}</Link>
+        <Link 
+          to={`${'/user/'}${recipe.user}`} 
+          className='text-md font-extralight w-[190px] text-gray-500'
+        >
+          view more by {owner}
+        </Link>
         <div>
           <h1 className="uppercase text-lg font-medium text-gray-900 ">ingridients</h1>
           <p className="max-w-[400px] text-gray-600">{recipe.ingridients}</p>
@@ -162,4 +171,4 @@ const Recipe = () => {
   return content
 }
 
-export default Recipe
+export default Recipe     

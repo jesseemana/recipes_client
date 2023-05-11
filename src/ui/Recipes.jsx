@@ -13,7 +13,11 @@ const Recipes = ({ recipes, pages, currentPage, totalPages, setCurrentPage }) =>
             return (
               <Link to={`/recipe/${recipe._id}`} key={recipe._id}>
                 <div className='rounded-md shadow-md w-[160px] lg:w-[240px] relative bg-white'>
-                  <img src={cake} alt='a nicely baked delicious chockolate cake' className='w-full h-[140px] lg:h-[200px] rounded-md'/> 
+                  <img 
+                    src={cake} 
+                    alt='a nicely baked delicious chockolate cake' 
+                    className='w-full h-[140px] lg:h-[200px] rounded-md'
+                  /> 
                   <div className='px-1 flex flex-col py-2 gap-y-1'>
                     <p className='absolute top-1 rounded-full px-2 py-0.5 mt-1 flex flex-row-reverse gap-x-1 items-center text-gray-900 bg-white'>
                       {recipe.time}min

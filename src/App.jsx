@@ -7,7 +7,7 @@ import AuthUser from './pages/AuthUser'
 import Bookmarks from './components/Bookmarks'
 import NotFound from './pages/NotFound'
 import { Toaster } from 'react-hot-toast'
-import Loader from './components/Loader'
+import Loader from './ui/Loader'
 import { ErrorBoundary } from 'react-error-boundary'
 
 import { lazy, Suspense } from 'react'

@@ -1,9 +1,12 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
 import { setLogout } from '../state/appSlice'
+import './Nav.css'
+import DropdownItem from './Dropdown'
 
-import { BiLogOut, BiLogIn } from 'react-icons/bi'
+import { BiLogOut, BiLogIn, } from 'react-icons/bi'
+import { FaUser } from 'react-icons/fa'
 import axios from "../api/axios"
 const LOGOUT_URL = '/auth/logout'
 
@@ -12,7 +15,28 @@ const Navbar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
   
-  const token = useSelector(state => state.access_token)
+  const user = useSelector(state => state.user)
+
+  const [open, setOpen] = useState(false)
+
+  let menuRef = useRef()
+
+  useEffect(() => {
+    let handler = (e) => {
+      if(!menuRef.current.contains(e.target)){
+        setOpen(false)
+        console.log(menuRef.current)
+      }      
+    }
+
+    document.addEventListener("mousedown", handler)
+    
+
+    return () => {
+      document.removeEventListener("mousedown", handler)
+    }
+
+  })
 
   const handleLogout = async () => {
     try {
@@ -35,15 +59,20 @@ const Navbar = () => {
 
 
   let content
-  if(!token) content = (
-    <div className="p-3 max-w-full px-[4%] bg-white border border-l-0 border-r-0 border-t-0 border-gray-300 sticky top-0 left-0 right-0 z-10 flex justify-between">
-      <Link to={'/feed'}>
-        <h1 className="text-lg md:text-2xl text-[#38D6C4] font-bold uppercase">foodiesss.</h1>
-      </Link>
-      <button onClick={handleLogin}>
-        <BiLogIn className='text-3xl text-[#38D6C4]' />
-      </button>
-    </div>
+  if(!user) content = (
+      <div className='menu-container' ref={menuRef}>
+        <div className='menu-trigger' onClick={()=>{setOpen(!open)}}>
+          <FaUser />
+        </div>
+
+        <div className={`dropdown-menu ${open? 'active' : 'inactive'}`} >
+          <h3>The Kiet<br/><span>Website Designer</span></h3>
+          <ul>
+            <DropdownItem img={BiLogIn} text = {"Login"}/>
+            <DropdownItem img={BiLogOut} text = {"Logout"}/>
+          </ul>
+        </div>
+      </div>
   )
   else content = (
     <>

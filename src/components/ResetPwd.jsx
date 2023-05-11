@@ -2,7 +2,6 @@ import { useState, useEffect } from 'react'
 import { toast } from 'react-hot-toast'
 
 import axios from '../api/axios'
-
 const RESET_URL = '/reset'
 
 const ResetPwd = () => {  

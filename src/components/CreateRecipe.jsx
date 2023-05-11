@@ -58,9 +58,9 @@ const CreateRecipe = () => {
     })
 
     return (
-        <div className='max-w-full px-[8%] py-7 flex justify-center'>
-            <div className='bg-white p-4 rounded-md shadow-lg w-[800px]'>
-                <h1 className='py-4 text-center text-gray-700 font-semibold text-3xl uppercase'>add a recipe</h1>
+        <div className='max-w-full px-[8%] py-7 flex justify-center bg-gray-50'>
+            <div className='bg-white p-4 rounded-md shadow-lg w-[800px] border'>
+                <h1 className='py-4 text-center text-[#38D6C4] font-bold text-3xl uppercase'>add a recipe</h1>
                 <form onSubmit={createRecipe} encType='multipart/form-data' className='flex flex-col gap-y-3'>
                     <label htmlFor="name" className='text-gray-600 capitalize'>name:</label>
                     <input
@@ -132,7 +132,7 @@ const CreateRecipe = () => {
                 
                     <button
                         type='submit'
-                        className='p-2 bg-blue-500 text-gray-900 capitalize rounded-sm'
+                        className='p-2 bg-[#38D6C4] text-white font-semibold  text-xl capitalize rounded-sm'
                     >
                         let's cook
                     </button> 

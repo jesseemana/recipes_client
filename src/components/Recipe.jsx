@@ -1,15 +1,11 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
-import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
-import { BsClock } from 'react-icons/bs'
 import { toast } from 'react-hot-toast'
-import { Link } from 'react-router-dom'
 import Loader from '../ui/Loader'
-
-import cake from '../assets/cake.jpg'
-
 import axios from '../api/axios'
+import RecipeUI from '../ui/RecipeUI'
+
 const RECIPE_URL = '/recipes'
 const BOOKMARK_URL = '/recipes/bookmark'
 
@@ -18,29 +14,32 @@ const Recipe = () => {
   
   const [recipe, setRecipe] = useState({})
   const [owner, setOwner] = useState('')
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [bookmarks, setBookmarks] = useState([])
   const [bookmarked, setBookmarked] = useState(false)
 
   const userId = useSelector(state => state.user_id)
   const token = useSelector(state => state.access_token)
 
-
   const getRecipe = async () => {
     try {
+      setLoading(true)
       const response = await axios.get(`${RECIPE_URL}/${id}/${userId}`, {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       const results = await response?.data
-      console.log(results)
       setLoading(false)
       setRecipe(results.recipe)
       setOwner(results.fullName)
       setBookmarks(results.bookmarks)
     } catch(error) {
-      console.log(`AN ERROR OCCURED: ${error}`)
+      console.error(`AN ERROR OCCURED: ${error}`)
     }
   }
+
+  useEffect(() => {
+    getRecipe()
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
 
   const addBookamrk = async () => {
@@ -49,37 +48,27 @@ const Recipe = () => {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       const results = await response?.data
-      console.log(results)
-      setLoading(false)
       setBookmarked(true)
       setBookmarks(results.bookmarks)
     } catch(error) {
-      console.log(`AN ERROR OCCURED: ${error}`)
+      console.error(`AN ERROR OCCURED: ${error}`)
     }
   }
-
 
   const removeBookamrk = async () => {
     try {
-      const response = await axios.delete(`${BOOKMARK_URL}/${id}/${userId}`, {
+      const response = await axios.delete(`${BOOKMARK_URL}/${id}/${userId}`, { 
         headers: { 'Authorization': `Bearer ${token}` }
       })
       const results = await response?.data
-      console.log(results)
-      setLoading(false)
       setBookmarked(false)
       setBookmarks(results.bookmarks)
     } catch(error) {
-      console.log(`AN ERROR OCCURED: ${error}`)
+      console.error(`AN ERROR OCCURED: ${error}`)
     }
   }
 
-
-  useEffect(() => {
-    getRecipe()
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
-
-
+  
   // MANTAINING STATE OF BOOKMARK ICON 
   useEffect(() => {
     function hasMatchingId(bookmarks, id) {
@@ -93,80 +82,38 @@ const Recipe = () => {
     hasMatchingId(bookmarks, id)
   }) 
 
-  
-  function toggleBookmark() {
+  const toggleBookmark = () => {
     if(bookmarked) {
       toast.promise(removeBookamrk(), {
-        loading: 'saving...',
+        loading: 'removing...',
         success: 'Recipe removed',
         error: `couldn't remove recipe` 
       })
     } else {
       toast.promise(addBookamrk(), {
-        loading: 'removing...',
+        loading: 'saving...',
         success: 'Recipe added',
         error: `couldn't save recipe`
       })
     } 
   }
 
-  
   useEffect(() => {
     loading ?  document.title = 'loading...' : document.title = recipe.name
   })
 
-
   let content
   if(loading) content = <Loader />
-  else content = <>
-    <div className="max-w-full px-[8%] flex flex-col justify-center gap-y-5 gap-x-20 md:flex-row py-4 ">
-      {/* <button onCklick={() => navigate(-1)}>back</button> */}
-      <div className="flex flex-col gap-y-2">
-        <img src={cake} alt="a beautiful delicious chockolate cake" className="w-[300px] h-[250px] lg:h-[430px] lg:w-[500px] shadow-lg rounded-md" />
-        <h1 className='capitalize font-semibold text-xl'>{recipe.name}</h1>
-        <div className='flex gap-x-5'>
-          <p className="flex items-center gap-x-2 text-gray-700"><span><BsClock  className="text-xl text-[#38D6C4]"/></span>{recipe.time}min</p>
-          {!token ? 
-          <div
-            onClick={toggleBookmark}
-            className="flex items-center gap-x-2 text-gray-700"
-          >
-            <span><BsBookmark className="text-xl text-[#38D6C4]" /></span>
-            login to save
-          </div> : <>
-          {!bookmarked ? 
-          <button
-            onClick={toggleBookmark}
-            className="flex items-center gap-x-2 text-gray-700"
-          >
-            <span><BsBookmark className="text-xl text-[#38D6C4]" /></span>
-            save recipe
-          </button> : <button
-            onClick={toggleBookmark}
-            className="flex items-center gap-x-2 text-gray-700"
-          >
-            <span><BsBookmarkFill className="text-xl text-[#38D6C4]" /></span>
-            saved
-          </button>}
-        </>}
-        </div>
-        <Link 
-          to={`${'/user/'}${recipe.user}`} 
-          className='text-md font-extralight w-[190px] text-gray-500'
-        >
-          view more by {owner}
-        </Link>
-        <div className='border border-l-0 border-r-0 border-b-0 pt-3 '>
-          <h1 className="uppercase text-lg font-medium text-gray-900">ingridients</h1>
-          <p className="max-w-[400px] text-gray-600">{recipe.ingridients}</p>
-        </div>
-      </div>
-      <div className=''>
-        <h1 className="uppercase text-lg font-medium text-gray-900 border py-3 border-l-0 border-r-0">procedure</h1>
-        <p className="max-w-[400px] text-gray-600">{recipe.procedure}</p>
-      </div>
-    </div>
-  </>
+  else content = (
+    <RecipeUI 
+      token={token} 
+      owner={owner} 
+      recipe={recipe} 
+      bookmarks={bookmarks} 
+      bookmarked={bookmarked} 
+      toggleBookmark={toggleBookmark} 
+    />
+  )
 
   return content
 }

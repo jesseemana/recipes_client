@@ -14,7 +14,7 @@ const Recipe = () => {
   
   const [recipe, setRecipe] = useState({})
   const [owner, setOwner] = useState('')
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [bookmarks, setBookmarks] = useState([])
   const [bookmarked, setBookmarked] = useState(false)
 
@@ -48,6 +48,7 @@ const Recipe = () => {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       const results = await response?.data
+      setLoading(false)
       setBookmarked(true)
       setBookmarks(results.bookmarks)
     } catch(error) {
@@ -61,6 +62,7 @@ const Recipe = () => {
         headers: { 'Authorization': `Bearer ${token}` }
       })
       const results = await response?.data
+      setLoading(false)
       setBookmarked(false)
       setBookmarks(results.bookmarks)
     } catch(error) {

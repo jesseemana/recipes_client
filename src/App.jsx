@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import Navbar from './components/Navbar'
+import Navibar from './components/Navbar'
 import CreateRecipe from './components/CreateRecipe'
 import ResetPwd from './components/ResetPwd'
 import AuthUser from './pages/AuthUser'
@@ -23,18 +23,18 @@ function App(){
 
   return (
     <>
-      <Navbar />
+      <Navibar />
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Routes>
           <Route path='/' element={<Navigate to='/feed'/>} />
           <Route path='/auth' element={isAuth ? <Navigate to='/feed'/> : <AuthUser />} />
           <Route path='/reset' element={<ResetPwd />} />
           <Route path='/feed' element={<Suspense fallback={<Loader />}> <Home /> </Suspense>} />
-          <Route path='/bookmarks' element={<Suspense fallback={<Loader />}> <Bookmarks /> </Suspense>} />
+          <Route path='/bookmarks' element={isAuth ? <Suspense fallback={<Loader />}> <Bookmarks /> </Suspense> : <Navigate to='/auth'/>} />
           <Route path='/recipe/:id' element={<Suspense fallback={<Loader />}> <Recipe /> </Suspense>} />
           <Route path='/user/:id' element={<Suspense fallback={<Loader />}> <UserRecipes /> </Suspense>} />
           <Route path='/profile/:id' element={isAuth ? <Suspense fallback={<Loader />}> <Profile /> </Suspense> : <Navigate to='/'/>} />
-          <Route path='/newrecipe' element={<CreateRecipe/>} />
+          <Route path='/newrecipe' element={isAuth ? <CreateRecipe/> : <Navigate to='/auth'/>} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </ErrorBoundary>

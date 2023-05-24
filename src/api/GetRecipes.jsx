@@ -30,6 +30,8 @@ const GetRecipes = () => {
   useEffect(() => {
     getRecipes()
   }, [currentPage]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  console.log(recipes)
   
   if(loading) return <Loader />
   return (

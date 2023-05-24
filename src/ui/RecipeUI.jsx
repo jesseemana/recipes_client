@@ -2,16 +2,18 @@ import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import { BsClock } from 'react-icons/bs'
 import { Link } from 'react-router-dom'
 
-import cake from '../assets/cake.jpg'
 
 const RecipeUI = ({token, recipe, owner, bookmarked, toggleBookmark}) => {
+    
+  console.log(recipe)
+
   return (
     <>
         <div className="max-w-full px-[8%] flex flex-col justify-center gap-y-5 gap-x-20 md:flex-row py-4 ">
             <div className="flex flex-col gap-y-2">
                 <img 
-                    src={cake} 
-                    alt="a beautiful delicious chockolate cake" 
+                    src={recipe.picturePath} 
+                    alt={recipe.name}
                     className="w-[300px] h-[250px] lg:h-[430px] lg:w-[500px] shadow-lg rounded-md" 
                 />
                 <h1 className='capitalize font-semibold text-xl'>{recipe.name}</h1>

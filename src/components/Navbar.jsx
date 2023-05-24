@@ -6,9 +6,6 @@ import {
   MenuButton,
   MenuList,
   MenuItem,
-  MenuItemOption,
-  MenuGroup,
-  MenuOptionGroup,
   MenuDivider,
 } from '@chakra-ui/react'
 
@@ -70,46 +67,53 @@ const Navibar = () => {
         <Link to={'/feed'}>
           <h1 className="text-lg md:text-2xl text-[#38D6C4] font-bold uppercase">foodiesss.</h1>
         </Link>
-        <div className='flex gap-x-4 items-center'>
+        <div className='flex gap-x-1 items-center'>
           <Menu>
-            <MenuButton colorScheme='pink'>
-              <div className='rounded-full border p-1 bg-gray-200'>
-                <AiOutlineUser className='text-2xl text-gray-400' />
+            <MenuButton>
+              <div className='flex gap-x-1 items-center border border-gray-400 px-2 rounded-full'>
+                <span className='text-lg font-medium text-gray-500 pr-2'>{user.firstName}</span>
+                <div className='rounded-full border p-1 bg-gray-200 mr-[-6px]'>
+                  <AiOutlineUser className='text-2xl text-gray-400' />
+                </div>
               </div>
             </MenuButton>
-            <MenuList className='capitalize'>
-              <MenuItem as='a' href={`/profile/${user._id}`}>
-                <div className='flex items-center gap-x-2 text-lg text-gray-600'>
-                  <CgProfile className='text-2xl text-gray-400'/>
-                  <p>profile</p>
-                </div>
-              </MenuItem>
+            <MenuList>
+              <Link to={`/profile/${user._id}`}>
+                <MenuItem>
+                  <div className='flex items-center gap-x-2 text-lg capitalize'>
+                    <CgProfile className='text-2xl text-gray-700'/>
+                    <p className='text-gray-700'>profile</p>
+                  </div>
+                </MenuItem>
+              </Link>
               <MenuDivider />
-              <MenuItem as='a' href='/bookmarks'>
-                <div className='flex items-center gap-x-2 text-lg text-gray-600'>
-                  <BsBookmark className='text-2xl text-gray-400'/>
-                  <p>bookmarks</p>
-                </div>
-              </MenuItem>
+              <Link to={'/newrecipe'}>
+                <MenuItem>
+                  <div className='flex items-center gap-x-2 text-lg capitalize'>
+                    <MdOutlineAddBox className='text-2xl text-gray-700'/>
+                    <p className='text-gray-700'>add recipe</p>
+                  </div>
+                </MenuItem>
+              </Link>
               <MenuDivider />
-              <MenuItem as='a' href='/newrecipe'>
-                <div className='flex items-center gap-x-2 text-lg text-gray-600'>
-                  <MdOutlineAddBox className='text-2xl text-gray-400'/>
-                  <p>add recipe</p>
-                </div>
-              </MenuItem>
-              <MenuDivider />
+              <Link to={'/bookmarks'}>
+                <MenuItem>
+                  <div className='flex items-center gap-x-2 text-lg capitalize'>
+                    <BsBookmark className='text-2xl text-gray-700'/>
+                    <p className='text-gray-700'>bookmarks</p>
+                  </div>
+                </MenuItem>
+              </Link>
+              {/* <MenuDivider />
               <MenuItem>
-                <button 
-                  className='flex items-center gap-x-2 text-lg text-gray-600' 
-                  // onClick={alert('Button clicked')}
-                >
-                  <BiLogOut className='text-2xl text-gray-400'/>
-                  <p>Logout</p>
-                </button>
-              </MenuItem>
+                <BiLogOut className='text-2xl text-gray-700'/>
+                <p className='text-gray-700'>Logout</p>
+              </MenuItem> */}
             </MenuList>
           </Menu>
+          <button onClick={handleLogout}>
+            <BiLogOut className='text-3xl text-gray-500'/>
+          </button>
         </div>
       </div>
     </>

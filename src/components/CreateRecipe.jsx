@@ -19,6 +19,7 @@ const CreateRecipe = () => {
     const user = useSelector((state) => state.user)
     const token = useSelector((state) => state.access_token)
 
+
     const handleDrop = (acceptedFiles) => {
         setImage(acceptedFiles[0])
     }
@@ -32,11 +33,11 @@ const CreateRecipe = () => {
             formData.append('user', user._id)
             formData.append('name', name)
             formData.append('ingridients', ingridients)
-            formData.append('procedure', procedure)
             formData.append('category', category)
-            formData.append('time', time);
+            formData.append('time', time)
             formData.append('picture', image)
-            formData.append('picturepath', image.name)
+            formData.append('picturePath', image.name)
+            formData.append('procedure', procedure)
             
             await axios.post(RECIPE_URL, formData, {
                 headers: {
@@ -47,10 +48,10 @@ const CreateRecipe = () => {
             })
 
         } catch (error) {
-            console.log(`An error occurred ${error}`)
+            console.error(`AN ERROR OCCURED: ${error}`)
         }
         
-        navigate('/')  
+        // navigate('/')  
     }
     
     useEffect(() => {
@@ -73,7 +74,7 @@ const CreateRecipe = () => {
                         required
                     />
 
-                    <label htmlFor="name" className='text-gray-600 capitalize'>ingridients:</label>
+                    <label htmlFor="ingridients" className='text-gray-600 capitalize'>ingridients:</label>
                     <input
                         type='text'
                         value={ingridients}
@@ -83,7 +84,7 @@ const CreateRecipe = () => {
                         required
                     />
 
-                    <label htmlFor="name" className='text-gray-600 capitalize'>category:</label>
+                    <label htmlFor="category" className='text-gray-600 capitalize'>category:</label>
                     <input
                         type='text'
                         value={category}
@@ -93,7 +94,7 @@ const CreateRecipe = () => {
                         required
                     />
 
-                    <label htmlFor="name" className='text-gray-600 capitalize'>time to prepare:</label>
+                    <label htmlFor="time" className='text-gray-600 capitalize'>time to prepare:</label>
                     <input
                         type='text'
                         value={time}
@@ -103,23 +104,31 @@ const CreateRecipe = () => {
                         required
                     />
 
-                    <label htmlFor="name" className='text-gray-600 capitalize'>attach image:</label> 
-                    <div className='border border-dashed rounded-sm px-1 py-5 bg-white cursor-pointer'>
+                    <label htmlFor="image" className='text-gray-600 capitalize'>attach image:</label> 
+                    <div className='border border-dashed py-4 rounded-sm px-1 bg-white cursor-pointer'>
+                        {/* <input 
+                            type="file" 
+                            value={image} 
+                            onChange={(e) => setImage(e.target.value) } 
+                            className='border border-gray-200 p-2 border-dashed cursor-pointer py-5 rounded-sm outline-none'
+                            required
+                        /> */}
+
                         <Dropzone onDrop={handleDrop}>
                             {({getRootProps, getInputProps}) => (
                                 <div {...getRootProps()}>
                                     <input {...getInputProps()} />
                                     {image ? (
                                     <p>{image.name}</p>
-                                    ) : (
-                                    <p className='text-gray-400'>Drag and drop/click to select a picture</p>
+                                        ) : (
+                                        <p className='text-gray-400'>Drag and drop/click to select a picture</p>
                                     )}
                                 </div>
                             )}
                         </Dropzone>
                     </div>
 
-                    <label htmlFor="name" className='text-gray-600 capitalize'>how to prepare:</label> 
+                    <label htmlFor="procedure" className='text-gray-600 capitalize'>how to prepare:</label> 
                     <textarea
                         type='text'
                         rows='9'
@@ -143,3 +152,16 @@ const CreateRecipe = () => {
 }
 
 export default CreateRecipe
+
+{/* <Dropzone onDrop={handleDrop}>
+    {({getRootProps, getInputProps}) => (
+        <div {...getRootProps()}>
+            <input {...getInputProps()} />
+            {image ? (
+            <p>{image.name}</p>
+                ) : (
+                <p className='text-gray-400'>Drag and drop/click to select a picture</p>
+            )}
+        </div>
+    )}
+</Dropzone> */}

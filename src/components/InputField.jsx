@@ -1,5 +1,3 @@
-import { useRef } from 'react'
-
 const InputField = ({ref, type, text, autoComplete, placeholder, onChange, htmlFor, label,}) => {
   return (
     <>

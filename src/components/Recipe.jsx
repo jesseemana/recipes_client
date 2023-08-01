@@ -25,7 +25,7 @@ const Recipe = () => {
   const getRecipe = async () => {
     try {
       setLoading(true)
-      const response = await axios.get(`${RECIPE_URL}/${id}/${userId}`, { headers: { 'Authorization': `Bearer ${token}` }})
+      const response = await axios.get(`${RECIPE_URL}/${id}/${userId}`, { headers: {'Authorization': `Bearer ${token}`}})
       const results = await response?.data
       setRecipe(results.recipe)
       setOwner(results.full_name)
@@ -43,7 +43,7 @@ const Recipe = () => {
 
   async function addBookmark() {
     try {
-      await axios.post(`${BOOKMARK_URL}/${id}/${userId}`, { headers: { 'Authorization': `Bearer ${token}` }})
+      await axios.post(`${BOOKMARK_URL}/${id}/${userId}`, { headers: {'Authorization': `Bearer ${token}`}})
       // refresh page
       // setBookmarked(true)
     } catch(error) {
@@ -53,7 +53,7 @@ const Recipe = () => {
 
   async function removeBookmark() {
     try {
-      await axios.delete(`${BOOKMARK_URL}/${id}/${userId}`, { headers: { 'Authorization': `Bearer ${token}` }})
+      await axios.delete(`${BOOKMARK_URL}/${id}/${userId}`, { headers: {'Authorization': `Bearer ${token}`}})
       // refresh page
       // setBookmarked(false)
     } catch(error) {
@@ -111,16 +111,16 @@ const Recipe = () => {
                 {!bookmarked ? 
                   <button
                     onClick={toggleBookmark}
-                    className="flex items-center gap-x-2 text-gray-700"
+                    className='flex items-center gap-x-2 text-gray-700'
                   >
                     <span><BsBookmark className="text-xl text-[#38D6C4]" /></span>
                     save recipe
                   </button> : 
                   <button
                     onClick={toggleBookmark}
-                    className="flex items-center gap-x-2 text-gray-700"
+                    className='flex items-center gap-x-2 text-gray-700'
                   >
-                    <span><BsBookmarkFill className="text-xl text-[#38D6C4]" /></span>
+                    <span><BsBookmarkFill className='text-xl text-[#38D6C4]' /></span>
                     saved
                   </button>
                 }

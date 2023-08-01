@@ -22,7 +22,7 @@ const ResetPwd = () => {
       }, 3000 )
     })
   }
-  
+
 
   function toggleReset(e) {
     e.preventDefault()
@@ -49,7 +49,7 @@ const ResetPwd = () => {
           />
           <button 
             onClick={toggleReset} 
-            className='bg-[#38D6C4] rounded-sm py-1 text-white uppercase text-sm md:text-md text-center font-semibold'
+            className='bg-[#38D6C4] rounded-sm py-1 text-white uppercase text-sm md:text-[17px] text-center font-semibold'
           >
             reset password
           </button>

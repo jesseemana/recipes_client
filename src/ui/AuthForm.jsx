@@ -4,7 +4,6 @@ import InputField from '../components/InputField'
 const Form = ({
   errMsg,
   isLogin,
-  isRegister, 
   handleSubmit, 
   firstName, 
   lastName, 
@@ -24,15 +23,15 @@ const Form = ({
         onSubmit={handleSubmit} 
         className='flex flex-col gap-y-4 transition-all w-[300px] md:w-auto px-5 py-4 rounded-sm shadow-lg bg-white'
       >
-        {isRegister 
-          ? <h1 className='text-center text-[#38D6C4] text-xl font-bold uppercase'>register</h1> 
-          : <h1 className='text-center text-[#38D6C4] text-xl font-bold uppercase'>login</h1>
+        {isLogin 
+          ? <h1 className='text-center text-[#38D6C4] text-xl font-bold uppercase'>login</h1> 
+          : <h1 className='text-center text-[#38D6C4] text-xl font-bold uppercase'>register</h1>
         }
-        {isRegister && (
+        {!isLogin && (
           <div className='flex flex-col gap-y-4 items-start md:flex-row gap-x-4'>
             <div className='flex flex-col w-full'>
               <InputField 
-                htmlFor={firstName}
+                htmlFor={'first name'}
                 label={'first name:'}
                 type='text'
                 value={firstName}
@@ -43,7 +42,7 @@ const Form = ({
                     
             <div className='flex flex-col w-full'>
               <InputField 
-                htmlFor={lastName}
+                htmlFor={'last name'}
                 label={'last name:'}
                 type='text'
                 value={lastName}
@@ -55,16 +54,16 @@ const Form = ({
         )}
 
         <InputField 
-          htmlFor={email}
+          htmlFor={'email'}
           label={'email:'}
           type='text'
           value={email}
-          placeholder='email'
+          placeholder='email@example.com'
           onChange={(e) => setEmail(e.target.value)}
         />
             
         <InputField 
-          htmlFor={password}
+          htmlFor={'password'}
           label={'password:'}
           type='password'
           value={password}
@@ -73,7 +72,7 @@ const Form = ({
         />
 
         <InputField 
-          htmlFor={password2}
+          htmlFor={'password2'}
           label={'confirm password:'}
           type='password'
           value={password2}

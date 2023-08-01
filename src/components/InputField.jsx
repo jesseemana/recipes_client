@@ -1,4 +1,4 @@
-const InputField = ({ref, type, text, autoComplete, placeholder, onChange, htmlFor, label,}) => {
+const InputField = ({ref, type, text, placeholder, onChange, htmlFor, label,}) => {
   return (
     <>
       <label htmlFor={htmlFor} className='text-gray-700 px-1 capitalize'>{label}</label>
@@ -8,7 +8,7 @@ const InputField = ({ref, type, text, autoComplete, placeholder, onChange, htmlF
         text={text}
         onChange={onChange} 
         placeholder={placeholder}
-        autoComplete={autoComplete}
+        autoComplete='off'
         className='py-2 px-1 text-gray-600 border border-gray-200 rounded-sm outline-[#38D6C4]'
         required
       />

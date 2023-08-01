@@ -36,7 +36,7 @@ const CreateRecipe = () => {
       formData.append('category', category)
       formData.append('time', time)
       formData.append('file', image) // FOR MULTER
-      formData.append('picturevpath', image.name)  // FOR SCHEMA
+      formData.append('picture_path', image.name)  // FOR SCHEMA
       formData.append('procedure', procedure)
       
       await axios.post(RECIPE_URL, formData, {
@@ -75,7 +75,7 @@ const CreateRecipe = () => {
         <h1 className='py-4 text-center text-[#38D6C4] font-bold text-3xl uppercase'>add a recipe</h1>
         <form onSubmit={handleSubmit} encType='multipart/form-data' className='flex flex-col gap-y-3'>
           <InputField 
-            htmlFor={name}
+            htmlFor={'name'}
             label={'name:'}
             type='text'
             value={name}
@@ -86,7 +86,7 @@ const CreateRecipe = () => {
           />
 
           <InputField 
-            htmlFor={ingridients}
+            htmlFor={'ingridients'}
             label={'ingridients:'}
             type='text'
             value={ingridients}
@@ -122,7 +122,7 @@ const CreateRecipe = () => {
           </select>
 
           <InputField 
-            htmlFor={time}
+            htmlFor={'time'}
             label={'time to prepare:'}
             type='text'
             value={time}
@@ -149,7 +149,7 @@ const CreateRecipe = () => {
 
           {/* input field changed from textarea */}
           <InputField 
-            htmlFor={procedure}
+            htmlFor={'procedure'}
             label={'how to prepare:'}
             type='text'
             rows='9'

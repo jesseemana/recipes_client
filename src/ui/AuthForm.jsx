@@ -32,7 +32,7 @@ const Form = ({
           <div className='flex flex-col gap-y-4 items-start md:flex-row gap-x-4'>
             <div className='flex flex-col w-full'>
               <InputField 
-                htmlFor={'first name'}
+                htmlFor={firstName}
                 label={'first name:'}
                 type='text'
                 value={firstName}
@@ -43,7 +43,7 @@ const Form = ({
                     
             <div className='flex flex-col w-full'>
               <InputField 
-                htmlFor={'last name'}
+                htmlFor={lastName}
                 label={'last name:'}
                 type='text'
                 value={lastName}
@@ -55,7 +55,7 @@ const Form = ({
         )}
 
         <InputField 
-          htmlFor={'email'}
+          htmlFor={email}
           label={'email:'}
           type='text'
           value={email}
@@ -64,7 +64,7 @@ const Form = ({
         />
             
         <InputField 
-          htmlFor={'password'}
+          htmlFor={password}
           label={'password:'}
           type='password'
           value={password}
@@ -73,7 +73,7 @@ const Form = ({
         />
 
         <InputField 
-          htmlFor={'password'}
+          htmlFor={password2}
           label={'confirm password:'}
           type='password'
           value={password2}

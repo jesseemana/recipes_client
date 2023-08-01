@@ -14,6 +14,12 @@ const CreateRecipe = () => {
     const [procedure, setProcedure] = useState('')
     const [ingridients, setIngridients] = useState('')
 
+    const [snack, setSnack] = useState('snack/appetiser')
+    const [breakFast, setBreakFast] = useState('breakfast')
+    const [mainCourse, setMainCourse] = useState('main course')
+
+    console.log(`category: ${category}`)
+
     const navigate = useNavigate()
     
     const user = useSelector((state) => state.user)
@@ -30,13 +36,15 @@ const CreateRecipe = () => {
         try {
             const formData = new FormData()    
 
+            console.log(image)
+
             formData.append('user', user._id)
             formData.append('name', name)
             formData.append('ingridients', ingridients)
             formData.append('category', category)
             formData.append('time', time)
-            formData.append('picture', image)
-            formData.append('picturePath', image.name)
+            formData.append('picture', image) // FOR MULTER
+            formData.append('picturePath', image.name)  // FOR SCHEMA
             formData.append('procedure', procedure)
             
             await axios.post(RECIPE_URL, formData, {
@@ -53,6 +61,23 @@ const CreateRecipe = () => {
         
         // navigate('/')  
     }
+
+    const handleChange = (e) => {
+        setCategory(e.target.value)
+    }
+
+    const handleSubmit = () => {
+        createRecipe()
+
+        setTime('')
+        setName('')
+        setImage(null)
+        setCategory('')
+        setProcedure('')
+        setIngridients('')
+
+        // navigate('/')  
+    }
     
     useEffect(() => {
         document.title = 'Create Recipe'
@@ -60,9 +85,9 @@ const CreateRecipe = () => {
 
     return (
         <div className='max-w-full px-[8%] py-7 flex justify-center bg-gray-50'>
-            <div className='bg-white p-4 rounded-md shadow-lg w-[800px] border'>
+            <div className='bg-white p-4 rounded-md shadow-lg w-[500px] border'>
                 <h1 className='py-4 text-center text-[#38D6C4] font-bold text-3xl uppercase'>add a recipe</h1>
-                <form onSubmit={createRecipe} encType='multipart/form-data' className='flex flex-col gap-y-3'>
+                <form onSubmit={handleSubmit} encType='multipart/form-data' className='flex flex-col gap-y-3'>
                     <label htmlFor="name" className='text-gray-600 capitalize'>name:</label>
                     <input
                         type='text'
@@ -85,14 +110,26 @@ const CreateRecipe = () => {
                     />
 
                     <label htmlFor="category" className='text-gray-600 capitalize'>category:</label>
-                    <input
-                        type='text'
-                        value={category}
-                        placeholder='breakfast, main course, snack, desert'
-                        onChange={(e) => setCategory(e.target.value)}
-                        className='border border-gray-200 p-2 rounded-sm outline-none'
-                        required
-                    />
+                    <select name="category dropdown" onChange={handleChange} className='border p-2 capitalize text-gray-500 outline-none'>
+                        <option 
+                            value={breakFast} 
+                            className='capitalize'
+                        >
+                            breakfast
+                        </option>
+                        <option 
+                            value={mainCourse} 
+                            className='capitalize'
+                        >
+                            main course
+                        </option>
+                        <option 
+                            value={snack} 
+                            className='capitalize'
+                        >
+                            snack/appetiser
+                        </option>
+                    </select>
 
                     <label htmlFor="time" className='text-gray-600 capitalize'>time to prepare:</label>
                     <input
@@ -106,14 +143,6 @@ const CreateRecipe = () => {
 
                     <label htmlFor="image" className='text-gray-600 capitalize'>attach image:</label> 
                     <div className='border border-dashed py-4 rounded-sm px-1 bg-white cursor-pointer'>
-                        {/* <input 
-                            type="file" 
-                            value={image} 
-                            onChange={(e) => setImage(e.target.value) } 
-                            className='border border-gray-200 p-2 border-dashed cursor-pointer py-5 rounded-sm outline-none'
-                            required
-                        /> */}
-
                         <Dropzone onDrop={handleDrop}>
                             {({getRootProps, getInputProps}) => (
                                 <div {...getRootProps()}>
@@ -121,7 +150,7 @@ const CreateRecipe = () => {
                                     {image ? (
                                     <p>{image.name}</p>
                                         ) : (
-                                        <p className='text-gray-400'>Drag and drop/click to select a picture</p>
+                                        <p className='text-gray-500'>Drag and drop/click to select a picture</p>
                                     )}
                                 </div>
                             )}
@@ -151,17 +180,4 @@ const CreateRecipe = () => {
     )
 }
 
-export default CreateRecipe
-
-{/* <Dropzone onDrop={handleDrop}>
-    {({getRootProps, getInputProps}) => (
-        <div {...getRootProps()}>
-            <input {...getInputProps()} />
-            {image ? (
-            <p>{image.name}</p>
-                ) : (
-                <p className='text-gray-400'>Drag and drop/click to select a picture</p>
-            )}
-        </div>
-    )}
-</Dropzone> */}
+export default CreateRecipe     

@@ -83,11 +83,13 @@ const Recipe = () => {
 
   let content
 
-  if (loading) content = (
-    <Loader />
-  )
+  if (loading) {
+    content = (
+      <Loader />
+    )
+  }
 
-  else content = (
+  content = (
     <>
       <div className='max-w-full px-[8%] flex flex-col justify-center gap-y-5 gap-x-20 md:flex-row py-4'>
         <div className='flex flex-col gap-y-4'>

@@ -12,7 +12,6 @@ const ResetPwd = () => {
     // } catch (error) {
     //   console.log(`AN ERROR OCCURED: ${error}`)
     // }
-
     return new Promise((resolve, reject) => {
       setTimeout(() => {
         resolve('email sent')
@@ -24,10 +23,10 @@ const ResetPwd = () => {
   function toggleReset(e) {
     e.preventDefault()
     toast.promise(resetPwd(), {
-        loading: 'loading...',
-        success: 'email sent',
-        error: `couldn't reset password` 
-      })
+      loading: 'loading...',
+      success: 'email sent',
+      error: `couldn't reset password` 
+    })
   }
 
 

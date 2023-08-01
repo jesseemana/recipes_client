@@ -1,4 +1,6 @@
-const InputField = ({ref, type, text, autoComplete, placeholder, onChange, htmlFor, label}) => {
+import { useRef } from 'react'
+
+const InputField = ({ref, type, text, autoComplete, placeholder, onChange, htmlFor, label,}) => {
   return (
     <>
       <label htmlFor={htmlFor} className='text-gray-700 px-1 capitalize'>{label}</label>

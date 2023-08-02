@@ -23,7 +23,6 @@ const ResetPwd = () => {
     })
   }
 
-
   function toggleReset(e) {
     e.preventDefault()
     toast.promise(resetPwd(), {
@@ -43,16 +42,23 @@ const ResetPwd = () => {
             label={'email:'}
             type='text' 
             value={email}
-            autoComplete='off'
             placeholder='enter your email' 
             onChange={(e) => setEmail(e.target.value)}
           />
-          <button 
-            onClick={toggleReset} 
-            className='bg-[#38D6C4] rounded-sm py-1 text-white uppercase text-sm md:text-[17px] text-center font-semibold'
-          >
-            reset password
-          </button>
+          {email ? 
+            <button 
+              onClick={toggleReset} 
+              className='bg-[#38D6C4] rounded-sm py-1 text-white uppercase text-sm md:text-[17px] text-center font-medium'
+            >
+              reset password
+            </button> : 
+            <button 
+              disabled 
+              className='bg-[#8feee3] rounded-sm py-1 text-white uppercase text-sm md:text-[17px] text-center font-medium cursor-not-allowed'
+            >
+              reset password
+            </button>
+          }
         </form>
       </div>
     </div>

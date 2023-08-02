@@ -80,7 +80,6 @@ const CreateRecipe = () => {
             type='text'
             value={name}
             placeholder='name'
-            autoComplete='false'
             onChange={(e) => setName(e.target.value)}
             className='border border-gray-200 p-2 rounded-sm outline-none'
           />

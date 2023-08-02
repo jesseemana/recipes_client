@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import Recipes from '../ui/Recipes'
+import RecipesCard from '../ui/RecipesCard'
 import Loader from '../ui/Loader'
 
 import axios from './axios'
@@ -53,7 +53,7 @@ const GetRecipes = () => {
           <option value={snack}>snack/appetiser</option>
         </select>
       </div>
-      <Recipes
+      <RecipesCard
         recipes={recipes}
         pages={totalPages}
         currentPage={currentPage}

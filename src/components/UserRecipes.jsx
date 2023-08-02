@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import axios from '../api/axios'
-import Recipes from '../ui/Recipes'
+import RecipesCard from '../ui/RecipesCard'
 import Loader from '../ui/Loader'
 
 const RECIPE_URL = '/recipes/user'
@@ -47,13 +47,12 @@ const UserRecipes = () =>{
     )
   }
 
-  content = (
-    <>
-      <div className='max-w-full px-[4%]'>
-        <div className='capitalize text-center pt-7'>more recipes by {owner}</div>
-        <Recipes recipes={recipes} />
-      </div>
-    </>
+  else content = (
+    <div className='max-w-full px-[4%]'>
+      <h1 className=''>recipes</h1>
+      <p className='capitalize text-center pt-7'>more recipes by {owner}</p>
+      <RecipesCard recipes={recipes} />
+    </div>
   )
     
   return content

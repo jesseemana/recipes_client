@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import Navibar from './components/Navbar'
+import Navbar from './components/Navbar'
 import CreateRecipe from './components/CreateRecipe'
 import ResetPwd from './components/ResetPwd'
 import AuthUser from './pages/AuthUser'
@@ -23,7 +23,7 @@ function App(){
 
   return (
     <>
-      <Navibar />
+      <Navbar />
       <ErrorBoundary FallbackComponent={ErrorFallback}>
         <Routes>
           <Route path='/' element={<Navigate to='/feed'/>} />

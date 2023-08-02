@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import Recipes from '../ui/Recipes'
+import RecipesCard from '../ui/RecipesCard'
 import { useSelector } from 'react-redux'
 import Loader from '../ui/Loader'
 import axios from '../api/axios'
@@ -36,12 +36,11 @@ const Bookmarks = () => {
   }
 
   content = (
-    <>
-      <div className="max-w-full px-[4%]">
-        <h1 className='capitalize text-gray-600 text-xl md:text-2xl pt-4 font-semibold text-start'>your saved recipes</h1>
-        <Recipes recipes={bookmarks} />
-      </div>
-    </>
+    <div className='max-w-full px-[4%]'>
+      <h1 className=''>bookmarks</h1>
+      <h1 className='capitalize text-gray-600 text-xl md:text-2xl pt-4 font-semibold text-start'>your saved recipes</h1>
+      <RecipesCard recipes={bookmarks} />
+    </div>
   )
 
   return content

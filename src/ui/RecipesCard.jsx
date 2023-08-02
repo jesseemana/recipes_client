@@ -4,7 +4,7 @@ import Pagination from './Pagination'
 
 import cake from '../assets/cake.jpg'
 
-const Recipes = ({ recipes, pages, currentPage, setCurrentPage, totalPages, }) => {
+const RecipesCard = ({ recipes, pages, currentPage, setCurrentPage, totalPages, }) => {
   return (
     <>
       <div className='flex flex-col items-center'>
@@ -42,4 +42,4 @@ const Recipes = ({ recipes, pages, currentPage, setCurrentPage, totalPages, }) =
   )
 }
 
-export default Recipes    
+export default RecipesCard   

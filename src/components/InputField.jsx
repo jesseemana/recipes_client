@@ -1,11 +1,10 @@
-const InputField = ({ref, type, text, placeholder, onChange, htmlFor, label,}) => {
+const InputField = ({type, value, placeholder, onChange, htmlFor, label,}) => {
   return (
     <>
-      <label htmlFor={htmlFor} className='text-gray-700 px-1 capitalize'>{label}</label>
+      <label htmlFor={htmlFor} className='text-gray-700 capitalize'>{label}</label>
       <input
-        ref={ref} 
-        type={type} 
-        text={text}
+        type={type}
+        value={value}
         onChange={onChange} 
         placeholder={placeholder}
         autoComplete='off'

@@ -2,18 +2,18 @@ import { Link } from 'react-router-dom'
 import InputField from '../components/InputField'
 
 const Form = ({
+  email, 
   errMsg,
   isLogin,
-  handleSubmit, 
   firstName, 
   lastName, 
-  email, 
   password, 
   password2, 
-  setPageType, 
+  handleChange, 
+  handleSubmit, 
+  setEmail, 
   setFirstName, 
   setLastName, 
-  setEmail, 
   setPassword, 
   setPassword2, 
 }) => {
@@ -21,15 +21,15 @@ const Form = ({
     <div className='flex justify-center items-center py bg-gray-50 h-[96vh]'>
       <form 
         onSubmit={handleSubmit} 
-        className='flex flex-col gap-y-4 transition-all w-[300px] md:w-auto px-5 py-4 rounded-sm shadow-lg bg-white'
+        className='flex flex-col gap-y-3 transition-all w-[300px] md:w-auto px-5 py-4 rounded-sm shadow-lg bg-white'
       >
         {isLogin 
           ? <h1 className='text-center text-[#38D6C4] text-xl font-bold uppercase'>login</h1> 
-          : <h1 className='text-center text-[#38D6C4] text-xl font-bold uppercase'>register</h1>
+          : <h1 className='text-center text-[#38D6C4] text-xl font-bold uppercase'>create account</h1>
         }
         {!isLogin && (
           <div className='flex flex-col gap-y-4 items-start md:flex-row gap-x-4'>
-            <div className='flex flex-col w-full'>
+            <div className='flex flex-col w-full gap-3'>
               <InputField 
                 htmlFor={'first name'}
                 label={'first name:'}
@@ -40,7 +40,7 @@ const Form = ({
               />
             </div>
                     
-            <div className='flex flex-col w-full'>
+            <div className='flex flex-col w-full gap-3'>
               <InputField 
                 htmlFor={'last name'}
                 label={'last name:'}
@@ -72,7 +72,7 @@ const Form = ({
         />
 
         <InputField 
-          htmlFor={'password2'}
+          htmlFor={'confirm password'}
           label={'confirm password:'}
           type='password'
           value={password2}
@@ -80,7 +80,7 @@ const Form = ({
           onChange={(e) => setPassword2(e.target.value)}
         />
                 
-        <p className='text-red-500 text-center text-lg font-normal'>{errMsg}</p>
+        {isLogin && <p className='text-red-500 text-center text-lg font-normal'>{errMsg}</p>}
 
         <Link to={'/reset'}>
           {isLogin && <p className='text-[#38D6C4] text-center underline capitalize'>forgot password?</p>}
@@ -89,15 +89,16 @@ const Form = ({
         <button
           // disabled={!canSend}
           type='submit'
-          className={'bg-[#38D6C4] rounded-sm px-10 py-2 text-white uppercase text-md text-center'}>
-          {isLogin ? 'login' : 'create account'}
+          className={'bg-[#38D6C4] rounded-sm px-10 py-2 text-white uppercase text-md text-center'}
+        >
+          {isLogin ? 'login' : 'register'}
         </button>
         <div className='flex gap-1'>
           <div className='text-gray-500 text-sm md:text-[17px]'>
             {isLogin ? `Don't have an account?`: 'Already have an account?'}
           </div>
           <button
-            onClick={() => {setPageType(isLogin ? 'register' : 'login')}}
+            onClick={handleChange}
             className='text-[#38D6C4] text-sm md:text-[17px] underline capitalize'
           >
             {isLogin ? 'create account.' : 'login.'}

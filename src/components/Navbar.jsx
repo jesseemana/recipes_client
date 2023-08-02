@@ -9,12 +9,13 @@ import {
   MenuDivider,
 } from '@chakra-ui/react'
 
-import {MdOutlineAddBox} from 'react-icons/md'
+import { MdOutlineAddBox } from 'react-icons/md'
 import { CgProfile } from 'react-icons/cg'
 import { BsBookmark } from 'react-icons/bs'
 import { BiLogOut, BiLogIn, } from 'react-icons/bi'
 import { AiOutlineUser } from 'react-icons/ai'
-import axios from "../api/axios"
+
+import axios from '../api/axios'
 const LOGOUT_URL = '/auth/logout'
 
 
@@ -39,33 +40,36 @@ const Navibar = () => {
     }
   }
 
-
   let content
-  if(!user) content = (
-    <div className="p-3 max-w-full px-[4%] bg-white border border-l-0 border-r-0 border-t-0 border-gray-300 sticky top-0 left-0 right-0 z-10 flex justify-between">
-      <h1 className="text-lg md:text-2xl text-[#38D6C4] font-bold uppercase">foodiesss.</h1>
-      <Menu>
-        <MenuButton colorScheme='pink'>
-          <div className='rounded-full border p-1 bg-gray-200'>
-            <AiOutlineUser className='text-2xl text-gray-400' />
-          </div>
-        </MenuButton>
-        <MenuList>
-          <MenuItem as='a' href='/auth'>
-            <div className='flex items-center gap-x-3 text-lg text-gray-600'>
-              <BiLogIn className='text-2xl text-[#38D6C4]'/>
-              <p>Login</p>
+  
+  if (!user) {
+    content = (
+      <div className='p-3 max-w-full px-[4%] bg-white border border-l-0 border-r-0 border-t-0 border-gray-300 sticky top-0 left-0 right-0 z-10 flex justify-between'>
+        <h1 className='text-lg md:text-2xl text-[#38D6C4] font-bold uppercase'>foodiesss.</h1>
+        <Menu>
+          <MenuButton colorScheme='pink'>
+            <div className='rounded-full border p-1 bg-gray-200'>
+              <AiOutlineUser className='text-2xl text-gray-400' />
             </div>
-          </MenuItem>
-        </MenuList>
-      </Menu>
-    </div>
-  ) 
+          </MenuButton>
+          <MenuList>
+            <MenuItem as='a' href='/auth'>
+              <div className='flex items-center gap-x-3 text-lg text-gray-600'>
+                <BiLogIn className='text-2xl text-[#38D6C4]'/>
+                <p>Login</p>
+              </div>
+            </MenuItem>
+          </MenuList>
+        </Menu>
+      </div>
+    ) 
+  }
+
   else content = (
     <>
-      <div className="p-3 max-w-full px-[4%] bg-white border border-l-0 border-r-0 border-t-0 border-gray-300 sticky top-0 left-0 right-0 z-10 flex justify-between">
+      <div className='p-3 max-w-full px-[4%] bg-white border border-l-0 border-r-0 border-t-0 border-gray-300 sticky top-0 left-0 right-0 z-10 flex justify-between'>
         <Link to={'/feed'}>
-          <h1 className="text-lg md:text-2xl text-[#38D6C4] font-bold uppercase">foodiesss.</h1>
+          <h1 className='text-lg md:text-2xl text-[#38D6C4] font-bold uppercase'>foodiesss.</h1>
         </Link>
         <div className='flex gap-x-1 items-center'>
           <Menu>

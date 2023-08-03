@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux'
 import { Routes, Route, Navigate } from 'react-router-dom'
-import Navbar from './components/Navbar'
+import Navbar from './components/Navbar/Navbar'
 import CreateRecipe from './components/CreateRecipe'
 import ResetPwd from './components/ResetPwd'
 import AuthUser from './pages/AuthUser'

@@ -1,7 +1,7 @@
 const InputField = ({type, value, placeholder, onChange, htmlFor, label,}) => {
   return (
     <>
-      <label htmlFor={htmlFor} className='text-gray-700 capitalize'>{label}</label>
+      <label htmlFor={htmlFor} className='text-gray-700 text-sm md:text-[15px] capitalize'>{label}</label>
       <input
         type={type}
         value={value}

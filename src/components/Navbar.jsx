@@ -1,19 +1,12 @@
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
 import { setLogout } from '../state/appSlice'
-import {
-  Menu,
-  MenuButton,
-  MenuList,
-  MenuItem,
-  MenuDivider,
-} from '@chakra-ui/react'
-
+import { AiOutlineMenu, AiOutlineUser } from 'react-icons/ai'
 import { MdOutlineAddBox } from 'react-icons/md'
 import { CgProfile } from 'react-icons/cg'
 import { BsBookmark } from 'react-icons/bs'
 import { BiLogOut, BiLogIn, } from 'react-icons/bi'
-import { AiOutlineUser } from 'react-icons/ai'
 
 import axios from '../api/axios'
 const LOGOUT_URL = '/auth/logout'
@@ -22,8 +15,15 @@ const LOGOUT_URL = '/auth/logout'
 const Navibar = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const [open, setOpen] = useState(false)
   
-  const user = useSelector(state => state.user)
+  // const user = useSelector(state => state.user)
+  const user = false
+
+  function toggleOpen() {
+    setOpen((prev )=> !prev)
+    console.log(open)
+  }
 
   const handleLogout = async () => {
     try {
@@ -44,23 +44,39 @@ const Navibar = () => {
   
   if (!user) {
     content = (
-      <div className='p-3 max-w-full px-[4%] bg-white border border-l-0 border-r-0 border-t-0 border-gray-300 sticky top-0 left-0 right-0 z-10 flex justify-between'>
+      <div className='p-3 w-full px-[4%] bg-white border border-l-0 border-r-0 border-t-0 border-gray-300 sticky top-0 left-0 right-0 z-10 flex justify-between items-center'>
         <h1 className='text-lg md:text-2xl text-[#38D6C4] font-bold uppercase'>foodiesss.</h1>
-        <Menu>
-          <MenuButton colorScheme='pink'>
-            <div className='rounded-full border p-1 bg-gray-200'>
-              <AiOutlineUser className='text-2xl text-gray-400' />
-            </div>
-          </MenuButton>
-          <MenuList>
-            <MenuItem as='a' href='/auth'>
-              <div className='flex items-center gap-x-3 text-lg text-gray-600'>
-                <BiLogIn className='text-2xl text-[#38D6C4]'/>
-                <p>Login</p>
+        <div className='relative border px-1 rounded-full'>
+          <div 
+            onClick={() => setOpen((prev ) => !prev)} 
+            className='cursor-pointer flex items-center gap-1'
+          >
+            <AiOutlineMenu />
+            <img src='/avatar.jpg' alt='user profile avatar' className='w-8 h-8 rounded-full'/>
+          </div>
+          <div className='absolute bg-white rounded-md shadow-md w-[170px] overflow-hidden top-12 right-0 text-sm'>
+            <div className='flex flex-col cursor-pointer'>
+              <div 
+                onClick={() => {}} 
+                className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+              >
+                <p>user</p>
               </div>
-            </MenuItem>
-          </MenuList>
-        </Menu>
+              <div 
+                onClick={() => {}} 
+                className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+              >
+                <p>bookmarks</p>
+              </div>
+              <div 
+                onClick={() => {}} 
+                className='px-4 py-3 hover:bg-neutral-100 transition font-semibold'
+              >
+                <p>recipes</p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     ) 
   }
@@ -108,11 +124,6 @@ const Navibar = () => {
                   </div>
                 </MenuItem>
               </Link>
-              {/* <MenuDivider />
-              <MenuItem>
-                <BiLogOut className='text-2xl text-gray-700'/>
-                <p className='text-gray-700'>Logout</p>
-              </MenuItem> */}
             </MenuList>
           </Menu>
           <button onClick={handleLogout}>

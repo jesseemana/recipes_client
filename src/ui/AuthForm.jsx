@@ -18,14 +18,14 @@ const Form = ({
   setPassword2, 
 }) => {
   return (
-    <div className='flex justify-center items-center py bg-gray-50 h-[96vh]'>
+    <div className='flex justify-center items-center bg-gray-50 h-[100vh]'>
       <form 
         onSubmit={handleSubmit} 
         className='flex flex-col gap-y-3 transition-all w-[300px] md:w-auto px-5 py-4 rounded-sm shadow-lg bg-white'
       >
         {isLogin 
-          ? <h1 className='text-center text-[#38D6C4] text-xl font-bold uppercase'>login</h1> 
-          : <h1 className='text-center text-[#38D6C4] text-xl font-bold uppercase'>create account</h1>
+          ? <h1 className='text-center text-[#38D6C4] text-lg md:text-xl font-bold uppercase'>login</h1> 
+          : <h1 className='text-center text-[#38D6C4] text-lg md:text-xl font-bold uppercase'>create account</h1>
         }
         {!isLogin && (
           <div className='flex flex-col gap-y-4 items-start md:flex-row gap-x-4'>
@@ -89,7 +89,7 @@ const Form = ({
         <button
           // disabled={!canSend}
           type='submit'
-          className={'bg-[#38D6C4] rounded-sm px-10 py-2 text-white uppercase text-md text-center'}
+          className={'bg-[#38D6C4] rounded-sm px-10 py-2 text-white uppercase text-sm md:text-md text-center'}
         >
           {isLogin ? 'login' : 'register'}
         </button>

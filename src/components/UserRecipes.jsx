@@ -8,7 +8,7 @@ import Loader from '../ui/Loader'
 const RECIPE_URL = '/recipes/user'
 
 const UserRecipes = () =>{
-  const {id} = useParams()
+  const {id} = useParams() // in next, user router from navigation/router to get userId
 
   const [owner, setOwner] = useState('')
   const [recipes, setRecipes] = useState([])

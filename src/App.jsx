@@ -2,20 +2,20 @@ import { useSelector } from 'react-redux'
 import { Routes, Route, Navigate } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
 import Navbar from './components/Navbar/Navbar'
-import CreateRecipe from './components/CreateRecipe'
-import ResetPwd from './components/ResetPwd'
-import AuthUser from './pages/AuthUser'
-import Bookmarks from './components/Bookmarks'
-import NotFound from './pages/NotFound'
+import CreateRecipe from './main pages/CreateRecipe'
+import ResetPwd from './main pages/ResetPwd'
+import AuthUser from './main pages/AuthUser'
+import Bookmarks from './main pages/Bookmarks'
+import NotFound from './main pages/NotFound'
 import Loader from './components/ui/Loader'
 
 import { lazy, Suspense } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorFallback from './components/ErrorFallback'
-const Home = lazy(() => import('./pages/Home'))
-const Recipe = lazy(() => import('./components/Recipe'))
-const UserRecipes = lazy(() => import('./components/UserRecipes'))
-const Profile = lazy(() => import('./components/Profile'))
+const Home = lazy(() => import('./main pages/Home'))
+const Recipe = lazy(() => import('./main pages/Recipe'))
+const UserRecipes = lazy(() => import('./main pages/UserRecipes'))
+const Profile = lazy(() => import('./main pages/Profile'))
 
 
 function App(){ 

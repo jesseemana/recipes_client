@@ -65,7 +65,7 @@ const Navibar = () => {
         >
           <img 
             src='/avatar.jpg' 
-            alt='user profile avatar' 
+            alt='user menu placeholder avatar' 
             className='w-8 h-8 rounded-full'
           />
           <AiOutlineMenu />

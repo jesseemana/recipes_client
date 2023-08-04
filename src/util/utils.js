@@ -10,7 +10,7 @@ const userId = user.userId
 export default async function getRecipes() {
   try {
     const response = await axios.get(`/recipes?page=${currentPage}`, {
-      headers: {'Authorization': `Bearer ${token}`}
+      headers: {Authorization: `Bearer ${token}`}
     })
     const results = await response?.data
     return results
@@ -22,7 +22,7 @@ export default async function getRecipes() {
 export default async function getBookmarks() {
   try {
     const response = await axios.get(`${BOOKMARKS_URL}/${userId}`, {
-      headers: {'Authorization': `Bearer ${token}`}
+      headers: {Authorization: `Bearer ${token}`}
     })
     const results = await response.data 
     return results
@@ -33,7 +33,9 @@ export default async function getBookmarks() {
 
 export default async function myRecipes() {
   try {
-    const response = await axios.get('user_profile_url', {headers})
+    const response = await axios.get('user_profile_url', {
+      headers: {Authorization: `Bearer ${token}`}
+    })
     const results = await response.data
     return results
   } catch (error) {
@@ -43,10 +45,12 @@ export default async function myRecipes() {
 
 export default async function userRecipes({id}) {
   try {
-    const response = await axios.get(`${RECIPE_URL}/${id}`, {headers: {'Authorization': `Bearer ${token}`}});
+    const response = await axios.get(`${RECIPE_URL}/${id}`, {
+      headers: {Authorization: `Bearer ${token}`}
+    })
     const results = await response?.data
     return results
   } catch (error) {
     console.log(`AN ERROR OCCURED: ${error}`)
   }
-}
+} 

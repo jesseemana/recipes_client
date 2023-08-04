@@ -29,6 +29,10 @@ const Navibar = () => {
     }
 
     document.addEventListener('mousedown', handler)
+
+    return function() {
+      document.removeEventListener('mousedown', handler)
+    }
   })
 
   function handleLogout() {

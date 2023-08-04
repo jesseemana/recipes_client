@@ -1,16 +1,16 @@
 import { useSelector } from 'react-redux'
 import { Routes, Route, Navigate } from 'react-router-dom'
+import { Toaster } from 'react-hot-toast'
 import Navbar from './components/Navbar/Navbar'
 import CreateRecipe from './components/CreateRecipe'
 import ResetPwd from './components/ResetPwd'
 import AuthUser from './pages/AuthUser'
 import Bookmarks from './components/Bookmarks'
 import NotFound from './pages/NotFound'
-import { Toaster } from 'react-hot-toast'
-import Loader from './ui/Loader'
-import { ErrorBoundary } from 'react-error-boundary'
+import Loader from './components/ui/Loader'
 
 import { lazy, Suspense } from 'react'
+import { ErrorBoundary } from 'react-error-boundary'
 import ErrorFallback from './components/ErrorFallback'
 const Home = lazy(() => import('./pages/Home'))
 const Recipe = lazy(() => import('./components/Recipe'))

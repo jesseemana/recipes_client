@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import RecipesCard from '../ui/RecipesCard'
+import RecipesCard from './ui/RecipesListing'
 
 const Profile = () => {
   const user = useSelector(state => state.user)

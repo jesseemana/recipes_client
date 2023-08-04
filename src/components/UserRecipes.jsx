@@ -2,8 +2,8 @@ import { useState, useEffect } from 'react'
 import { useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 import axios from '../api/axios'
-import RecipesCard from '../ui/RecipesCard'
-import Loader from '../ui/Loader'
+import RecipesCard from './ui/RecipesListing'
+import Loader from './ui/Loader'
 
 const RECIPE_URL = '/recipes/user'
 

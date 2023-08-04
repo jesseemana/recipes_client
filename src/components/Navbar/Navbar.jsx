@@ -27,7 +27,7 @@ const Navibar = () => {
       //     withCredentials: true
       //   })
       // console.log(response.data.message) // cookie cleared
-      dispatch(setLogout())
+      // dispatch(setLogout())
       navigate('/auth')
     } catch (error) {
       console.error(`AN ERROR OCCURED: ${error}`)
@@ -72,14 +72,14 @@ const Navibar = () => {
                   />
                   <hr />
                   <MenuItem 
-                    onClick={() => {}}
+                    onClick={handleLogout}
                     label='logout'
                     icon={<BiLogOut />}
                   />
                 </>
                 ) : ( 
                 <MenuItem 
-                  onClick={() => {}}
+                  onClick={() => navigate('/auth')}
                   label='login / signup'
                   icon={<BiLogIn />}
                 />

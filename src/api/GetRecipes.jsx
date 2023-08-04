@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import RecipesCard from '../ui/RecipesCard'
-import Loader from '../ui/Loader'
-
+import RecipesCard from '../components/ui/RecipesListing'
+import Loader from '../components/ui/Loader'
 import axios from './axios'
 
 const GetRecipes = () => {
@@ -38,7 +37,8 @@ const GetRecipes = () => {
 
   console.log(category)
   
-  if(loading) return <Loader />
+  if (loading) return <Loader />
+
   return (
     <>
       <div className='flex pt-4 gap-x-2'>

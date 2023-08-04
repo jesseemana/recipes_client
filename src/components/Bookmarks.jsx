@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
-import RecipesCard from '../ui/RecipesCard'
+import RecipesCard from './ui/RecipesListing'
 import { useSelector } from 'react-redux'
-import Loader from '../ui/Loader'
+import Loader from './ui/Loader'
 import axios from '../api/axios'
 
 const BOOKMARKS_URL = '/bookmarks'
 
 const Bookmarks = () => {
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(false)
   const [bookmarks, setBookmarks] = useState([])
 
   const userId = useSelector(state => state.user_id)
@@ -15,6 +15,7 @@ const Bookmarks = () => {
 
   const getBookmarks = async () => {
     try {
+      setLoading(true)
       const results = await axios.get(`${BOOKMARKS_URL}/${userId}`, { headers: { 'Authorization' : `Bearer ${token}`}})
       console.log(results.data)
       setBookmarks(results?.data)

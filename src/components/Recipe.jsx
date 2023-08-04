@@ -6,7 +6,7 @@ import { toast } from 'react-hot-toast'
 import { BsClock } from 'react-icons/bs'
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import axios from '../api/axios'
-import Loader from '../ui/Loader'
+import Loader from './ui/Loader'
 
 const RECIPE_URL = '/recipes'
 const BOOKMARK_URL = '/bookmarks'

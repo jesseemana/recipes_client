@@ -22,6 +22,8 @@ const Recipe = () => {
 
   const userId = useSelector(state => state.user_id)
   const token = useSelector(state => state.access_token)
+  
+  useDocumentTitle(loading ? 'loading...' : recipe.name)
 
   const getRecipe = async () => {
     try {
@@ -41,8 +43,6 @@ const Recipe = () => {
   useEffect(() => {
     getRecipe()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
-  
-  useDocumentTitle(loading ? 'loading...' : recipe.name)
 
   async function addBookmark() {
     try {

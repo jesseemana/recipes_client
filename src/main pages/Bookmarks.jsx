@@ -3,6 +3,7 @@ import RecipesCard from '../components/ui/RecipesListing'
 import { useSelector } from 'react-redux'
 import Loader from '../components/ui/Loader'
 import axios from '../api/axios'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const BOOKMARKS_URL = '/bookmarks'
 
@@ -12,6 +13,8 @@ const Bookmarks = () => {
 
   const userId = useSelector(state => state.user_id)
   const token = useSelector(state => state.access_token)
+
+  useDocumentTitle('Bookmarks')
 
   const getBookmarks = async () => {
     try {

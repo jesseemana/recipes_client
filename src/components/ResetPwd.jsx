@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import InputField from './InputField'
 import axios from '../api/axios'
@@ -7,6 +7,10 @@ const RESET_URL = '/reset'
 
 const ResetPwd = () => {  
   const [email, setEmail] = useState('')
+
+  useEffect(() => {
+    document.title = 'Reset password'
+  })
 
   async function resetPwd() {
     // try {

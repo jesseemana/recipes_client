@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate, Link } from 'react-router-dom'
 import { setLogout } from '../../state/appSlice'
@@ -19,7 +19,19 @@ const Navibar = () => {
   // const user = useSelector(state => state.user)
   const user = true
 
-  const handleLogout = async () => {
+  const menuRef = useRef()
+
+  useEffect(() => {
+    function handler(e) {
+      if (!menuRef.current.contains(e.target)) {
+        setIsOpen(false)
+      }
+    }
+
+    document.addEventListener('mousedown', handler)
+  })
+
+  function handleLogout() {
     try {
       // CLEARS REFRESH TOKEN FROM COOKIE
       // const response = await axios.post(LOGOUT_URL, {
@@ -42,16 +54,20 @@ const Navibar = () => {
       >
         foodiesss.
       </Link>
-      <div className='relative border px-1 rounded-full'>
+      <div ref={menuRef} className='relative border rounded-full'>
         <div 
           onClick={() => setIsOpen((prev ) => !prev)} 
-          className='cursor-pointer flex items-center gap-1'
+          className='cursor-pointer flex items-center gap-1 pr-1'
         >
+          <img 
+            src='/avatar.jpg' 
+            alt='user profile avatar' 
+            className='w-8 h-8 rounded-full'
+          />
           <AiOutlineMenu />
-          <img src='/avatar.jpg' alt='user profile avatar' className='w-8 h-8 rounded-full'/>
         </div>
         {isOpen && (
-          <div className='absolute bg-white rounded-md shadow-md md:w-[170px] w-[138px] overflow-hidden top-12 right-0 text-sm'>
+          <div className='absolute bg-white rounded-md shadow-md md:w-[170px] w-[138px]  top-12 right-0 text-sm'>
             <div className='flex flex-col cursor-pointer capitalize'>
               {user ? (
                 <>
@@ -80,7 +96,7 @@ const Navibar = () => {
                 ) : ( 
                 <MenuItem 
                   onClick={() => navigate('/auth')}
-                  label='login / signup'
+                  label='login'
                   icon={<BiLogIn />}
                 />
               )}

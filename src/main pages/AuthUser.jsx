@@ -10,21 +10,23 @@ const LOGIN_URL = '/auth/login'
 const REGISTER_URL = '/auth/register'
 
 const AuthUser = () => {
-  const errorRef = useRef()
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  
   const [pageType, setPageType] = useState('login')
   const [firstName, setFirstName] = useState('')
   const [lastName, setLastName] = useState('')
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [password2, setPassword2] = useState('')
   const [errMsg, setErrMsg] = useState('')
-    
+  const [password, setPassword] = useState('')
+  const [confirmPassword, setConfirmPassword] = useState('')
+  
   const isLogin = (pageType === 'login')
   const isRegister = (pageType === 'register')
-
+  
   useDocumentTitle(isLogin ? 'Login' : 'Register')
+  
+  const errorRef = useRef()
 
   // const formRef = useRef()
   // useEffect(() => {
@@ -84,7 +86,7 @@ const AuthUser = () => {
     if (pageType === 'login') {
       setEmail('')
       setPassword('')
-      setPassword2('')
+      setConfirmPassword('')
     }
   }
 
@@ -99,14 +101,14 @@ const AuthUser = () => {
       password={password}
       lastName={lastName} 
       firstName={firstName} 
-      password2={password2} 
+      confirmPassword={confirmPassword} 
       setEmail={setEmail}
       setPageType={setPageType}
       setLastName={setLastName}
       setPassword={setPassword}
       setFirstName={setFirstName}
       handleSubmit={handleSubmit} 
-      setPassword2={setPassword2}
+      setConfirmPassword={setConfirmPassword}
     />
   )
 }

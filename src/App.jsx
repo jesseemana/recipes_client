@@ -8,6 +8,7 @@ import AuthUser from './main pages/AuthUser'
 import Bookmarks from './main pages/Bookmarks'
 import NotFound from './main pages/NotFound'
 import Loader from './components/ui/Loader'
+import ChangePassword from './main pages/ChangePassword'
 
 import { lazy, Suspense } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
@@ -29,6 +30,7 @@ function App(){
           <Route path='/' element={<Navigate to='/feed'/>} />
           <Route path='/auth' element={isAuth ? <Navigate to='/feed'/> : <AuthUser />} />
           <Route path='/reset' element={<ResetPwd />} />
+          <Route path='/reset-password/:id/:token' element={<ChangePassword />} />
           <Route path='/feed' element={<Suspense fallback={<Loader />}> <Home /> </Suspense>} />
           <Route path='/bookmarks' element={isAuth ? <Suspense fallback={<Loader />}> <Bookmarks /> </Suspense> : <Navigate to='/auth'/>} />
           <Route path='/recipe/:id' element={<Suspense fallback={<Loader />}> <Recipe /> </Suspense>} />

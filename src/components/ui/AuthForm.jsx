@@ -8,14 +8,14 @@ const Form = ({
   firstName, 
   lastName, 
   password, 
-  password2, 
+  confirmPassword, 
   handleChange, 
   handleSubmit, 
   setEmail, 
   setFirstName, 
   setLastName, 
   setPassword, 
-  setPassword2, 
+  setConfirmPassword, 
 }) => {
   return (
     <div className='flex justify-center items-center bg-gray-50 h-[100vh]'>
@@ -75,9 +75,9 @@ const Form = ({
           htmlFor={'confirm password'}
           label={'confirm password:'}
           type='password'
-          value={password2}
+          value={confirmPassword}
           placeholder='confirm password'
-          onChange={(e) => setPassword2(e.target.value)}
+          onChange={(e) => setConfirmPassword(e.target.value)}
         />
                 
         {isLogin && <p className='text-red-500 text-center text-lg font-normal'>{errMsg}</p>}

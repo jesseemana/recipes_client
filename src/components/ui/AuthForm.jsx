@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom'
 import InputField from '../InputField'
+import Button from '../Button'
 
 const Form = ({
   email, 
@@ -11,6 +12,7 @@ const Form = ({
   confirmPassword, 
   handleChange, 
   handleSubmit, 
+  submitting,
   setEmail, 
   setFirstName, 
   setLastName, 
@@ -86,20 +88,19 @@ const Form = ({
           {isLogin && <p className='text-[#38D6C4] text-center underline capitalize'>forgot password?</p>}
         </Link>
                 
-        <button
-          // disabled={!canSend}
-          type='submit'
-          className={'bg-[#38D6C4] rounded-sm px-10 py-2 text-white uppercase text-sm md:text-md text-center'}
-        >
-          {isLogin ? 'login' : 'register'}
-        </button>
+        <Button 
+          // type={'submit'}
+          disabled={submitting}
+          label={isLogin ? 'login' : 'register'}
+        />
         <div className='flex gap-1'>
           <div className='text-gray-500 text-sm md:text-[17px]'>
             {isLogin ? `Don't have an account?`: 'Already have an account?'}
           </div>
           <button
+            disabled={submitting}
             onClick={handleChange}
-            className='text-[#38D6C4] text-sm md:text-[17px] underline capitalize'
+            className='text-[#38D6C4] text-sm md:text-[17px] underline capitalize cursor-pointer disabled:cursor-not-allowed'
           >
             {isLogin ? 'create account.' : 'login.'}
           </button>

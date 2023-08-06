@@ -1,24 +1,32 @@
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import InputField from '../components/InputField'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import axios from '../api/axios'
+import Button from '../components/Button';
+import Heading from '../components/Heading';
 
 
 const ChangePassword = () => {
   const {id, token} = useParams()
-
+  const navigate = useNavigate()
+  
+  const [submitting, setSubmitting] = useState(false)
   const [password, setPassword] = useState('')
   const [confirmPassword, setConfirmPassword] = useState('')
 
   useDocumentTitle('Change Password')
 
   async function resetPwd() {
+    setSubmitting(true)
     try {
       await axios.patch(`reset/:${id}/:${token}`)
+      navigate('/auth')
     } catch (error) {
       console.log(`AN ERROR OCCURED: ${error}`)
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -34,7 +42,7 @@ const ChangePassword = () => {
   return (
     <div className='max-w-full px-[4%] bg-gray-50 flex items-center justify-center h-[100vh]'>
       <div className='bg-white px-2 py-4 shadow-md rounded-md'>
-        <h1 className='text-center capitalize text-lg md:text-2xl font-semibold text-[#38D6C4] py-1'>enter new password</h1>
+        {/* <Heading label={'enter new password'} /> */}
         <form type='submit' className='flex flex-col w-[280px] md:w-[320px] gap-y-2 py-2 px-1'>
           <InputField
             htmlFor={'password'}
@@ -52,12 +60,12 @@ const ChangePassword = () => {
             placeholder='confirm password' 
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
-          <button 
-            onClick={toggleChangePassword} 
-            className='bg-[#38D6C4] rounded-sm py-1 text-white uppercase text-sm md:text-[17px] text-center font-medium'
-          >
-            reset password
-          </button>
+          <Button 
+            disabled={submitting}
+            type={'submit'}
+            label={'change password'}
+            onClick={toggleChangePassword}
+          />
         </form>
       </div>
     </div>

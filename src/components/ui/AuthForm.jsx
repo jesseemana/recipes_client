@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom'
-import InputField from '../InputField'
 import Button from '../Button'
+import Heading from '../Heading'
+import InputField from '../InputField'
+
 
 const Form = ({
   email, 
@@ -25,10 +27,8 @@ const Form = ({
         onSubmit={handleSubmit} 
         className='flex flex-col gap-y-3 transition-all w-[300px] md:w-auto px-5 py-4 rounded-sm shadow-lg bg-white'
       >
-        {isLogin 
-          ? <h1 className='text-center text-[#38D6C4] text-lg md:text-xl font-bold uppercase'>login</h1> 
-          : <h1 className='text-center text-[#38D6C4] text-lg md:text-xl font-bold uppercase'>create account</h1>
-        }
+        {isLogin ? <> <Heading label={'login'} /> </> : <> <Heading label={'create account'} /> </>}
+    
         {!isLogin && (
           <div className='flex flex-col gap-y-4 items-start md:flex-row gap-x-4'>
             <div className='flex flex-col w-full gap-3'>
@@ -82,28 +82,28 @@ const Form = ({
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
                 
-        {isLogin && <p className='text-red-500 text-center text-lg font-normal'>{errMsg}</p>}
+        <p className='text-red-500 text-center text-lg font-normal'>{errMsg}</p>
 
         <Link to={'/reset'}>
           {isLogin && <p className='text-[#38D6C4] text-center underline capitalize'>forgot password?</p>}
         </Link>
                 
         <Button 
-          // type={'submit'}
+          type={'submit'}
           disabled={submitting}
           label={isLogin ? 'login' : 'register'}
         />
+
         <div className='flex gap-1'>
           <div className='text-gray-500 text-sm md:text-[17px]'>
             {isLogin ? `Don't have an account?`: 'Already have an account?'}
           </div>
-          <button
+          <Button 
+            type={'button'}
             disabled={submitting}
             onClick={handleChange}
-            className='text-[#38D6C4] text-sm md:text-[17px] underline capitalize cursor-pointer disabled:cursor-not-allowed'
-          >
-            {isLogin ? 'create account.' : 'login.'}
-          </button>
+            label={isLogin ? 'create account.' : 'login.'}
+          />
         </div>
       </form>
     </div>

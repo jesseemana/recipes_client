@@ -16,9 +16,12 @@ const ResetPwd = () => {
     setSubmitting(true)
 
     try {
-      await axios.post(`/reset`)
+      await axios.post(`/reset`, JSON.stringify({email}), {
+        headers: {'Content-Type': 'application/json'},
+        withCredentials: true
+      })
     } catch (error) {
-      console.log(`AN ERROR OCCURED: ${error}`)
+      console.error(`AN ERROR OCCURED: ${error}`)
     } finally {
       setSubmitting(false)
       setEmail('')

@@ -22,10 +22,13 @@ const ChangePassword = () => {
     setSubmitting(true)
 
     try {
-      await axios.patch(`reset/:${id}/:${token}`)
+      await axios.patch(`reset/:${id}/:${token}`, JSON.stringify({password}), {
+        headers: {'Content-Type': 'application/json'},
+        withCredentials: true
+      })
       navigate('/auth')
     } catch (error) {
-      console.log(`AN ERROR OCCURED: ${error}`)
+      console.error(`AN ERROR OCCURED: ${error}`)
     } finally {
       setSubmitting(false)
       setPassword('')

@@ -50,7 +50,7 @@ const AuthUser = () => {
       }
       // refresh page to navigate to go login page
     } catch (error) {
-      console.log(`AN ERROR OCCURED: ${error}`)
+      console.error(`AN ERROR OCCURED: ${error}`)
     } finally {
       setSubmitting(false)
     }
@@ -75,7 +75,7 @@ const AuthUser = () => {
         navigate('/')
       }
     } catch (error) {
-      console.log(`AN ERROR OCCURED: ${error}`)
+      console.error(`AN ERROR OCCURED: ${error}`)
     } finally {
       setSubmitting(false)
       setEmail('')

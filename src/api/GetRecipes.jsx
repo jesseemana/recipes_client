@@ -18,14 +18,14 @@ const GetRecipes = () => {
   const token = useSelector(state => state.access_token)
 
   const getRecipes = async () => {
+    setLoading(true)
     try {
-      setLoading(true)
-      const response = await axios.get(`/recipes?page=${currentPage}`, { headers: { 'Authorization': `Bearer ${token}` }})
+      const response = await axios.get(`/recipes?page=${currentPage}`, { headers: {'Authorization': `Bearer ${token}`}})
       const results = await response?.data
       setRecipes(results.data)
       setTotalPages(results.totalPages)
     } catch (error) {
-      console.log(`AN ERROR OCCURED: ${error}`)
+      console.error(`AN ERROR OCCURED: ${error}`)
     } finally {
       setLoading(false)
     }

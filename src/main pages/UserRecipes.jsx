@@ -26,7 +26,7 @@ const UserRecipes = () =>{
       setRecipes(results.recipes)
       setOwner(results.fullName)
     } catch (error) {
-      console.log(`An error occured: ${error.message}`)
+      console.error(`An error occured: ${error.message}`)
     } finally {
       setLoading(false)
     }

@@ -6,6 +6,7 @@ import { toast } from 'react-hot-toast'
 import Form from '../components/ui/AuthForm'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import axios from '../api/axios'
+import useError from '../hooks/useError'
 
 const LOGIN_URL = '/auth/login'
 const REGISTER_URL = '/auth/register'
@@ -51,6 +52,7 @@ const AuthUser = () => {
       // refresh page to navigate to go login page
     } catch (error) {
       console.error(`AN ERROR OCCURED: ${error}`)
+      setErrMsg(`server error`)
     } finally {
       setSubmitting(false)
     }
@@ -76,6 +78,7 @@ const AuthUser = () => {
       }
     } catch (error) {
       console.error(`AN ERROR OCCURED: ${error}`)
+      setErrMsg(`server error`)
     } finally {
       setSubmitting(false)
       setEmail('')

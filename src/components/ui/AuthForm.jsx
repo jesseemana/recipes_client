@@ -82,17 +82,17 @@ const Form = ({
           onChange={(e) => setConfirmPassword(e.target.value)}
         />
                 
-        <p className='text-red-500 text-center text-lg font-normal'>{errMsg}</p>
-
         <Link to={'/reset'}>
           {isLogin && <p className='text-[#38D6C4] text-center underline capitalize'>forgot password?</p>}
         </Link>
-                
+
         <Button 
           type={'submit'}
           disabled={submitting}
           label={isLogin ? 'login' : 'register'}
         />
+
+        <p className='text-white text-center text-sm font-normal bg-red-500'>{errMsg}</p>
 
         <div className='flex gap-1'>
           <div className='text-gray-500 text-sm md:text-[17px]'>

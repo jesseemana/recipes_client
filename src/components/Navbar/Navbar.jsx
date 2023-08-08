@@ -71,7 +71,7 @@ const Navibar = () => {
           <AiOutlineMenu />
         </div>
         {isOpen && (
-          <div className='absolute bg-white rounded-md shadow-md md:w-[170px] w-[138px]  top-12 right-0 text-sm'>
+          <div className='absolute bg-white rounded-md shadow-md md:w-[170px] w-[138px] top-12 right-0 text-sm'>
             <div className='flex flex-col cursor-pointer capitalize'>
               {user ? (
                 <>

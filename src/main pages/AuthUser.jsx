@@ -6,7 +6,6 @@ import { toast } from 'react-hot-toast'
 import Form from '../components/ui/AuthForm'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import axios from '../api/axios'
-import useError from '../hooks/useError'
 
 const LOGIN_URL = '/auth/login'
 const REGISTER_URL = '/auth/register'
@@ -38,14 +37,13 @@ const AuthUser = () => {
 
   const register = async () => {
     setSubmitting(true)
-
     try {
       const response = await axios.post(REGISTER_URL,
         JSON.stringify({firstName, lastName, email, password}), {
         headers: {'Content-Type': 'application/json'},
         withCredentials: true
       })
-      const results = response?.data
+      const results = await response?.data
       if (results) {
         dispatch(setUsers({users: results}))
       }
@@ -60,14 +58,13 @@ const AuthUser = () => {
 
   const login = async () => {
     setSubmitting(true)
-
     try {
       const response = await axios.post(LOGIN_URL,
         JSON.stringify({email, password}), {
         headers: {'Content-Type': 'application/json'},
         withCredentials: true
       })
-      const results = response?.data
+      const results = await response?.data
       if (results) {
         dispatch(setLogin({
           user: results.user,
@@ -121,7 +118,6 @@ const AuthUser = () => {
   return (
     <Form 
       // formRef={formRef}
-      handleChange={handleChange}
       pageType={pageType}
       email={email}
       errMsg={errMsg}
@@ -132,10 +128,10 @@ const AuthUser = () => {
       confirmPassword={confirmPassword} 
       submitting={submitting}
       setEmail={setEmail}
-      setPageType={setPageType}
-      setLastName={setLastName}
       setPassword={setPassword}
+      handleChange={handleChange}
       setFirstName={setFirstName}
+      setLastName={setLastName}
       handleSubmit={handleSubmit} 
       setConfirmPassword={setConfirmPassword}
     />

@@ -3,7 +3,9 @@ import ReactDOM from 'react-dom/client'
 import App from './App'
 import './index.css'
 
+import AuthContext from './AuthProvider'
 import { BrowserRouter as Router } from 'react-router-dom'
+
 import { Provider } from 'react-redux'
 import { configureStore } from "@reduxjs/toolkit"
 import appReducer from './state/appSlice'
@@ -39,9 +41,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistStore(store)}>
-        <Router>
-          <App />
-        </Router>
+        <AuthContext>
+          <Router>
+            <App />
+          </Router>
+        </AuthContext>
       </PersistGate>
     </Provider>
   </React.StrictMode>

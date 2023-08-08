@@ -1,18 +1,21 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import RecipesCard from '../components/ui/RecipesListing'
-import { useSelector } from 'react-redux'
 import Loader from '../components/ui/Loader'
 import axios from '../api/axios'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import AuthContext from '../context/AuthProvider'
 
 const BOOKMARKS_URL = '/bookmarks'
 
 const Bookmarks = () => {
+  const { auth } = useContext(AuthContext)
+
   const [loading, setLoading] = useState(false)
   const [bookmarks, setBookmarks] = useState([])
 
-  const userId = useSelector(state => state.user_id)
-  const token = useSelector(state => state.access_token)
+  console.log(auth)
+  const userId = auth.user._id
+  const token = auth.access_token
 
   useDocumentTitle('Bookmarks')
 

@@ -1,5 +1,4 @@
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useContext, useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
@@ -7,21 +6,24 @@ import { BsClock } from 'react-icons/bs'
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import axios from '../api/axios'
 import Loader from '../components/ui/Loader'
-import useDocumentTitle from '../hooks/useDocumentTitle';
+import useDocumentTitle from '../hooks/useDocumentTitle'
+import AuthContext from '../context/AuthProvider'
 
 const RECIPE_URL = '/recipes'
 const BOOKMARK_URL = '/bookmarks'
 
 const Recipe = () => { 
   const { id } = useParams()
+
+  const { auth } = useContext(AuthContext)
   
   const [recipe, setRecipe] = useState({})
   const [owner, setOwner] = useState('')
   const [loading, setLoading] = useState(false)
   const [bookmarked, setBookmarked] = useState(false)
 
-  const userId = useSelector(state => state.user_id)
-  const token = useSelector(state => state.access_token)
+  const token = auth.token
+  const userId = auth.user._id
   
   useDocumentTitle(loading ? 'loading...' : recipe.name)
 

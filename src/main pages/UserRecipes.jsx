@@ -1,21 +1,22 @@
-import { useState, useEffect } from 'react'
-import { useSelector } from 'react-redux'
+import { useState, useEffect, useContext } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from '../api/axios'
 import RecipesCard from '../components/ui/RecipesListing'
 import Loader from '../components/ui/Loader'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import AuthContext from '../context/AuthProvider'
 
 const RECIPE_URL = '/recipes/user'
 
 const UserRecipes = () =>{
-  const {id} = useParams() // in next, user router from navigation/router to get userId
+  const { id } = useParams() // in next, user router from navigation/router to get userId
+  const { auth } = useContext(AuthContext)
 
   const [owner, setOwner] = useState('')
   const [recipes, setRecipes] = useState([])
   const [loading, setLoading] = useState(true)
 
-  const token = useSelector(state => state.access_token)
+  const token = auth.access_token
 
   useDocumentTitle(loading ? 'Loading...': `${owner}'s Recipes`)
 

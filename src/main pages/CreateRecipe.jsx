@@ -1,13 +1,15 @@
-import { useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useContext, useState } from 'react'
 import Dropzone from 'react-dropzone'
 import InputField from '../components/InputField'
 import axios from '../api/axios'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import AuthContext from '../context/AuthProvider'
 
 const RECIPE_URL = '/recipes'
 
 const CreateRecipe = () => {
+  const { auth } = useContext(AuthContext)
+
   const [time, setTime] = useState('')
   const [name, setName] = useState('')
   const [image, setImage] = useState(null)
@@ -19,8 +21,9 @@ const CreateRecipe = () => {
   const [breakFast, setBreakFast] = useState('breakfast')
   const [mainCourse, setMainCourse] = useState('main course')
     
-  const user = useSelector((state) => state.user)
-  const token = useSelector((state) => state.access_token)
+  console.log(auth)
+  const user = auth.user
+  const token = auth.access_token
 
   useDocumentTitle('Create Recipe')
 

@@ -74,9 +74,8 @@ const AuthUser = () => {
       const results = await response?.data
       if (results) {
         const user = results.user
-        const user_id = results.user._id
         const access_token = results.accessToken
-        setAuth({user, user_id, access_token})
+        setAuth({user, access_token})
         navigate('/')
       }
     } catch (error) {

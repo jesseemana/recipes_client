@@ -1,10 +1,12 @@
-import { useEffect, useState } from 'react'
-import { useSelector } from 'react-redux'
+import { useContext, useEffect, useState } from 'react'
 import RecipesCard from '../components/ui/RecipesListing'
 import Loader from '../components/ui/Loader'
 import axios from './axios'
+import AuthContext from '../context/AuthProvider'
 
 const GetRecipes = () => {
+  const { auth } = useContext(AuthContext)
+
   const [recipes, setRecipes] = useState([]) 
   const [loading, setLoading] = useState(false) 
   const [currentPage, setCurrentPage] = useState(1)
@@ -15,7 +17,7 @@ const GetRecipes = () => {
   const [breakfast, setBreakFast] = useState('breakfast')
   const [maincourse, setMainCourse] = useState('main course')
   
-  const token = useSelector(state => state.access_token)
+  const token = auth.access_token
 
   const getRecipes = async () => {
     setLoading(true)

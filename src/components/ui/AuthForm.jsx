@@ -7,6 +7,7 @@ import InputField from '../InputField'
 const Form = ({
   email, 
   errMsg,
+  errorRef,
   isLogin,
   firstName, 
   lastName, 
@@ -35,6 +36,7 @@ const Form = ({
               <InputField 
                 htmlFor={'first name'}
                 label={'first name:'}
+                id={'first name'}
                 type='text'
                 value={firstName}
                 placeholder='first name'
@@ -46,6 +48,7 @@ const Form = ({
               <InputField 
                 htmlFor={'last name'}
                 label={'last name:'}
+                id={'last name'}
                 type='text'
                 value={lastName}
                 placeholder='last name'
@@ -58,6 +61,7 @@ const Form = ({
         <InputField 
           htmlFor={'email'}
           label={'email:'}
+          id={'email'}
           type='text'
           value={email}
           placeholder='email@example.com'
@@ -67,6 +71,7 @@ const Form = ({
         <InputField 
           htmlFor={'password'}
           label={'password:'}
+          id={'password'}
           type='password'
           value={password}
           placeholder='password'
@@ -76,6 +81,7 @@ const Form = ({
         <InputField 
           htmlFor={'confirm password'}
           label={'confirm password:'}
+          id={'confirm password'}
           type='password'
           value={confirmPassword}
           placeholder='confirm password'
@@ -92,7 +98,7 @@ const Form = ({
           label={isLogin ? 'login' : 'register'}
         />
 
-        <p className='text-white text-center text-sm font-normal bg-red-500'>{errMsg}</p>
+        <p ref={errorRef} aria-live='assertive' className='text-white text-center text-sm font-normal bg-red-500'>{errMsg}</p>
 
         <div className='flex gap-1'>
           <div className='text-gray-500 text-sm md:text-[17px]'>

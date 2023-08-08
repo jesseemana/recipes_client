@@ -1,8 +1,9 @@
-const InputField = ({type, value, placeholder, onChange, htmlFor, label,}) => {
+const InputField = ({type, value, placeholder, onChange, htmlFor, label, id}) => {
   return (
     <>
       <label htmlFor={htmlFor} className='text-sm md:text-[15px] capitalize  text-gray-500'>{label}</label>
       <input
+        id={id}
         type={type}
         value={value}
         onChange={onChange} 

@@ -3,7 +3,7 @@ import { createContext, useState } from 'react'
 const AuthContext = createContext({})
 
 export const AuthProvider = ({ children }) => {
-  const [auth, setAuth] = useState({}) // will hold/manage state for user and access_token
+  const [auth, setAuth] = useState({})
 
   return (
     <AuthContext.Provider value={{ auth, setAuth }}>
@@ -12,4 +12,4 @@ export const AuthProvider = ({ children }) => {
   )
 }
 
-export default AuthContext
+export default AuthContext  

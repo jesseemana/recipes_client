@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import axios from '../api/axios'
 import RecipesCard from '../components/ui/RecipesListing'
 import Loader from '../components/ui/Loader'
-import useDocumentTitle from '../hooks/useDocumentTitle';
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const RECIPE_URL = '/recipes/user'
 
@@ -48,7 +48,7 @@ const UserRecipes = () =>{
 
   else content = (
     <div className='max-w-full px-[4%]'>
-      <h1 className=''>recipes</h1>
+      <h1 className=''>user recipes</h1>
       <p className='capitalize text-center pt-7'>more recipes by {owner}</p>
       <RecipesCard recipes={recipes} />
     </div>

@@ -24,8 +24,8 @@ const GetRecipes = () => {
     try {
       const response = await axios.get(`/recipes?page=${currentPage}`, { headers: {'Authorization': `Bearer ${token}`}})
       const results = await response?.data
-      setRecipes(results.data)
-      setTotalPages(results.totalPages)
+      setRecipes(results.recipes)
+      setTotalPages(results.total_pages)
     } catch (error) {
       console.error(`AN ERROR OCCURED: ${error}`)
     } finally {

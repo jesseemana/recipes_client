@@ -1,14 +1,14 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import RecipesCard from '../components/ui/RecipesListing'
 import Loader from '../components/ui/Loader'
 import axios from '../api/axios'
 import useDocumentTitle from '../hooks/useDocumentTitle'
-import AuthContext from '../context/AuthProvider'
+import useAuth from '../hooks/useAuth'
 
 const BOOKMARKS_URL = '/bookmarks'
 
 const Bookmarks = () => {
-  const { auth } = useContext(AuthContext)
+  const { auth } = useAuth()
 
   const [loading, setLoading] = useState(false)
   const [bookmarks, setBookmarks] = useState([])

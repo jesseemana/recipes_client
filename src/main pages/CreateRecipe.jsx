@@ -1,48 +1,45 @@
-import { useContext, useState } from 'react'
-import Dropzone from 'react-dropzone'
+import { useState } from 'react'
 import InputField from '../components/InputField'
 import axios from '../api/axios'
 import useDocumentTitle from '../hooks/useDocumentTitle'
-import AuthContext from '../context/AuthProvider'
+import Heading from '../components/Heading'
+import Button from '../components/Button'
+import useAuth from '../hooks/useAuth'
 
 const RECIPE_URL = '/recipes'
 
 const CreateRecipe = () => {
-  const { auth } = useContext(AuthContext)
+  const { auth } = useAuth()
 
   const [time, setTime] = useState('')
   const [name, setName] = useState('')
-  const [image, setImage] = useState(null)
+  const [image, setImage] = useState({})
   const [category, setCategory] = useState('')
   const [procedure, setProcedure] = useState('')
   const [ingridients, setIngridients] = useState('')
-
+  const [submitting, setSubmitting] = useState(false)
   const [snack, setSnack] = useState('snack/appetiser')
   const [breakFast, setBreakFast] = useState('breakfast')
   const [mainCourse, setMainCourse] = useState('main course')
     
-  console.log(auth)
+  // console.log(auth)
   const user = auth.user
   const token = auth.access_token
 
   useDocumentTitle('Create Recipe')
-
-  const handleDrop = (acceptedFiles) => {
-    setImage(acceptedFiles[0])
-  }
     
   const createRecipe = async (e) => {
+    setSubmitting(true)
     e.preventDefault()
     try {
-      const formData = new FormData()    
-      console.log(image)
+      const formData = new FormData() 
+
       formData.append('user', user._id)
       formData.append('name', name)
       formData.append('ingridients', ingridients)
       formData.append('category', category)
       formData.append('time', time)
       formData.append('file', image) // FOR MULTER
-      formData.append('picture_path', image.name)  // FOR SCHEMA
       formData.append('procedure', procedure)
       
       await axios.post(RECIPE_URL, formData, {
@@ -54,6 +51,8 @@ const CreateRecipe = () => {
       })
     } catch (error) {
       console.error(`AN ERROR OCCURED: ${error}`)
+    } finally {
+      setSubmitting(false)
     }
   }
 
@@ -61,21 +60,31 @@ const CreateRecipe = () => {
     setCategory(e.target.value)
   }
 
-  const handleSubmit = () => {
-    createRecipe()
-    setTime('')
-    setName('')
-    setImage(null)
-    setCategory('')
-    setProcedure('')
-    setIngridients('')
+  function handleImg(e) {
+    const files = e.target?.files
+
+    if (files.length > 0) {
+      const data = new FormData()
+      
+      for (const file of files) {
+        console.log(file)
+        // data.append('file', image)
+      }
+    }
+
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    console.log(image)
+    // createRecipe()
   }
 
   return (
-    <div className='max-w-full px-[8%] py-7 flex justify-center bg-gray-50'>
-      <div className='bg-white p-4 rounded-md shadow-lg w-[500px] border'>
-        <h1 className='py-4 text-center text-[#38D6C4] font-bold text-3xl uppercase'>add a recipe</h1>
-        <form onSubmit={handleSubmit} encType='multipart/form-data' className='flex flex-col gap-y-3'>
+    <div className='max-w-full px-[8%] flex justify-center items-center bg-gray-50 h-auto pt-[100px] pb-[50px]'>
+      <div className='bg-white p-4 rounded-md shadow-lg w-[540px] border'>
+        <Heading label={'add a recipe'} />
+        <form onSubmit={handleSubmit} encType='multipart/form-data' className='flex flex-col gap-y-2'>
           <InputField 
             htmlFor={'name'}
             label={'name:'}
@@ -100,7 +109,7 @@ const CreateRecipe = () => {
           <select 
             name='category dropdown' 
             onChange={handleChange} 
-            className='border p-2 capitalize text-gray-500 outline-none'
+            className='border p-2 capitalize text-gray-500 outline-none text-sm'
           >
             <option 
               value={breakFast} 
@@ -118,7 +127,7 @@ const CreateRecipe = () => {
               value={snack} 
               className='capitalize'
             >
-              snack/appetiser
+              snack / appetiser
             </option>
           </select>
 
@@ -132,40 +141,36 @@ const CreateRecipe = () => {
             className='border border-gray-200 p-2 rounded-sm outline-none'
           />
 
-          <label htmlFor='image' className='text-gray-700 capitalize'>attach image:</label> 
-          <div className='border border-dashed py-4 rounded-sm px-1 bg-white cursor-pointer'>
-            <Dropzone onDrop={handleDrop}>
-              {({getRootProps, getInputProps}) => (
-                <div {...getRootProps()}>
-                  <input {...getInputProps()} />
-                  {image ? (
-                  <p>{image.name}</p>
-                    ) : (
-                    <p className='text-gray-500'>Drag and drop/click to select a picture</p>
-                  )}
-                </div>
-              )}
-            </Dropzone>
-          </div>
-
-          {/* input field changed from textarea */}
           <InputField 
-            htmlFor={'procedure'}
-            label={'how to prepare:'}
-            type='text'
-            rows='9'
+            htmlFor={'image'}
+            label={'attach image:'}
+            type='file'
+            placeholder='choose image to attach'
+            // onChange={(e) => setImage(e.target.files)}
+            onChange={handleImg}
+          />
+
+          <label 
+            htmlFor='procedure' 
+            className='text-sm md:text-[15px] capitalize text-gray-500'
+          >
+            how to prepare
+          </label>
+          <textarea 
+            name='procedure' 
+            id='procedure' 
+            rows='10' 
             value={procedure}
-            placeholder='procedure'
+            placeholder='how to prepare'
             onChange={(e) => setProcedure(e.target.value)}
-            className='border border-gray-200 p-2 rounded-sm outline-none resize-none'
+            className='border border-gray-200 p-2 rounded-sm resize-none outline-[#38D6C4]' 
           />
                 
-          <button
+          <Button 
             type='submit'
-            className='p-2 bg-[#38D6C4] text-white font-semibold text-xl capitalize rounded-sm'
-          >
-            let's cook
-          </button> 
+            disabled={submitting}
+            label={`let's cook`}
+          />
         </form>
       </div>
     </div>

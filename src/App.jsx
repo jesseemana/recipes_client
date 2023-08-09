@@ -36,7 +36,8 @@ function App(){
           <Route path='/recipe/:id' element={<Suspense fallback={<Loader />}> <Recipe /> </Suspense>} />
           <Route path='/user/:id' element={<Suspense fallback={<Loader />}> <UserRecipes /> </Suspense>} />
           <Route path='/profile/:id' element={isAuth ? <Suspense fallback={<Loader />}> <Profile /> </Suspense> : <Navigate to='/'/>} />
-          <Route path='/newrecipe' element={isAuth ? <CreateRecipe/> : <Navigate to='/auth'/>} />
+          <Route path='/newrecipe' element={<CreateRecipe/>} />
+          {/* <Route path='/newrecipe' element={isAuth ? <CreateRecipe/> : <Navigate to='/auth'/>} /> */}
           <Route path='*' element={<NotFound />} />
         </Routes>
       </ErrorBoundary>

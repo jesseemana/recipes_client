@@ -1,16 +1,16 @@
-import { useState, useEffect, useContext } from 'react'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from '../api/axios'
 import RecipesCard from '../components/ui/RecipesListing'
 import Loader from '../components/ui/Loader'
 import useDocumentTitle from '../hooks/useDocumentTitle'
-import AuthContext from '../context/AuthProvider'
+import useAuth from '../hooks/useAuth'
 
 const RECIPE_URL = '/recipes/user'
 
 const UserRecipes = () =>{
   const { id } = useParams() // in next, user router from navigation/router to get userId
-  const { auth } = useContext(AuthContext)
+  const { auth } = useAuth()
 
   const [owner, setOwner] = useState('')
   const [recipes, setRecipes] = useState([])
@@ -25,7 +25,7 @@ const UserRecipes = () =>{
       const response = await axios.get(`${RECIPE_URL}/${id}`, { headers: { 'Authorization': `Bearer ${token}`}})
       const results = await response?.data
       setRecipes(results.recipes)
-      setOwner(results.fullName)
+      setOwner(results.full_name)
     } catch (error) {
       console.error(`An error occured: ${error.message}`)
     } finally {

@@ -1,11 +1,11 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import RecipesCard from '../components/ui/RecipesListing'
 import Loader from '../components/ui/Loader'
 import axios from './axios'
-import AuthContext from '../context/AuthProvider'
+import useAuth from '../hooks/useAuth'
 
 const GetRecipes = () => {
-  const { auth } = useContext(AuthContext)
+  const { auth } = useAuth()
 
   const [recipes, setRecipes] = useState([]) 
   const [loading, setLoading] = useState(false) 

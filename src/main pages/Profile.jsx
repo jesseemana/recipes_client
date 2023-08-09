@@ -1,9 +1,10 @@
 import { useSelector } from 'react-redux'
 import RecipesCard from '../components/ui/RecipesListing'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import useAuth from '../hooks/useAuth'
 
 const Profile = () => {
-  const user = useSelector(state => state.user)
+  const { auth } = useAuth()
 
   useDocumentTitle('My Profile')
   

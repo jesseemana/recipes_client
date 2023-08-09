@@ -1,10 +1,10 @@
-import { useState, useRef, useContext } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
-import AuthContext from '../context/AuthProvider'
 import Form from '../components/ui/AuthForm'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import axios from '../api/axios'
+import useAuth from '../hooks/useAuth'
 
 const LOGIN_URL = '/auth/login'
 const REGISTER_URL = '/auth/register'
@@ -12,7 +12,7 @@ const REGISTER_URL = '/auth/register'
 const AuthUser = () => {
   const navigate = useNavigate()
 
-  const { setAuth } = useContext(AuthContext)
+  const { setAuth } = useAuth()
   
   const [errMsg, setErrMsg] = useState('')
   const [pageType, setPageType] = useState('login')

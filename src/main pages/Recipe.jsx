@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
@@ -6,15 +6,15 @@ import { BsClock } from 'react-icons/bs'
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import Loader from '../components/ui/Loader'
-import AuthContext from '../context/AuthProvider'
 import axios from '../api/axios'
+import useAuth from '../hooks/useAuth'
 
 const RECIPE_URL = '/recipes'
 const BOOKMARK_URL = '/bookmarks'
 
 const Recipe = () => { 
   const { id } = useParams()
-  const { auth } = useContext(AuthContext)
+  const { auth } = useAuth()
   
   const [recipe, setRecipe] = useState({})
   const [owner, setOwner] = useState('')

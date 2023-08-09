@@ -4,17 +4,16 @@ import { useParams } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
 import { BsClock } from 'react-icons/bs'
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
-import axios from '../api/axios'
-import Loader from '../components/ui/Loader'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import Loader from '../components/ui/Loader'
 import AuthContext from '../context/AuthProvider'
+import axios from '../api/axios'
 
 const RECIPE_URL = '/recipes'
 const BOOKMARK_URL = '/bookmarks'
 
 const Recipe = () => { 
   const { id } = useParams()
-
   const { auth } = useContext(AuthContext)
   
   const [recipe, setRecipe] = useState({})
@@ -28,8 +27,8 @@ const Recipe = () => {
   useDocumentTitle(loading ? 'loading...' : recipe.name)
 
   const getRecipe = async () => {
+    setLoading(true)
     try {
-      setLoading(true)
       const response = await axios.get(`${RECIPE_URL}/${id}/${userId}`, { headers: {'Authorization': `Bearer ${token}`}})
       const results = await response?.data
       setRecipe(results.recipe)
@@ -46,35 +45,27 @@ const Recipe = () => {
     getRecipe()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  async function addBookmark() {
+  async function handleBookmark() {
     try {
-      await axios.post(`${BOOKMARK_URL}/${id}/${userId}`, { headers: {'Authorization': `Bearer ${token}`}})
-      // refresh page
-      // setBookmarked(true)
+      if (bookmarked) {
+        await axios.delete(`${BOOKMARK_URL}/${id}/${userId}`, { headers: {'Authorization': `Bearer ${token}`}})
+      } else {
+        await axios.post(`${BOOKMARK_URL}/${id}/${userId}`, { headers: {'Authorization': `Bearer ${token}`}})
+      }
     } catch(error) {
       console.error(`AN ERROR OCCURED: ${error}`)
     }
   }
 
-  async function removeBookmark() {
-    try {
-      await axios.delete(`${BOOKMARK_URL}/${id}/${userId}`, { headers: {'Authorization': `Bearer ${token}`}})
-      // refresh page
-      // setBookmarked(false)
-    } catch(error) {
-      console.error(`AN ERROR OCCURED: ${error}`)
-    }
-  } 
-
   const toggleBookmark = () => {
     if (bookmarked) {
-      toast.promise(removeBookmark(), {
+      toast.promise(handleBookmark(), {
         loading: 'removing...',
         success: 'Recipe removed',
         error: `couldn't remove recipe` 
       })
     } else {
-      toast.promise(addBookmark(), {
+      toast.promise(handleBookmark(), {
         loading: 'saving...',
         success: 'Recipe added',
         error: `couldn't save recipe`
@@ -154,6 +145,26 @@ const Recipe = () => {
 }
 
 export default Recipe     
+
+// async function addBookmark() {
+//   try {
+//     await axios.post(`${BOOKMARK_URL}/${id}/${userId}`, { headers: {'Authorization': `Bearer ${token}`}})
+//     // refresh page
+//     // setBookmarked(true)
+//   } catch(error) {
+//     console.error(`AN ERROR OCCURED: ${error}`)
+//   }
+// }
+
+// async function removeBookmark() {
+//   try {
+//     await axios.delete(`${BOOKMARK_URL}/${id}/${userId}`, { headers: {'Authorization': `Bearer ${token}`}})
+//     // refresh page
+//     // setBookmarked(false)
+//   } catch(error) {
+//     console.error(`AN ERROR OCCURED: ${error}`)
+//   }
+// } 
 
 // MANTAINING STATE OF BOOKMARK ICON 
 // useEffect(() => {

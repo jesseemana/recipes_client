@@ -72,12 +72,10 @@ const AuthUser = () => {
         withCredentials: true
       })
       const results = await response?.data
-      if (results) {
-        const user = results.user
-        const access_token = results.accessToken
-        setAuth({user, access_token})
-        navigate('/')
-      }
+      const user = results.user
+      const access_token = results.accessToken
+      setAuth({user, access_token})
+      navigate('/')
     } catch (error) {
       if (!error?.response) {
         setErrMsg('No server response.')

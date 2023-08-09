@@ -30,16 +30,16 @@ function App(){
           <Route path='/feed' element={<Suspense fallback={<Loader />}> <Home /> </Suspense>} />
           <Route path='/addrecipe' element={<CreateRecipe/>} />
           <Route path='/recipe/:id' element={<Suspense fallback={<Loader />}> <Recipe /> </Suspense>} />
-          <Route path='/user/:id' element={<Suspense fallback={<Loader />}> <UserRecipes /> </Suspense>} />
           <Route path='/reset' element={<ResetPwd />} />
           <Route path='/reset-password/:id/:token' element={<ChangePassword />} />
 
           {/* PROTECTED ROUTES */}
           <Route element={<RequireAuth />}>
             <Route path='/auth' element={<Navigate to='/feed'/>} />
-            <Route path='/bookmarks' element={<Suspense fallback={<Loader />}> <Bookmarks /> </Suspense>} />
-            <Route path='/profile/:id' element={<Suspense fallback={<Loader />}> <Profile /> </Suspense>} />
             <Route path='/newrecipe' element={<CreateRecipe/>} />
+            <Route path='/bookmarks' element={<Suspense fallback={<Loader />}> <Bookmarks /> </Suspense>} />
+            <Route path='/user/:id' element={<Suspense fallback={<Loader />}> <UserRecipes /> </Suspense>} />
+            <Route path='/profile/:id' element={<Suspense fallback={<Loader />}> <Profile /> </Suspense>} />
           </Route>
           
           <Route path='*' element={<NotFound />} />

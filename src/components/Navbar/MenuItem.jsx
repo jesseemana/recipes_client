@@ -2,10 +2,10 @@ const MenuItem = ({onClick, label, icon}) => {
   return (
     <div 
       onClick={onClick} 
-      className='px-4 py-3 hover:bg-neutral-100 transition font-normal flex items-center gap-1 text-gray-600'
+      className='px-4 py-3 hover:bg-neutral-100 transition font-normal flex items-center gap-1 text-gray-600 text-md'
     >
-      <div className='text-lg'>{icon}</div>
-      <p className='text-md'>{label}</p>
+      <>{icon}</>
+      <p>{label}</p>
     </div>
   )
 }

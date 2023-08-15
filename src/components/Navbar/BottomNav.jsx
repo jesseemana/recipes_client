@@ -18,9 +18,9 @@ const BottomNav = ({ user, handleLogout }) => {
             <Menu route={'/bookmarks'} icon={<BsBookmark />} />
             <Menu route={'/addrecipe'} icon={<MdOutlineAddBox />} />
             <Menu route={'/profile/:id'} icon={<AiOutlineUser />} />
-            {user 
-              ? (<Menu onClick={handleLogout} icon={<BiLogOut />} />) 
-              : (<Menu route={'/auth'} icon={<BiLogIn />} />)
+            {!user 
+              ? (<Menu route={'/auth'} icon={<BiLogIn />} />)
+              : (<Menu onClick={handleLogout} icon={<BiLogOut />} />) 
             }
           </div>
         </div>

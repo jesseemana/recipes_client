@@ -70,7 +70,7 @@ const TopNav = ({ user, handleLogout }) => {
                     icon={<BiLogOut />}
                   />
                 </>
-                ) : ( 
+                ):( 
                 <MenuItem 
                   onClick={() => navigate('/auth')}
                   label='login'

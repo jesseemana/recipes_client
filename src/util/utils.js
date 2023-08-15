@@ -1,13 +1,6 @@
 import axios from '../api/axios'
 
-const BOOKMARKS_URL = '/bookmarks'
-const RECIPE_URL = '/recipes/user'
-
-const token = 'access token here'
-const user = 'get user'
-const userId = user.userId
-
-export default async function getRecipes() {
+export default async function getRecipes(token) {
   try {
     const response = await axios.get(`/recipes?page=${currentPage}`, {
       headers: {Authorization: `Bearer ${token}`}
@@ -15,42 +8,54 @@ export default async function getRecipes() {
     const results = await response?.data
     return results
   } catch (error) {
-    console.log(`AN ERROR OCCURED: ${error}`)
+    let errorMessage = 'Something went wrong: '
+    if (error instanceof Error)
+      errorMessage += error
+    console.log(errorMessage)
   }
 }
 
-export default async function getBookmarks() {
+export default async function getBookmarks(token, userId) {
   try {
-    const response = await axios.get(`${BOOKMARKS_URL}/${userId}`, {
+    const response = await axios.get(`/bookmarks/${userId}`, {
       headers: {Authorization: `Bearer ${token}`}
     })
-    const results = await response.data 
+    const results = await response?.data 
     return results
   } catch (error) {
-    console.log(`AN ERROR OCCURED: ${error}`)
+    let errorMessage = 'Something went wrong: '
+    if (error instanceof Error)
+      errorMessage += error
+    console.log(errorMessage)
   }
 }
 
-export default async function myRecipes() {
+export default async function myRecipes(id, token) {
   try {
-    const response = await axios.get('user_profile_url', {
-      headers: {Authorization: `Bearer ${token}`}
-    })
-    const results = await response.data
-    return results
-  } catch (error) {
-    console.log(`AN ERROR OCCURED: ${error}`)
-  }
-} 
-
-export default async function userRecipes({id}) {
-  try {
-    const response = await axios.get(`${RECIPE_URL}/${id}`, {
+    const response = await axios.get(`/profile/${id}`, {
       headers: {Authorization: `Bearer ${token}`}
     })
     const results = await response?.data
     return results
   } catch (error) {
-    console.log(`AN ERROR OCCURED: ${error}`)
+    let errorMessage = 'Something went wrong: '
+    if (error instanceof Error)
+      errorMessage += error
+    console.log(errorMessage)
   }
 } 
+
+export default async function userRecipes(id, token) {
+  try {
+    const response = await axios.get(`/recipes/user/${id}`, {
+      headers: {Authorization: `Bearer ${token}`}
+    })
+    const results = await response?.data
+    return results
+  } catch (error) {
+    let errorMessage = 'Something went wrong: '
+    if (error instanceof Error)
+      errorMessage += error
+    console.log(errorMessage)
+  }
+}   

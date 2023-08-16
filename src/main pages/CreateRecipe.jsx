@@ -7,8 +7,6 @@ import Heading from '../components/Heading'
 import Button from '../components/Button'
 import useAuth from '../hooks/useAuth'
 
-const RECIPE_URL = '/recipes'
-
 const CreateRecipe = () => {
   const { auth } = useAuth()
 
@@ -23,17 +21,19 @@ const CreateRecipe = () => {
   const [breakFast, setBreakFast] = useState('breakfast')
   const [mainCourse, setMainCourse] = useState('main course')
     
-  const [picturePath, setPicturePath] = useState('')
   const [source, setSource] = useState('')
-  const [uploading, setUploading] = useState(false)
+  const [picturePath, setPicturePath] = useState('')
+  const [pictureId, setPictureId] = useState('')
   // console.log(auth)
   const user = auth.user
   const token = auth.access_token
 
   useDocumentTitle('Create Recipe')
+
+  const handleChange = (e) => setCategory(e.target.value)
     
-  const createRecipe = async (e) => {
-    e.preventDefault()
+  // UPLOAD FUNCTIONALITY ONE START
+  const createRecipe = async () => {
     setSubmitting(true)
     try {
       const formData = new FormData() 
@@ -46,7 +46,7 @@ const CreateRecipe = () => {
       formData.append('file', image) // FOR MULTER
       formData.append('procedure', procedure)
       
-      await axios.post(RECIPE_URL, formData, {
+      await axios.post('/recipes', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
           'Authorization': `Bearer ${token}`
@@ -62,12 +62,8 @@ const CreateRecipe = () => {
       setSubmitting(false)
     }
   }
-
-  const handleChange = (e) => {
-    setCategory(e.target.value)
-  }
-
-  function handleImg(e) {
+  
+  const handleImg = (e) => {
     const file = e.target?.files[0]
     setImage(file)
 
@@ -76,11 +72,14 @@ const CreateRecipe = () => {
       reader.readAsDataURL(file)
       reader.onloadend = () => setSource(reader.result)
     }
-
+    
     previewFile(file)
   }
+  // UPLOAD FUNCTIONALITY ONE END
 
-  async function uploadImage(base64EncodedImage) {
+
+  // UPLOAD FUNCTIONALITY TWO START 
+  const uploadImage = async (base64EncodedImage) => {
     setUploading(true)
     try {
       const response = await axios.post('/upload', JSON.stringify({data: base64EncodedImage}), {
@@ -90,8 +89,10 @@ const CreateRecipe = () => {
         }
       })
       const results = await response?.data
-      if (results)
-        setPicturePath(results.cloudinaryurl)
+      if (results) {
+        setPictureId(results.public_url)
+        setPicturePath(results.secure_url)
+      }
     } catch (error) {
       let errorMessage = 'Something went wrong: '
       if (error instanceof Error)
@@ -102,7 +103,7 @@ const CreateRecipe = () => {
     }
   }
 
-  async function handleImgUpld(e) {
+  const handleImgUpld = async (e) => {
     const file = e.target?.files[0]
     
     const previewFile = (file) => {
@@ -116,6 +117,7 @@ const CreateRecipe = () => {
     if (!source) return
     uploadImage(source)
   }
+  // UPLOAD FUNCTIONALITY TWO END 
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -123,10 +125,10 @@ const CreateRecipe = () => {
   }
 
   return (
-    <div className='max-w-full px-[8%] flex justify-center items-center bg-gray-50 h-auto pt-[100px] pb-[50px]'>
-      <div className='bg-white p-4 rounded-md shadow-lg w-[540px] border'>
+    <div className='max-w-full px-[4%] flex justify-center items-center bg-gray-50 height'>
+      <div className='bg-white rounded-md shadow-lg border w-[600px] xl:w-[740px]'>
         <Heading label={'add a recipe'} />
-        <form onSubmit={handleSubmit} encType='multipart/form-data' className='flex flex-col gap-y-2'>
+        <form onSubmit={handleSubmit} encType='multipart/form-data' className='flex flex-col p-4 gap-y-2 h'>
           <InputField 
             htmlFor={'name'}
             label={'name:'}
@@ -134,7 +136,6 @@ const CreateRecipe = () => {
             value={name}
             placeholder='name'
             onChange={(e) => setName(e.target.value)}
-            className='border border-gray-200 p-2 rounded-sm outline-none'
           />
 
           <InputField 
@@ -144,7 +145,6 @@ const CreateRecipe = () => {
             value={ingridients}
             placeholder='e.g. rice, water, sugar'
             onChange={(e) => setIngridients(e.target.value)}
-            className='border border-gray-200 p-2 rounded-sm outline-none'
           />
 
           <label htmlFor='category' className='text-gray-600 capitalize'>category:</label>
@@ -169,7 +169,7 @@ const CreateRecipe = () => {
               value={snack} 
               className='capitalize'
             >
-              snack / appetiser
+              snack
             </option>
           </select>
 
@@ -180,11 +180,10 @@ const CreateRecipe = () => {
             value={time}
             placeholder='e.g. 10, 20, 60'
             onChange={(e) => setTime(e.target.value)}
-            className='border border-gray-200 p-2 rounded-sm outline-none'
           />
 
           {/* PART OF FORM DATA */}
-          <label htmlFor='choose file' className='text-sm md:text-[15px] capitalize  text-gray-500'>attach image:</label>
+          <label htmlFor='choose file' className='text-sm md:text-[15px] capitalize text-gray-500'>attach image:</label>
           <input type='file' className='border-0 cursor-pointer' onChange={handleImg} required />
           {source && (
             <img src={source} alt='selected image for upload' className='w-24 h-24' />
@@ -192,25 +191,25 @@ const CreateRecipe = () => {
 
           {/* SEPARATE API ENDPOINT */}
           {/* <Upload
-            uploading={uploading}
+            uploading={submitting}
             picturePath={picturePath}
             handleImgUpld={handleImgUpld}
            /> */}
 
           <label 
-            htmlFor='procedure' 
+            htmlFor='procedure'
             className='text-sm md:text-[15px] capitalize text-gray-500'
           >
             how to prepare
           </label>
           <textarea 
-            name='procedure' 
-            id='procedure' 
-            rows='10' 
+            id='procedure'
+            name='procedure'
+            rows='10'
             value={procedure}
             placeholder='how to prepare'
             onChange={(e) => setProcedure(e.target.value)}
-            className='border border-gray-200 p-2 rounded-sm resize-none outline-[#38D6C4]' 
+            className='border border-gray-200 p-2 rounded-sm resize-none outline-[#38D6C4]'
           />
                 
           <Button 

@@ -10,7 +10,7 @@ const BottomNav = ({ user, handleLogout }) => {
     <Content>
       <div className='lg:hidden'>
         <div className='p-4 fixed top-0 left-0 right-0 bg-white shadow-sm'>
-          <h1 className='text-lg md:text-2xl text-[#38D6C4] text-center font-normal uppercase'>logooo</h1>
+          <h1 className='text-md md:text-2xl text-[#38D6C4] text-center font-normal uppercase'>logooo</h1>
         </div>
         <div className='fixed bottom-0 left-0 right-0 bg-white p-4 shadow-lg border'>
           <div className='flex justify-between'>

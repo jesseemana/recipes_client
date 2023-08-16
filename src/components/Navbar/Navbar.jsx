@@ -9,7 +9,7 @@ const Navbar = () => {
 
   const navigate = useNavigate()
 
-  const user = true
+  const user = auth?.user
   const token = auth?.access_token
 
   function handleLogout() {

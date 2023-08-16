@@ -6,13 +6,13 @@ import { MdOutlineAddBox } from 'react-icons/md'
 import { BsBookmark } from 'react-icons/bs'
 import { BiLogOut, BiLogIn, } from 'react-icons/bi'
 
-const TopNav = ({user, handleLogout}) => {
+const TopNav = ({ user, handleLogout }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const menuRef = useRef()
 
   useEffect(() => {
-    function handler(e) {
+    const handler = (e) => {
       if (!menuRef.current.contains(e.target)) {
         setIsOpen(false)
       }
@@ -20,18 +20,16 @@ const TopNav = ({user, handleLogout}) => {
 
     document.addEventListener('mousedown', handler)
 
-    return function() {
-      document.removeEventListener('mousedown', handler)
-    }
+    return () => document.removeEventListener('mousedown', handler)
   })
 
   return (
-    <div className='p-3 w-full px-[4%] bg-white shadow-sm fixed z-10 flex justify-between items-center'>
+    <nav className='hidden p-3 w-full px-[4%] bg-white shadow-sm fixed z-10 lg:flex justify-between items-center'>
       <Link 
         to={'/feed'} 
-        className='text-lg md:text-2xl text-[#38D6C4] font-bold uppercase'
+        className='text-lg md:text-xl text-[#38D6C4] font-normal uppercase'
       >
-        foodiesss.
+        logoooo.
       </Link>
       <div ref={menuRef} className='relative border rounded-full'>
         <div 
@@ -83,8 +81,8 @@ const TopNav = ({user, handleLogout}) => {
           </div>
         )}
       </div>
-    </div>
+    </nav>
   ) 
 }
 
-export default TopNav
+export default TopNav 

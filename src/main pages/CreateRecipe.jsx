@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import InputField from '../components/InputField'
+import Upload from '../components/Upload'
 import axios from '../api/axios'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import Heading from '../components/Heading'
@@ -13,15 +14,18 @@ const CreateRecipe = () => {
 
   const [time, setTime] = useState('')
   const [name, setName] = useState('')
-  const [image, setImage] = useState({})
+  const [image, setImage] = useState('')
   const [category, setCategory] = useState('')
   const [procedure, setProcedure] = useState('')
   const [ingridients, setIngridients] = useState('')
   const [submitting, setSubmitting] = useState(false)
-  const [snack, setSnack] = useState('snack/appetiser')
+  const [snack, setSnack] = useState('snack')
   const [breakFast, setBreakFast] = useState('breakfast')
   const [mainCourse, setMainCourse] = useState('main course')
     
+  const [picturePath, setPicturePath] = useState('')
+  const [source, setSource] = useState('')
+  const [uploading, setUploading] = useState(false)
   // console.log(auth)
   const user = auth.user
   const token = auth.access_token
@@ -29,8 +33,8 @@ const CreateRecipe = () => {
   useDocumentTitle('Create Recipe')
     
   const createRecipe = async (e) => {
-    setSubmitting(true)
     e.preventDefault()
+    setSubmitting(true)
     try {
       const formData = new FormData() 
 
@@ -50,7 +54,10 @@ const CreateRecipe = () => {
         withCredentials: true 
       })
     } catch (error) {
-      console.error(`AN ERROR OCCURED: ${error}`)
+      let errorMessage = 'Something went wrong: '
+      if (error instanceof Error)
+        errorMessage += error
+      console.log(errorMessage)
     } finally {
       setSubmitting(false)
     }
@@ -61,22 +68,57 @@ const CreateRecipe = () => {
   }
 
   function handleImg(e) {
-    const files = e.target?.files
+    const file = e.target?.files[0]
+    setImage(file)
 
-    if (files.length > 0) {
-      const data = new FormData()
-      
-      for (const file of files) {
-        console.log(file)
-        // data.append('file', image)
-      }
+    const previewFile = (file) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onloadend = () => setSource(reader.result)
     }
 
+    previewFile(file)
+  }
+
+  async function uploadImage(base64EncodedImage) {
+    setUploading(true)
+    try {
+      const response = await axios.post('/upload', JSON.stringify({data: base64EncodedImage}), {
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+      })
+      const results = await response?.data
+      if (results)
+        setPicturePath(results.cloudinaryurl)
+    } catch (error) {
+      let errorMessage = 'Something went wrong: '
+      if (error instanceof Error)
+        errorMessage += error
+      console.log(errorMessage)
+    } finally {
+      setUploading(false)
+    }
+  }
+
+  async function handleImgUpld(e) {
+    const file = e.target?.files[0]
+    
+    const previewFile = (file) => {
+      const reader = new FileReader()
+      reader.readAsDataURL(file)
+      reader.onloadend = () => setSource(reader.result)
+    }
+
+    previewFile(file)
+
+    if (!source) return
+    uploadImage(source)
   }
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log(image)
     // createRecipe()
   }
 
@@ -100,7 +142,7 @@ const CreateRecipe = () => {
             label={'ingridients:'}
             type='text'
             value={ingridients}
-            placeholder='ingridients'
+            placeholder='e.g. rice, water, sugar'
             onChange={(e) => setIngridients(e.target.value)}
             className='border border-gray-200 p-2 rounded-sm outline-none'
           />
@@ -133,22 +175,27 @@ const CreateRecipe = () => {
 
           <InputField 
             htmlFor={'time'}
-            label={'time to prepare:'}
+            label={'time to prepare(minutes):'}
             type='text'
             value={time}
-            placeholder='(minutes e.g. 10, 20, 30)'
+            placeholder='e.g. 10, 20, 60'
             onChange={(e) => setTime(e.target.value)}
             className='border border-gray-200 p-2 rounded-sm outline-none'
           />
 
-          <InputField 
-            htmlFor={'image'}
-            label={'attach image:'}
-            type='file'
-            placeholder='choose image to attach'
-            // onChange={(e) => setImage(e.target.files)}
-            onChange={handleImg}
-          />
+          {/* PART OF FORM DATA */}
+          <label htmlFor='choose file' className='text-sm md:text-[15px] capitalize  text-gray-500'>attach image:</label>
+          <input type='file' className='border-0 cursor-pointer' onChange={handleImg} required />
+          {source && (
+            <img src={source} alt='selected image for upload' className='w-24 h-24' />
+          )}
+
+          {/* SEPARATE API ENDPOINT */}
+          {/* <Upload
+            uploading={uploading}
+            picturePath={picturePath}
+            handleImgUpld={handleImgUpld}
+           /> */}
 
           <label 
             htmlFor='procedure' 

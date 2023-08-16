@@ -10,3 +10,7 @@
 .dropdown {
     @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end;
 }
+
+.height {
+    @apply h-auto pt-[80px] pb-[70px] md:min-h-[100vh] md:pt-[90px] md:pb-[90px] lg:pb-[50px] lg:h-full xl:pt-[100px]
+}

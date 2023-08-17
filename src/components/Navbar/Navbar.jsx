@@ -7,26 +7,29 @@ import axios from '../../api/axios'
 const Navbar = () => {
   const { auth } = useAuth()
 
-  const navigate = useNavigate()
-
   const user = auth?.user
   const token = auth?.access_token
 
-  function handleLogout() {
-    // try {
-    //   // CLEARS REFRESH TOKEN FROM COOKIE
-    //   // const response = await axios.post(/auth/logout, {
-    //   //     headers: { Authorization: `Bearer ${token}` },
-    //   //     withCredentials: true
-    //   //   })
-    //   // console.log(response.data.message) // cookie cleared
-    //   navigate('/auth')
-    // } catch (error) {
-    //   console.error(`AN ERROR OCCURED: ${error}`)
-    // }
+  const navigate = useNavigate()
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post('/auth/logout', {
+        headers: { Authorization: `Bearer ${token}` },
+        withCredentials: true
+      })
+      console.log(response.data.message) // cookie cleared
+      // navigate to auth or refresh page, show toast message
+    } catch (error) {
+      let errorMessage = 'Somethin went wrong: ';
+      if (error instanceof Error) {
+        errorMessage += error
+      }
+      console.error(message)
+    }
   }
 
-  return(
+  return (
     <>
       <TopNav 
         user={user} 

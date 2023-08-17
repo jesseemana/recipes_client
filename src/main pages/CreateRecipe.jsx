@@ -79,44 +79,44 @@ const CreateRecipe = () => {
 
 
   // UPLOAD FUNCTIONALITY TWO START 
-  const uploadImage = async (base64EncodedImage) => {
-    setUploading(true)
-    try {
-      const response = await axios.post('/upload', JSON.stringify({data: base64EncodedImage}), {
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${token}`
-        }
-      })
-      const results = await response?.data
-      if (results) {
-        setPictureId(results.public_url)
-        setPicturePath(results.secure_url)
-      }
-    } catch (error) {
-      let errorMessage = 'Something went wrong: '
-      if (error instanceof Error)
-        errorMessage += error
-      console.log(errorMessage)
-    } finally {
-      setUploading(false)
-    }
-  }
+  // const uploadImage = async (base64EncodedImage) => {
+  //   setUploading(true)
+  //   try {
+  //     const response = await axios.post('/upload', JSON.stringify({data: base64EncodedImage}), {
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Authorization': `Bearer ${token}`
+  //       }
+  //     })
+  //     const results = await response?.data
+  //     if (results) {
+  //       setPictureId(results.public_url)
+  //       setPicturePath(results.secure_url)
+  //     }
+  //   } catch (error) {
+  //     let errorMessage = 'Something went wrong: '
+  //     if (error instanceof Error)
+  //       errorMessage += error
+  //     console.log(errorMessage)
+  //   } finally {
+  //     setUploading(false)
+  //   }
+  // }
 
-  const handleImgUpld = async (e) => {
-    const file = e.target?.files[0]
+  // const handleImgUpld = async (e) => {
+  //   const file = e.target?.files[0]
     
-    const previewFile = (file) => {
-      const reader = new FileReader()
-      reader.readAsDataURL(file)
-      reader.onloadend = () => setSource(reader.result)
-    }
+  //   const previewFile = (file) => {
+  //     const reader = new FileReader()
+  //     reader.readAsDataURL(file)
+  //     reader.onloadend = () => setSource(reader.result)
+  //   }
 
-    previewFile(file)
+  //   previewFile(file)
 
-    if (!source) return
-    uploadImage(source)
-  }
+  //   if (!source) return
+  //   uploadImage(source)
+  // }
   // UPLOAD FUNCTIONALITY TWO END 
 
   const handleSubmit = (e) => {

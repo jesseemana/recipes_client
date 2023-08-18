@@ -1,4 +1,4 @@
-import MainNav from './TopNav'
+import MainNav from './MainNav'
 import MobileNav from './MobileNav'
 import useAuth from '../../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'

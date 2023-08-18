@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react'
-import RecipesCard from '../components/ui/RecipesListing'
-import Loader from '../components/ui/Loader'
-import axios from './axios'
 import useAuth from '../hooks/useAuth'
+import Loader from '../components/ui/Loader'
+import RecipesCard from '../components/ui/RecipesListing'
+import axios from './axios'
 
 const GetRecipes = () => {
   const { auth } = useAuth()
@@ -13,7 +13,7 @@ const GetRecipes = () => {
   const [totalPages, setTotalPages] = useState(null) 
 
   const [category, setCategory] = useState('all')
-  const [snack, setSnack] = useState('snack/appetiser')
+  const [snack, setSnack] = useState('snack')
   const [breakfast, setBreakFast] = useState('breakfast')
   const [maincourse, setMainCourse] = useState('main course')
   
@@ -22,12 +22,17 @@ const GetRecipes = () => {
   const getRecipes = async () => {
     setLoading(true)
     try {
-      const response = await axios.get(`/recipes?page=${currentPage}`, { headers: {'Authorization': `Bearer ${token}`}})
+      const response = await axios.get(`/recipes?page=${currentPage}`, { 
+        headers: {'Authorization': `Bearer ${token}`}
+      })
       const results = await response?.data
       setRecipes(results.recipes)
       setTotalPages(results.total_pages)
     } catch (error) {
-      console.error(`AN ERROR OCCURED: ${error}`)
+      let errorMessage = 'Something went wrong: '
+      if (error instanceof Error)
+        errorMessage += error
+      console.log(errorMessage)
     } finally {
       setLoading(false)
     }

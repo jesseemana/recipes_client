@@ -1,16 +1,17 @@
 import GetRecipes from '../api/GetRecipes'
-import useDocumentTitle from '../hooks/useDocumentTitle';
+import Content from '../components/Content'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const Home = () => {
   useDocumentTitle('Home')
 
   return (
-    <>
-      <div className='max-w-full px-[4%]'>
-        <GetRecipes />
+    <Content>
+      <div>
+        <h1>HELLO WORLD</h1>
       </div>
-    </>
+    </Content>
   )
 }
 
-export default Home
+export default Home 

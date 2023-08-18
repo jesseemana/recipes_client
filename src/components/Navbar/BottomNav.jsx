@@ -3,16 +3,16 @@ import Content from '../Content'
 import { AiFillHome, AiOutlineUser } from 'react-icons/ai'
 import { BsBookmark } from 'react-icons/bs'
 import { MdOutlineAddBox } from 'react-icons/md'
-import { BiLogOut, BiLogIn, } from 'react-icons/bi'
+import { BiLogOut, BiLogIn } from 'react-icons/bi'
 
-const BottomNav = ({ user, handleLogout }) => {
+const MobileNav = ({ user, handleLogout }) => {
   return (
     <Content>
       <div className='lg:hidden'>
-        <div className='p-4 fixed top-0 left-0 right-0 bg-white shadow-sm'>
+        <div className='fixed left-0 right-0 top-0  bg-white p-4 shadow-sm'>
           <h1 className='text-md md:text-2xl text-[#38D6C4] text-center font-normal uppercase'>logooo</h1>
         </div>
-        <div className='fixed bottom-0 left-0 right-0 bg-white p-4 shadow-lg border'>
+        <div className='fixed left-0 right-0 bottom-0 bg-white p-4 shadow-lg border'>
           <div className='flex justify-between'>
             <Menu route={'/feed'} icon={<AiFillHome />} />
             <Menu route={'/bookmarks'} icon={<BsBookmark />} />
@@ -29,4 +29,4 @@ const BottomNav = ({ user, handleLogout }) => {
   )
 }
 
-export default BottomNav  
+export default MobileNav  

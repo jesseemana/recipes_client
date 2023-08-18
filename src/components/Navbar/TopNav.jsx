@@ -6,7 +6,7 @@ import { MdOutlineAddBox } from 'react-icons/md'
 import { BsBookmark } from 'react-icons/bs'
 import { BiLogOut, BiLogIn, } from 'react-icons/bi'
 
-const TopNav = ({ user, handleLogout }) => {
+const MainNav = ({ user, handleLogout }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const menuRef = useRef()
@@ -85,4 +85,4 @@ const TopNav = ({ user, handleLogout }) => {
   ) 
 }
 
-export default TopNav 
+export default MainNav 

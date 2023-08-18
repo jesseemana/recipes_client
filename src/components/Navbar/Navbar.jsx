@@ -1,5 +1,5 @@
-import TopNav from './TopNav'
-import BottomNav from './BottomNav'
+import MainNav from './TopNav'
+import MobileNav from './MobileNav'
 import useAuth from '../../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'
 import axios from '../../api/axios'
@@ -31,11 +31,11 @@ const Navbar = () => {
 
   return (
     <>
-      <TopNav 
+      <MainNav 
         user={user} 
         handleLogout={handleLogout} 
       />
-      <BottomNav 
+      <MobileNav 
         user={user} 
         handleLogout={handleLogout} 
       />

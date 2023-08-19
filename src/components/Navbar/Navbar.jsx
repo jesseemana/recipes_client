@@ -1,8 +1,8 @@
 import MainNav from './MainNav'
 import MobileNav from './MobileNav'
 import useAuth from '../../hooks/useAuth'
-import { useNavigate } from 'react-router-dom'
 import axios from '../../api/axios'
+import { useNavigate } from 'react-router-dom'
 
 const Navbar = () => {
   const { auth } = useAuth()
@@ -15,13 +15,13 @@ const Navbar = () => {
   const handleLogout = async () => {
     try {
       const response = await axios.post('/auth/logout', {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { 'Authorization': `Bearer ${token}` },
         withCredentials: true
       })
       console.log(response.data.message) // cookie cleared
       // navigate to auth or refresh page, show toast message
     } catch (error) {
-      let errorMessage = 'Somethin went wrong: ';
+      let errorMessage = 'Something went wrong: '
       if (error instanceof Error) {
         errorMessage += error
       }

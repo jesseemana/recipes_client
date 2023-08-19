@@ -1,12 +1,12 @@
 import MenuItem from './MenuItem'
-import { useState, useRef, useEffect } from 'react'
 import { Link}from 'react-router-dom'
-import { AiOutlineMenu, AiOutlineUser } from 'react-icons/ai'
-import { MdOutlineAddBox } from 'react-icons/md'
+import { useState, useRef, useEffect } from 'react'
 import { BsBookmark } from 'react-icons/bs'
+import { MdOutlineAddBox } from 'react-icons/md'
 import { BiLogOut, BiLogIn, } from 'react-icons/bi'
+import { AiOutlineMenu, AiOutlineUser } from 'react-icons/ai'
 
-const MainNav = ({ user, handleLogout }) => {
+const MainNav = ({user, handleLogout}) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const menuRef = useRef()
@@ -49,30 +49,30 @@ const MainNav = ({ user, handleLogout }) => {
               {user ? (
                 <>
                   <MenuItem
-                    onClick={() => {}}
+                    route={'/profile/:id'}
                     label='profile'
                     icon={<AiOutlineUser />}
                   />
                   <MenuItem
-                    onClick={() => {}}
+                    route={'/create'}
                     label='add recipe'
                     icon={<MdOutlineAddBox />}
                   />
-                  <MenuItem 
-                    onClick={() => {}}
+                  <MenuItem
+                    route={'/bookmarks'}
                     label='bookmarks'
                     icon={<BsBookmark />}
                   />
                   <hr />
-                  <MenuItem 
+                  <MenuItem
                     onClick={handleLogout}
                     label='logout'
                     icon={<BiLogOut />}
                   />
                 </>
-                ):( 
-                <MenuItem 
-                  onClick={() => navigate('/auth')}
+                ):(
+                <MenuItem
+                  route={'/auth'}
                   label='login'
                   icon={<BiLogIn />}
                 />

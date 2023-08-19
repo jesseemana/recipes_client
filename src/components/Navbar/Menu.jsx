@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 
-const Menu = ({ route, onClick, icon }) => {
+const Menu = ({route, onClick, icon}) => {
   return (
     <>
       <Link 

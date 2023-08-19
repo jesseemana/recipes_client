@@ -1,13 +1,16 @@
-const MenuItem = ({onClick, label, icon}) => {
+import { Link } from 'react-router-dom'
+
+const MenuItem = ({onClick, route, label, icon}) => {
   return (
-    <div 
+    <Link
+      to={route}
       onClick={onClick} 
       className='px-4 py-3 hover:bg-neutral-100 transition font-normal flex items-center gap-1 text-gray-600 text-md'
     >
       <>{icon}</>
       <p>{label}</p>
-    </div>
+    </Link>
   )
 }
 
-export default MenuItem
+export default MenuItem 

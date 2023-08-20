@@ -1,9 +1,9 @@
 const Content = ({children}) => {
   return (
-    <div className='max-w-full px-[4%]'>
+    <div className='max-w-full px-[3%]'>
       {children}
     </div>
   )
 }
 
-export default Content
+export default Content 

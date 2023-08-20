@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import axios from '../api/axios'
-import RecipesCard from '../components/ui/RecipesListing'
-import Loader from '../components/ui/Loader'
+import RecipesCard from '../components/RecipesListing'
+import Loader from '../components/Loader'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import useAuth from '../hooks/useAuth'
 

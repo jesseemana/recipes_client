@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-hot-toast'
-import Form from '../components/ui/AuthForm'
+import Form from '../components/AuthForm'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import axios from '../api/axios'
 import useAuth from '../hooks/useAuth'

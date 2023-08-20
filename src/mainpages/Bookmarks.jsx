@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import RecipesCard from '../components/ui/RecipesListing'
-import Loader from '../components/ui/Loader'
+import RecipesCard from '../components/RecipesListing'
+import Loader from '../components/Loader'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import useAuth from '../hooks/useAuth'
 import axios from '../api/axios'

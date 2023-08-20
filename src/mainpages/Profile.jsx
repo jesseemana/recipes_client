@@ -1,5 +1,5 @@
 import { useSelector } from 'react-redux'
-import RecipesCard from '../components/ui/RecipesListing'
+import RecipesCard from '../components/RecipesListing'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import useAuth from '../hooks/useAuth'
 

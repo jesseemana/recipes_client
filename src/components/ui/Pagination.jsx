@@ -23,7 +23,7 @@ const Pagination = ({pages, currentPage, setCurrentPage}) => {
   }
 
   return (
-    <nav className='flex justify-center mt-10 pb-8 px-2 rounded-sm'>
+    <nav className='flex justify-center px-2 rounded-sm'>
       <ul className='flex space-x-1'>
         <li>
           <button

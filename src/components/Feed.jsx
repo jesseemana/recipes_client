@@ -1,5 +1,5 @@
 import RecipeCard from './RecipeCard'
-import Pagination from './ui/Pagination'
+import Pagination from './Pagination'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const Feed = ({recipes, pages, currentPage, setCurrentPage}) => {

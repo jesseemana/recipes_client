@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom'
-import Button from '../Button'
-import Heading from '../Heading'
-import InputField from '../InputField'
+import Button from './Button'
+import Heading from './Heading'
+import InputField from './InputField'
 
 
 const Form = ({

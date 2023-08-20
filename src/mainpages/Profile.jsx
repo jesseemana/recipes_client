@@ -1,5 +1,4 @@
-import { useSelector } from 'react-redux'
-import RecipesCard from '../components/RecipesListing'
+import RecipeCard from '../components/RecipeCard'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import useAuth from '../hooks/useAuth'
 
@@ -15,4 +14,4 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export default Profile  

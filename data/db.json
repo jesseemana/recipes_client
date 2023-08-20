@@ -1,0 +1,88 @@
+{ 
+    "recipes": [
+        {
+            "id": 1,
+            "name": "Chocolate cake",
+            "time": 90,
+            "category": "snack",
+            "image": "./cake.jpg"
+        },
+        {
+            "id": 2,
+            "name": "been stew",
+            "time": 120,
+            "category": "main course",
+            "image": "./beanstew.png"
+        },
+        {
+            "id": 3,
+            "name": "chigumu",
+            "time": 60,
+            "category": "breakfast",
+            "image": "./cakes.png"
+        },
+        {
+            "id": 4,
+            "name": "liver",
+            "time": 30,
+            "category": "main course",
+            "image": "./liver.png"
+        },
+        {
+            "id": 7,
+            "name": "meat balls",
+            "time": 40,
+            "category": "snack",
+            "image": "./groundbeef.jpg"
+        },
+        {
+            "id": 8,
+            "name": "chicken curry",
+            "time": 30,
+            "category": "main course",
+            "image": "./chickencurry.png"
+        },
+        {
+            "id": 9,
+            "name": "wings",
+            "time": 20,
+            "category": "main course",
+            "image": "./wings.png"
+        },
+        {
+            "id": 10,
+            "name": "cookies",
+            "time": 10,
+            "category": "snack",
+            "image": "./cookies.png"
+        },
+        {
+            "id": 11,
+            "name": "fried chicken",
+            "time": 30,
+            "category": "main course",
+            "image": "./friedchicken.png"
+        },
+        {
+            "id": 12,
+            "name": "muffins",
+            "time": 80,
+            "category": "snack",
+            "image": "./muffins.png"
+        },
+        {
+            "id": 13,
+            "name": "mash wors",
+            "time": 38,
+            "category": "snack",
+            "image": "./mashwors.png"
+        },
+        {
+            "id": 14,
+            "name": "lamb stew",
+            "time": 30,
+            "category": "main course",
+            "image": "./lambstew.png"
+        }
+    ]
+}

@@ -24,7 +24,7 @@ const MainNav = ({user, handleLogout}) => {
   })
 
   return (
-    <nav className='hidden p-3 w-full px-[4%] bg-white shadow-sm fixed z-10 lg:flex justify-between items-center'>
+    <nav className='hidden lg:flex fixed p-3 w-full px-[4%] bg-white shadow-sm z-10 justify-between items-center'>
       <Link 
         to={'/feed'} 
         className='text-lg md:text-xl text-[#38D6C4] font-normal uppercase'

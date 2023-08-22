@@ -1,0 +1,24 @@
+.skeleton {
+  background-color: rgb(199, 199, 199);
+  margin: 0.75rem 0;
+  border-radius: 0.20rem;
+}
+
+.skeleton.image {
+  height: 200px;
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 0.75rem;
+}
+
+.skeleton.text {
+  height: 1rem;
+}
+
+.skeleton.width-50 {
+  width: 50%;
+}
+
+.skeleton.width-30 {
+  width: 30%;
+}

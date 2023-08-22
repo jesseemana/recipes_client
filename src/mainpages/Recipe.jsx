@@ -1,24 +1,24 @@
-import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { BsClock } from 'react-icons/bs'
 import { BsBookmark, BsBookmarkFill } from 'react-icons/bs'
 import axios from '../api/axios'
-import Loader from '../components/Loader'
+import Loader from '../components/Loaders/Loader'
 import useAuth from '../hooks/useAuth'
 import useBookmark from '../hooks/useBookmark'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const Recipe = () => {
   const { id } = useParams()
+  
   const { auth } = useAuth()
   
+  const token = auth.token
+
   const [owner, setOwner] = useState('')
   const [recipe, setRecipe] = useState({})
   const [loading, setLoading] = useState(false)
-
-  const token = auth.token
-  const userId = auth.user._id
 
   useDocumentTitle(loading ? 'loading...' : recipe.name)
 
@@ -27,12 +27,12 @@ const Recipe = () => {
   const getRecipe = async () => {
     setLoading(true)
     try {
-      const response = await axios.get(`recipes/${id}/${userId}`, { 
+      const response = await axios.get(`recipes/${id}`, { 
         headers: {'Authorization': `Bearer ${token}`}
       })
-      const results = await response?.data
-      setRecipe(results.recipe)
-      setOwner(results.full_name)
+      if (response.data)
+        setRecipe(response.data.recipe)
+        setOwner(response.data.full_name)
     } catch(error) {
       let errorMessage = 'Something went wrong: '
       if (error instanceof Error)
@@ -66,12 +66,12 @@ const Recipe = () => {
         <h1 className='capitalize font-semibold text-xl'>{recipe.name}</h1>
         <div className='flex gap-x-5'>
           <p className='flex items-center gap-x-2 text-gray-700'>
-            <span><BsClock  className="text-xl text-[#38D6C4]"/></span>
+            <span><BsClock  className='text-xl text-[#38D6C4]'/></span>
             {recipe.time}min
           </p>
           {!token ? 
             <div className='flex items-center gap-x-2 text-gray-700'>
-              <span><BsBookmark className="text-xl text-[#38D6C4]" /></span>
+              <span><BsBookmark className='text-xl text-[#38D6C4]' /></span>
               login to save
             </div> : 
             <>
@@ -80,14 +80,14 @@ const Recipe = () => {
                   onClick={toggleBookmark}
                   className='flex items-center gap-x-2 text-gray-700'
                 >
-                  <span><BsBookmark className="text-xl text-[#38D6C4]" /></span>
+                  <span><BsBookmark className='text-xl text-[#38D6C4]' /></span>
                   save recipe
                 </button> : 
                 <button
                   onClick={toggleBookmark}
                   className='flex items-center gap-x-2 text-gray-700'
                 >
-                  <span><BsBookmarkFill className='text-xl text-[#38D6C4]' /></span>
+                  <span><BsBookmarkFill className='text-xl fill-[#38D6C4]' /></span>
                   saved
                 </button>
               }

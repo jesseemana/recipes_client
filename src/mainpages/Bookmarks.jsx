@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
-import RecipesCard from '../components/RecipesListing'
-import Loader from '../components/Loader'
+import RecipeCard from '../components/RecipeCard'
+import Loader from '../components/Loaders/Loader'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import useAuth from '../hooks/useAuth'
 import axios from '../api/axios'
@@ -58,11 +58,11 @@ const Bookmarks = () => {
     <div className='max-w-full px-[4%]'>
       <h1 className=''>bookmarks</h1>
       <h2 className='capitalize text-gray-600 text-xl md:text-2xl pt-4 font-semibold text-start'>your saved recipes</h2>
-      <RecipesCard recipes={bookmarks} />
+      <RecipeCard recipes={bookmarks} />
     </div>
   )
 
   return content
 }
 
-export default Bookmarks
+export default Bookmarks  

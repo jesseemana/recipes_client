@@ -16,7 +16,7 @@ const MobileNav = ({user, handleLogout}) => {
           logooo
         </Link>
       </div>
-      <div className='fixed bottom-0 w-full bg-white z-20 p-4 border'>
+      <div className='fixed w-full p-4 bg-white z-20 bottom-0 border'>
         <div className='flex justify-between'>
           <Menu route={'/feed'} icon={<BsHouse />} />
           <Menu route={'/bookmarks'} icon={<BsBookmark />} />

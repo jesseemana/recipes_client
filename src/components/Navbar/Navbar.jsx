@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom'
 const Navbar = () => {
   const { auth } = useAuth()
 
-  const user = auth?.user
+  const user = true
   const token = auth?.access_token
 
   const navigate = useNavigate()

@@ -9,13 +9,11 @@ const FavButton = ({id}) => {
       onClick={toggleBookmark}
       className='relative hover:opacity-80 transition cursor-pointer'
     >
-      <AiOutlineHeart 
-        size={31} 
-        className='fill-white absolute -top-[2px] -right-[2px]'
+      <AiOutlineHeart
+        className='fill-white absolute -top-[2px] -right-[2px] text-5xl md:text-4xl'
       />
-      <AiFillHeart 
-        size={28} 
-        className={bookmarked ? 'fill-[#38D6C4]' : 'fill-neutral-500/70'}
+      <AiFillHeart
+        className={bookmarked ? 'fill-[#38D6C4]' : 'fill-neutral-500/70 text-[42px] md:text-[32px]'}
       />
     </div>
   )

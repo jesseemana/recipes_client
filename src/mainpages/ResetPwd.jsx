@@ -1,30 +1,32 @@
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
-import InputField from '../components/InputField'
-import useDocumentTitle from '../hooks/useDocumentTitle'
 import Button from '../components/Button'
 import Heading from '../components/Heading'
+import InputField from '../components/InputField'
+import useDocumentTitle from '../hooks/useDocumentTitle'
 import axios from '../api/axios'
 
 const ResetPwd = () => {  
+  useDocumentTitle('Reset Password')
+
   const [email, setEmail] = useState('')
   const [submitting, setSubmitting] = useState(false)
-  
-  useDocumentTitle('Reset Password')
 
   async function sendEmail() {
     setSubmitting(true)
-
     try {
       await axios.post(`/reset`, JSON.stringify({email}), {
         headers: {'Content-Type': 'application/json'},
         withCredentials: true
       })
     } catch (error) {
-      console.error(`AN ERROR OCCURED: ${error}`)
+      let errorMessage = 'Something went wrong: '
+      if (error instanceof Error)
+        errorMessage += error
+      console.log(errorMessage)
     } finally {
-      setSubmitting(false)
       setEmail('')
+      setSubmitting(false)
     }
   }
 
@@ -40,11 +42,11 @@ const ResetPwd = () => {
   return (
     <div className='max-w-full px-[4%] bg-gray-50 flex items-center justify-center h-[100vh]'>
       <div className='bg-white px-2 py-4 shadow-md rounded-md'>
-        <Heading label={'reset your password'} />
+        <Heading label='reset your password' />
         <form type='submit' className='flex flex-col w-[280px] md:w-[320px] gap-y-2 py-2 px-1'>
           <InputField 
-            htmlFor={'email'}
-            label={'email:'}
+            htmlFor='email'
+            label='email:'
             type='text' 
             value={email}
             placeholder='enter your email' 
@@ -53,14 +55,15 @@ const ResetPwd = () => {
           {email ? (
             <Button 
               disabled={submitting} 
-              type={'submit'}
-              label={'send email'}
+              type='submit'
+              label='send email'
               onClick={toggleSendEmail} 
-            /> ) : (
+            /> 
+            ):(
             <Button 
               disabled  
-              type={'submit'}
-              label={'send email'}
+              type='button'
+              label='send email'
             />
           )}
         </form>
@@ -69,4 +72,4 @@ const ResetPwd = () => {
   )
 }
 
-export default ResetPwd     
+export default ResetPwd  

@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import Button from '../components/Button'
-import Heading from '../components/Heading'
-import InputField from '../components/InputField'
+import Heading from '../components/Inputs/Heading'
+import InputField from '../components/Inputs/InputField'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import axios from '../api/axios'
 

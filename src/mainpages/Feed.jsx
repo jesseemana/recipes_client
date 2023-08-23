@@ -32,25 +32,25 @@ const Feed = ({user, pages, currentPage, setCurrentPage}) => {
   }, [])
 
   if (loading) {
-    return [...Array(10).keys()].map(i => {
-      return <SkeletonCard key={i} />
-    })
+    return [...Array(10).keys()].map(i => (
+      <SkeletonCard key={i} />
+    ))
   }
 
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8'>
       {recipes.map(recipe => (
-        <RecipeCard 
-          data={recipe}
+        <RecipeCard
           user={user}
+          data={recipe}
           key={recipe.id}
         />
       ))}
       {recipes?.length > 16 && (
-        <Pagination 
-          pages={pages} 
-          currentPage={currentPage} 
-          setCurrentPage={setCurrentPage} 
+        <Pagination
+          pages={pages}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
         />
       )}
     </div>

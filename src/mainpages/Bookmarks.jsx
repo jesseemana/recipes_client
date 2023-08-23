@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import useAuth from '../hooks/useAuth'
-import Header from '../components/Header'
+import Header from '../components/Inputs/Header'
 import Content from '../components/Content'
 import RecipeCard from '../components/RecipeCard'
 import Loader from '../components/Loaders/Loader'

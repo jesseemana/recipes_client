@@ -19,7 +19,10 @@ const Feed = ({user, pages, currentPage, setCurrentPage}) => {
         if (response.data)
           setRecipes(response.data)
       } catch (error) {
-        
+        let errorMessage = 'Something went wrong: '
+        if (error instanceof Error)
+          errorMessage += error
+        console.log(errorMessage)
       }  finally {
         setLoading(false)
       }
@@ -35,7 +38,7 @@ const Feed = ({user, pages, currentPage, setCurrentPage}) => {
   }
 
   return (
-    <div className='py-20 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8'>
+    <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8'>
       {recipes.map(recipe => (
         <RecipeCard 
           data={recipe}

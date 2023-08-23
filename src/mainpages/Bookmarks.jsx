@@ -1,40 +1,49 @@
 import { useState, useEffect } from 'react'
+import useAuth from '../hooks/useAuth'
+import Header from '../components/Header'
+import Content from '../components/Content'
 import RecipeCard from '../components/RecipeCard'
 import Loader from '../components/Loaders/Loader'
 import useDocumentTitle from '../hooks/useDocumentTitle'
-import useAuth from '../hooks/useAuth'
-import axios from '../api/axios'
-import useAxiosPrivate from '../hooks/useAxiosPrivate'
+// import axios from '../api/axios'
+// import useAxiosPrivate from '../hooks/useAxiosPrivate'
+import axios from 'axios'
 
 const Bookmarks = () => {
   const { auth } = useAuth()
 
+  useDocumentTitle('Bookmarks')
+
   const [loading, setLoading] = useState(false)
   const [bookmarks, setBookmarks] = useState([])
 
-  const axiosPrivate = useAxiosPrivate()
+  // const axiosPrivate = useAxiosPrivate()
 
-  console.log(auth)
-  const userId = auth.user._id
-  const token = auth.access_token
-
-  useDocumentTitle('Bookmarks')
+  // const userId = auth?.user._id
+  // const token = auth?.access_token
 
   useEffect(() => {
     // const isMounted = true
     // const controller = new AbortController()
 
     const getBookmarks = async () => {
+      setLoading(true)
       try {
-        setLoading(true)
-        const results = await axios.get(`/bookmarks/${userId}`, { 
-          headers: { 'Authorization' : `Bearer ${token}`},
-          signal: controller.signal()
-        })
-        console.log(results.data)
-        isMounted && setBookmarks(results?.data)
+        const response = await axios.get('http://localhost:3030/recipes')
+        const results = await response?.data
+        if (results)
+          setBookmarks(results)
+        // const results = await axios.get(`/bookmarks/${userId}`, { 
+        //   headers: { 'Authorization' : `Bearer ${token}`},
+        //   signal: controller.signal()
+        // })
+        // console.log(results.data)
+        // isMounted && setBookmarks(results?.data)
       } catch (error) {
-        console.error(`AN ERROR OCCURED: ${error.message}`)
+        let errorMessage = 'Something went wrong: '
+        if (error instanceof Error)
+          errorMessage += error
+        console.log(errorMessage)
       } finally {
         setLoading(false)
       }
@@ -50,16 +59,23 @@ const Bookmarks = () => {
 
   let content
 
-  if (loading) {
-    content = <Loader />
-  }
+  if (loading) content = <Loader />
 
   content = (
-    <div className='max-w-full px-[4%]'>
-      <h1 className=''>bookmarks</h1>
-      <h2 className='capitalize text-gray-600 text-xl md:text-2xl pt-4 font-semibold text-start'>your saved recipes</h2>
-      <RecipeCard recipes={bookmarks} />
-    </div>
+    <Content>
+      <Header 
+        title='my bookmarks' 
+        subtitle='Recipes that you saved' 
+      />
+      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8'>
+        {bookmarks.map(bookmark => (
+          <RecipeCard 
+            data={bookmark} 
+            key={bookmark.id} 
+          />
+        ))}
+      </div>
+    </Content>
   )
 
   return content

@@ -50,18 +50,18 @@ const MainNav = ({user, handleLogout}) => {
                 <>
                   <MenuItem
                     route={'/profile/:id'}
-                    label='profile'
-                    icon={<AiOutlineUser />}
+                    label='my recipes'
+                    // icon={<AiOutlineUser />}
                   />
                   <MenuItem
                     route={'/create'}
                     label='add recipe'
-                    icon={<MdOutlineAddBox />}
+                    // icon={<MdOutlineAddBox />}
                   />
                   <MenuItem
                     route={'/bookmarks'}
                     label='bookmarks'
-                    icon={<BsBookmark />}
+                    // icon={<BsBookmark />}
                   />
                   <hr />
                   <MenuItem

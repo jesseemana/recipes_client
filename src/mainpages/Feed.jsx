@@ -1,6 +1,7 @@
 import RecipeCard from '../components/RecipeCard'
 import Pagination from '../components/Pagination'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import Loader from '../components/Loaders/Loader'
 import SkeletonCard from '../components/Loaders/Skeleton/SkeletonCard'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
@@ -31,11 +32,13 @@ const Feed = ({user, pages, currentPage, setCurrentPage}) => {
     fetchRecipes()
   }, [])
 
-  if (loading) {
-    return [...Array(10).keys()].map(i => (
-      <SkeletonCard key={i} />
-    ))
-  }
+  // if (loading) {
+  //   return [...Array(10).keys()].map(i => (
+  //     <SkeletonCard key={i} />
+  //   ))
+  // }
+
+  if (loading) return <Loader />
 
   return (
     <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8'>

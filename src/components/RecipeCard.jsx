@@ -43,7 +43,7 @@ const RecipeCard = ({
             loading='lazy'
           />
           <div className='absolute top-3 right-3'>
-            {user && <FavButton id={data.id} />}
+            { user && <FavButton id={data.id} /> }
           </div>
         </div>
         <p className='capitalize font-semibold text-gray-700'>{data.name}</p>

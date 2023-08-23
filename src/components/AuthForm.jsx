@@ -92,7 +92,7 @@ const Form = ({
           {isLogin && <p className='text-[#38D6C4] text-center underline capitalize'>forgot password?</p>}
         </Link>
 
-        <Button 
+        <Button
           type={'submit'}
           disabled={submitting}
           label={isLogin ? 'login' : 'register'}
@@ -104,7 +104,7 @@ const Form = ({
           <div className='text-gray-500 text-sm md:text-[17px]'>
             {isLogin ? `Don't have an account?`: 'Already have an account?'}
           </div>
-          <Button 
+          <Button
             type={'button'}
             disabled={submitting}
             onClick={handleChange}
@@ -116,4 +116,4 @@ const Form = ({
   )
 }
 
-export default Form     
+export default Form    

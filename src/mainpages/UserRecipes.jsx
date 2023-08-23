@@ -30,10 +30,10 @@ const UserRecipes = () =>{
           setRecipes(response.data.recipes)
           setOwner(response.data.full_name)
       } catch (error) {
-          let errorMessage = 'Something went wrong: '
-          if (error instanceof Error)
-            errorMessage += error
-          console.log(errorMessage)
+        let errorMessage = 'Something went wrong: '
+        if (error instanceof Error)
+          errorMessage += error
+        console.log(errorMessage)
       } finally {
         setLoading(false)
       }

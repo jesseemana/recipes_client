@@ -1,8 +1,7 @@
 import { Link } from 'react-router-dom'
 import Button from './Button'
-import Heading from './Heading'
-import InputField from './InputField'
-
+import Heading from './Inputs/Heading'
+import InputField from './Inputs/InputField'
 
 const Form = ({
   email, 
@@ -34,9 +33,9 @@ const Form = ({
           <div className='flex flex-col gap-y-4 items-start md:flex-row gap-x-4'>
             <div className='flex flex-col w-full gap-3'>
               <InputField 
-                htmlFor={'first name'}
-                label={'first name:'}
-                id={'first name'}
+                htmlFor='first name'
+                label='first name:'
+                id='first name'
                 type='text'
                 value={firstName}
                 placeholder='first name'
@@ -46,9 +45,9 @@ const Form = ({
                     
             <div className='flex flex-col w-full gap-3'>
               <InputField 
-                htmlFor={'last name'}
-                label={'last name:'}
-                id={'last name'}
+                htmlFor='last name'
+                label='last name:'
+                id='last name'
                 type='text'
                 value={lastName}
                 placeholder='last name'
@@ -59,9 +58,9 @@ const Form = ({
         )}
 
         <InputField 
-          htmlFor={'email'}
-          label={'email:'}
-          id={'email'}
+          htmlFor='email'
+          label='email:'
+          id='email'
           type='text'
           value={email}
           placeholder='email@example.com'
@@ -69,9 +68,9 @@ const Form = ({
         />
             
         <InputField 
-          htmlFor={'password'}
-          label={'password:'}
-          id={'password'}
+          htmlFor='password'
+          label='password:'
+          id='password'
           type='password'
           value={password}
           placeholder='password'
@@ -79,9 +78,9 @@ const Form = ({
         />
 
         <InputField 
-          htmlFor={'confirm password'}
-          label={'confirm password:'}
-          id={'confirm password'}
+          htmlFor='confirm password'
+          label='confirm password:'
+          id='confirm password'
           type='password'
           value={confirmPassword}
           placeholder='confirm password'
@@ -93,7 +92,7 @@ const Form = ({
         </Link>
 
         <Button
-          type={'submit'}
+          type='submit'
           disabled={submitting}
           label={isLogin ? 'login' : 'register'}
         />
@@ -105,7 +104,7 @@ const Form = ({
             {isLogin ? `Don't have an account?`: 'Already have an account?'}
           </div>
           <Button
-            type={'button'}
+            type='button'
             disabled={submitting}
             onClick={handleChange}
             label={isLogin ? 'create account.' : 'login.'}

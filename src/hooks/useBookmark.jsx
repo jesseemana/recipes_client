@@ -10,7 +10,8 @@ const useBookmark = ({id, auth}) => {
     return auth?.user.bookmarks.includes(id)
   }, [id, auth])
 
-  const toggleBookmark = async () => {
+  const toggleBookmark = async (e) => {
+    e.stopPropagation()
     try {
       if (bookmarked) {
         await axios.delete(`/bookmarks/${id}/${userId}`, {
@@ -29,7 +30,7 @@ const useBookmark = ({id, auth}) => {
       if (error instanceof Error)
         errorMessage += error
       console.log(error)
-      toast.error('Failed to bookmark' )
+      toast.error('Failed' )
     }
   }
 

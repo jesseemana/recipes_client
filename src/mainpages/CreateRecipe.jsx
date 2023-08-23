@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import InputField from '../components/Inputs/InputField'
-import Upload from '../components/Upload'
+import Upload from '../components/Inputs/Upload'
 import axios from '../api/axios'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import Heading from '../components/Inputs/Heading'
-import Button from '../components/Button'
+import Button from '../components/Buttons/Button'
 import useAuth from '../hooks/useAuth'
 
 const CreateRecipe = () => {

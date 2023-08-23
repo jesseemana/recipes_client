@@ -1,4 +1,4 @@
-import useBookmark from '../hooks/useBookmark'
+import useBookmark from '../../hooks/useBookmark'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 
 const FavButton = ({id}) => {

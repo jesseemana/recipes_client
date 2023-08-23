@@ -1,9 +1,0 @@
-const Heading = ({label}) => {
-  return (
-    <h1 className='text-center capitalize text-lg md:text-2xl font-normal text-[#38D6C4] py-1'>
-      {label}
-    </h1>
-  )
-}
-
-export default Heading

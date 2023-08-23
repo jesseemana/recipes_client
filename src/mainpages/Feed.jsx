@@ -1,5 +1,5 @@
 import RecipeCard from '../components/RecipeCard'
-import Pagination from '../components/Pagination'
+import Pagination from '../components/Buttons/Pagination'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import Loader from '../components/Loaders/Loader'
 import SkeletonCard from '../components/Loaders/Skeleton/SkeletonCard'

@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import FavButton from './FavButton'
+import FavButton from './Buttons/FavButton'
 import { BsClock, } from 'react-icons/bs'
 import { CgOptions  } from 'react-icons/cg'
 import { useNavigate } from 'react-router-dom'

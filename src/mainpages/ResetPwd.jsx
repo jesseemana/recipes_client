@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
-import Button from '../components/Button'
+import Button from '../components/Buttons/Button'
 import Heading from '../components/Inputs/Heading'
 import InputField from '../components/Inputs/InputField'
 import useDocumentTitle from '../hooks/useDocumentTitle'

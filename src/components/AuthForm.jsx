@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom'
-import Button from './Button'
+import Button from './Buttons/Button'
 import Heading from './Inputs/Heading'
 import InputField from './Inputs/InputField'
 
@@ -27,7 +27,7 @@ const Form = ({
         onSubmit={handleSubmit} 
         className='flex flex-col gap-y-3 transition-all w-[300px] md:w-auto px-5 py-4 rounded-sm shadow-lg bg-white'
       >
-        {isLogin ? <> <Heading label={'login'} /> </> : <> <Heading label={'create account'} /> </>}
+        {isLogin ? <><Heading label='login' /></> : <><Heading label='create account' /></>}
     
         {!isLogin && (
           <div className='flex flex-col gap-y-4 items-start md:flex-row gap-x-4'>
@@ -97,7 +97,13 @@ const Form = ({
           label={isLogin ? 'login' : 'register'}
         />
 
-        <p ref={errorRef} aria-live='assertive' className='text-white text-center text-sm font-normal bg-red-500'>{errMsg}</p>
+        <p 
+          ref={errorRef} 
+          aria-live='assertive' 
+          className='text-white text-center text-sm font-normal bg-rose-500'
+        >
+          {errMsg}
+        </p>
 
         <div className='flex gap-1'>
           <div className='text-gray-500 text-sm md:text-[17px]'>

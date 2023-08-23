@@ -1,33 +1,89 @@
+import { useRef } from 'react'
 import FavButton from './FavButton'
-import { Link } from 'react-router-dom'
-import { BsClock } from 'react-icons/bs'
+import { BsClock, } from 'react-icons/bs'
+import { CgOptions  } from 'react-icons/cg'
+import { useNavigate } from 'react-router-dom'
 
-const RecipeCard = ({data, user}) => {
+const RecipeCard = ({
+  user,
+  data,
+  isOpen,
+  setIsOpen,
+  actionId,
+  primaryAction,
+  primaryActionLabel,
+  disabled
+}) => {
+  const navigate = useNavigate()
+
+  const menuRef = useRef()
+
+  const handleDelete = (e) => {
+    e.stopPropagation()
+    if (disabled) return
+    primaryAction(actionId)
+  }
+
+  const toggleOpen = (e) => {
+    e.stopPropagation()
+    setIsOpen((prev) => !prev)
+  }
+
   return (
-    <Link
-      to={`/recipe/${data?.id}`}
-      className='cols-span-1 group'
+    <div
+      onClick={() => navigate(`/recipe/${data.id}`)}
+      className='group'
     >
-      <div className='flex flex-col gap-2 w-full text-gray-600 text-xl lg:text-md'>
-        <div className='aspect-square w-full relative overflow-hidden rounded-xl border'>
+      <div  className='flex flex-col gap-2 w-full text-xl md:text-lg lg:text-md'>
+        <div className='w-full relative overflow-hidden rounded-xl border aspect-square'>
           <img 
-            src={data?.image || './cake.jpg'} 
-            alt={data?.description || 'a chocolate cake'} 
-            className='h-full w-full group-hover:scale-110 transition'
+            src={data.image} 
+            alt={data.description} 
+            className='object-cover h-full w-full group-hover:scale-110 transition '
             loading='lazy'
           />
           <div className='absolute top-3 right-3'>
-            {<FavButton id={data?._id} />}
+            {user && <FavButton id={data.id} />}
           </div>
         </div>
-        <p className='capitalize font-semibold'>{data?.name || 'chocolate cake'}</p>
-        <div className='flex items-center gap-1 lg:text-[15px]'>
+        <p className='capitalize font-semibold text-gray-700'>{data.name}</p>
+        <div className='flex items-center gap-1 text-gray-600 lg:text-[15px]'>
           <BsClock />
-          <p>{data?.time}min.</p>
+          <p className='font-normal'>{data.time}min</p>
         </div>
-        <p className='font-nomal text-neutral-500 text-lg'>#snack</p>
+        <div className='flex justify-between items-center'>
+          <p className='font-medium text-neutral-700 text-lg'>#{data.category}</p>
+          {primaryAction && (
+            <div
+              id={data.id}
+              ref={menuRef}
+              onClick={toggleOpen}
+              className='relative hover:cursor-pointer'
+            >
+              <CgOptions className='text-gray-700' />
+              {isOpen ? (
+                <div className='absolute bg-white rounded-md shadow-md w-[120px] right-0 bottom-10 md:bottom-6 text-md'>
+                  <p
+                    onClick={() => navigate(`/edit/${data.id}`)} 
+                    className='px-2 py-2 md:py-1 capitalize text-gray-700 hover:bg-neutral-100 hover:rounded-sm transition'
+                  >
+                    Edit
+                  </p>
+                  <p
+                    onClick={handleDelete} 
+                    className='px-2 py-2 md:py-1 capitalize text-gray-700 hover:bg-neutral-100 hover:rounded-sm transition'
+                  >
+                    {primaryActionLabel}
+                  </p>
+                </div>
+                ):(
+                <div></div>
+              )}
+            </div>
+          )}
+        </div>
       </div>
-    </Link>
+    </div>
   )
 }
 

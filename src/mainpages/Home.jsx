@@ -1,5 +1,5 @@
 import Feed from './Feed'
-import Content from '../components/Content'
+import Content from '../components/Wrappers/Content'
 
 const Home = () => {
   return (

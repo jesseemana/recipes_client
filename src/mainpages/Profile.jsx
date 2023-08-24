@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import { toast } from 'react-hot-toast'
-import { useNavigate, useParams } from 'react-router-dom'
+import { useParams } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
-import Content from '../components/Content'
+import Content from '../components/Wrappers/Content'
 import Header from '../components/Inputs/Header'
 import RecipeCard from '../components/RecipeCard'
+import PageLayout from '../components/Wrappers/PageLayout'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 // import axios from '../api/axios'
 import axios from 'axios'
@@ -12,8 +13,6 @@ import axios from 'axios'
 const Profile = () => {
   const { id } = useParams()
   const { auth } = useAuth()
-
-  const navigate = useNavigate()
 
   useDocumentTitle('My Profile')
 
@@ -61,7 +60,7 @@ const Profile = () => {
         title='my recipes' 
         subtitle='Recipes you created'
       />
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8'>
+      <PageLayout>
         {recipes.map(recipe => (
           <RecipeCard
             data={recipe}
@@ -73,7 +72,7 @@ const Profile = () => {
             primaryActionLabel={'Delete'}
           />
         ))}
-      </div>
+      </PageLayout>
     </Content>
   )
 }

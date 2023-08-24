@@ -1,4 +1,4 @@
-import Content from '../components/Content'
+import Content from '../components/Wrappers/Content'
 import { useParams } from 'react-router-dom'
 
 const EditRecipe = () => {

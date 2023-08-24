@@ -3,10 +3,11 @@ import { useParams } from 'react-router-dom'
 import axios from '../api/axios'
 import useAuth from '../hooks/useAuth'
 import Header from '../components/Inputs/Header'
-import Content from '../components/Content'
+import Content from '../components/Wrappers/Content'
 import RecipeCard from '../components/RecipeCard'
 import Loader from '../components/Loaders/Loader'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import PageLayout from '../components/Wrappers/PageLayout'
 
 const UserRecipes = () =>{
   const { id } = useParams() // in next, user router from navigation/router to get userId
@@ -56,14 +57,14 @@ const UserRecipes = () =>{
         title='more recipes' 
         subtitle={`View more recipes by ${'this user'}`}
       />
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8'>
+      <PageLayout>
         {recipes.map(recipe =>(
           <RecipeCard 
             data={recipe} 
             key={recipe.id} 
           />
         ))}
-      </div>
+      </PageLayout>
     </Content>
   )
     

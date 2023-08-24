@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react'
 import useAuth from '../hooks/useAuth'
-import Content from '../components/Content'
+import Content from '../components/Wrappers/Content'
 import Header from '../components/Inputs/Header'
 import Loader from '../components/Loaders/Loader'
 import RecipeCard from '../components/RecipeCard'
 import useDocumentTitle from '../hooks/useDocumentTitle'
+import PageLayout from '../components/Wrappers/PageLayout'
 // import useAxiosPrivate from '../hooks/useAxiosPrivate'
 import axios from '../api/axios'
 
@@ -64,14 +65,14 @@ const Bookmarks = () => {
         title='my bookmarks'
         subtitle='Recipes that you saved'
       />
-      <div className='grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-8'>
+      <PageLayout>
         {bookmarks.map(bookmark => (
           <RecipeCard
             data={bookmark}
             key={bookmark.id}
           />
         ))}
-      </div>
+      </PageLayout>
     </Content>
   )
 

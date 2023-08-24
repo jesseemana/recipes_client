@@ -95,7 +95,7 @@ const Recipe = () => {
           }
         </div>
         <Link 
-          to={`${'/user/'}${recipe.user}`} 
+          to={`/user/${recipe.user}`} 
           className='text-md font-extralight w-[190px] text-gray-500'
         >
           view more by <span className='text-[#38D6C4] font-normal underline'>{owner}</span>

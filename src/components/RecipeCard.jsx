@@ -61,7 +61,6 @@ const RecipeCard = ({
           <p className='font-medium text-neutral-700 text-lg'>#{data.category}</p>
           {primaryAction && (
             <div
-              // id={data.id}
               // ref={menuRef}
               // onClick={toggleOpen}
               className='relative hover:cursor-pointer flex gap-2 text-gray-600'
@@ -74,6 +73,7 @@ const RecipeCard = ({
               <AiOutlineDelete 
                 size={22} 
                 onClick={handleDelete}
+                className='text-rose-500'
               />
               {/* 
               *****OPENS UP ON EVERY RECIPE COMPONENT ON THE PAGE INSTEAD OF THE SINGLE COMPONENT THAT WAS TRIGERRED*****

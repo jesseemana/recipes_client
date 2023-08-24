@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { toast } from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import useAuth from '../hooks/useAuth'
 import Content from '../components/Content'
 import Header from '../components/Inputs/Header'
@@ -10,6 +10,7 @@ import useDocumentTitle from '../hooks/useDocumentTitle'
 import axios from 'axios'
 
 const Profile = () => {
+  const { id } = useParams()
   const { auth } = useAuth()
 
   const navigate = useNavigate()
@@ -24,7 +25,7 @@ const Profile = () => {
     const getRecipes = async () => {
       setLoading(true)
       try {
-        const response = await axios.get('http://localhost:3030/recipes')
+        const response = await axios.get(`http://localhost:3030/recipes/`)
         const results = await response?.data
         if (results)
           setRecipes(results)

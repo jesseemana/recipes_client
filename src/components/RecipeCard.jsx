@@ -1,7 +1,8 @@
 import { useRef } from 'react'
 import FavButton from './Buttons/FavButton'
-import { BsClock, } from 'react-icons/bs'
-import { CgOptions  } from 'react-icons/cg'
+import { FiEdit } from 'react-icons/fi'
+import { BsClock } from 'react-icons/bs'
+import { AiOutlineDelete } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
 
 const RecipeCard = ({
@@ -9,14 +10,14 @@ const RecipeCard = ({
   data,
   isOpen,
   setIsOpen,
-  actionId,
-  primaryAction,
   primaryActionLabel,
+  primaryAction,
+  actionId,
   disabled
 }) => {
-  const navigate = useNavigate()
-
   const menuRef = useRef()
+
+  const navigate = useNavigate()
 
   const handleDelete = (e) => {
     e.stopPropagation()
@@ -24,17 +25,22 @@ const RecipeCard = ({
     primaryAction(actionId)
   }
 
-  const toggleOpen = (e) => {
+  const handleEdit = (e) => {
     e.stopPropagation()
-    setIsOpen((prev) => !prev)
+    navigate(`/edit/${data.id}`)
   }
+
+  // const toggleOpen = (e) => {
+  //   e.stopPropagation()
+  //   setIsOpen((prev) => !prev)
+  // }
 
   return (
     <div
       onClick={() => navigate(`/recipe/${data.id}`)}
       className='group'
     >
-      <div  className='flex flex-col gap-2 w-full text-xl md:text-lg lg:text-md'>
+      <div className='flex flex-col gap-2 text-xl md:text-lg lg:text-md'>
         <div className='w-full relative overflow-hidden rounded-xl border aspect-square'>
           <img 
             src={data.image} 
@@ -55,13 +61,24 @@ const RecipeCard = ({
           <p className='font-medium text-neutral-700 text-lg'>#{data.category}</p>
           {primaryAction && (
             <div
-              id={data.id}
-              ref={menuRef}
-              onClick={toggleOpen}
-              className='relative hover:cursor-pointer'
+              // id={data.id}
+              // ref={menuRef}
+              // onClick={toggleOpen}
+              className='relative hover:cursor-pointer flex gap-2 text-gray-600'
             >
+              <FiEdit 
+                size={20} 
+                onClick={handleEdit}
+              />
+              {/* USE REACT SWEET ALERT TO PROMPT DELETE QUESTION */}
+              <AiOutlineDelete 
+                size={22} 
+                onClick={handleDelete}
+              />
+              {/* 
+              *****OPENS UP ON EVERY RECIPE COMPONENT ON THE PAGE INSTEAD OF THE SINGLE COMPONENT THAT WAS TRIGERRED*****
               <CgOptions className='text-gray-700' />
-              {isOpen ? (
+               {isOpen ? (
                 <div className='absolute bg-white rounded-md shadow-md w-[120px] right-0 bottom-10 md:bottom-6 text-md'>
                   <p
                     onClick={() => navigate(`/edit/${data.id}`)} 
@@ -78,7 +95,8 @@ const RecipeCard = ({
                 </div>
                 ):(
                 <div></div>
-              )}
+              )} 
+              */}
             </div>
           )}
         </div>

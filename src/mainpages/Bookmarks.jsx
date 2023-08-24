@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react'
 import useAuth from '../hooks/useAuth'
-import Header from '../components/Inputs/Header'
 import Content from '../components/Content'
-import RecipeCard from '../components/RecipeCard'
+import Header from '../components/Inputs/Header'
 import Loader from '../components/Loaders/Loader'
+import RecipeCard from '../components/RecipeCard'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 // import useAxiosPrivate from '../hooks/useAxiosPrivate'
 import axios from '../api/axios'
@@ -22,7 +22,7 @@ const Bookmarks = () => {
   // const axiosPrivate = useAxiosPrivate()
 
   useEffect(() => {
-    const isMounted = true
+    // const isMounted = true
     // const controller = new AbortController()
 
     const getBookmarks = async () => {
@@ -30,11 +30,12 @@ const Bookmarks = () => {
       try {
         const response = await axios.get(`/bookmarks/${userId}`, { 
           headers: { 'Authorization' : `Bearer ${token}`},
-          signal: controller.signal()
+          // signal: controller.signal()
         })
         console.log(response.data.bookmarks)
         if (response?.data)
-          isMounted && setBookmarks(response.data.bookmarks)
+          setBookmarks(response.data.bookmarks)
+          // isMounted && setBookmarks(response.data.bookmarks)
       } catch (error) {
         let errorMessage = 'Something went wrong: '
         if (error instanceof Error)
@@ -47,10 +48,10 @@ const Bookmarks = () => {
 
     getBookmarks()
 
-    return function() {
-      isMounted = false
+    // return function() {
+    //   isMounted = false
     //   controller.abort()
-    }
+    // }
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   let content

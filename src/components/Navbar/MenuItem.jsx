@@ -1,5 +1,12 @@
 import { Link } from 'react-router-dom'
 
+// interface MenuItem {
+//   onClick?: () => void
+//   route?: string | undefined
+//   label: string
+//   icon?: React.ReactElement
+// }
+
 const MenuItem = ({onClick, route, label, icon}) => {
   return (
     <Link

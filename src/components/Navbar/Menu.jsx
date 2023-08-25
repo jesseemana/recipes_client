@@ -1,4 +1,11 @@
 import { Link } from 'react-router-dom'
+import { IconType } from 'react-icons'
+
+// interface Menu {
+//   route?: string | undefined
+//   onClick?: () => void
+//   icon: React.ReactElement
+// }
 
 const Menu = ({route, onClick, icon}) => {
   return (

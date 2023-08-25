@@ -1,9 +1,9 @@
 import MenuItem from './MenuItem'
 import { Link}from 'react-router-dom'
-import { useState, useRef, useEffect } from 'react'
 import { BsBookmark } from 'react-icons/bs'
 import { MdOutlineAddBox } from 'react-icons/md'
 import { BiLogOut, BiLogIn, } from 'react-icons/bi'
+import { useState, useRef, useEffect } from 'react'
 import { AiOutlineMenu, AiOutlineUser } from 'react-icons/ai'
 
 const MainNav = ({user, handleLogout}) => {
@@ -13,7 +13,7 @@ const MainNav = ({user, handleLogout}) => {
 
   useEffect(() => {
     const handler = (e) => {
-      if (!menuRef.current.contains(e.target)) {
+      if (!menuRef.current?.contains(e.target)) {
         setIsOpen(false)
       }
     }
@@ -26,7 +26,7 @@ const MainNav = ({user, handleLogout}) => {
   return (
     <nav className='hidden lg:flex fixed p-3 w-full px-[3%] bg-white shadow-sm z-10 justify-between items-center'>
       <Link 
-        to={'/feed'} 
+        to='/feed'
         className='text-lg md:text-xl text-[#38D6C4] font-normal uppercase'
       >
         logoooo.
@@ -49,17 +49,17 @@ const MainNav = ({user, handleLogout}) => {
               {user ? (
                 <>
                   <MenuItem
-                    route={'/profile/:id'}
+                    route='/profile/:id'
                     label='my recipes'
                     // icon={<AiOutlineUser />}
                   />
                   <MenuItem
-                    route={'/create'}
+                    route='/create'
                     label='add recipe'
                     // icon={<MdOutlineAddBox />}
                   />
                   <MenuItem
-                    route={'/bookmarks'}
+                    route='/bookmarks'
                     label='bookmarks'
                     // icon={<BsBookmark />}
                   />
@@ -72,7 +72,7 @@ const MainNav = ({user, handleLogout}) => {
                 </>
                 ):(
                 <MenuItem
-                  route={'/auth'}
+                  route='/auth'
                   label='login'
                   icon={<BiLogIn />}
                 />

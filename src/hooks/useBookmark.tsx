@@ -2,7 +2,7 @@ import axios from '../api/axios'
 import { useMemo } from 'react'
 import { toast } from 'react-hot-toast'
 
-const useBookmark = ({id, auth}: Bookmark) => {
+const useBookmark = ({id, auth}: UseBookmarkProps) => {
   const userId = auth?.user._id
   const token = auth?.access_token
 
@@ -10,7 +10,7 @@ const useBookmark = ({id, auth}: Bookmark) => {
     return auth?.user.bookmarks.includes(id)
   }, [id, auth])
 
-  const toggleBookmark = async (e) => {
+  const toggleBookmark = async (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation()
     try {
       if (bookmarked) {

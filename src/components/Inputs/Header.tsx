@@ -1,4 +1,10 @@
-const Header = ({title, subtitle, center}) => {
+interface HeaderProps {
+  title: string
+  subtitle: string
+  center: boolean
+}
+
+const Header = ({title, subtitle, center}: HeaderProps) => {
   return (
     <div className={`${center ? 'text-center' : 'text-start'} pb-5`}>
       <div className='text-2xl font-bold capitalize'>

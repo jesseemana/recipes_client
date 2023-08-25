@@ -1,7 +1,12 @@
-const InputField = ({type, value, placeholder, onChange, htmlFor, label, id}) => {
+const InputField = ({type, value, placeholder, onChange, htmlFor, label, id}: InputProps) => {
   return (
     <>
-      <label htmlFor={htmlFor} className='text-sm md:text-[15px] capitalize text-gray-500'>{label}</label>
+      <label 
+        htmlFor={htmlFor} 
+        className='text-sm md:text-[15px] capitalize text-gray-500'
+      >
+        {label}
+      </label>
       <input
         id={id}
         type={type}
@@ -16,4 +21,4 @@ const InputField = ({type, value, placeholder, onChange, htmlFor, label, id}) =>
   )
 }
 
-export default InputField
+export default InputField 

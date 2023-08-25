@@ -9,20 +9,22 @@ interface ButtonProps {
   type: 'button' | 'submit' | 'reset'
 }
 
+interface User {
+  _id: string,
+  first_name: string,
+  last_name: string,
+  email: string,
+  bookmarks: string[]
+}
+
 interface Auth {
-  user: {
-    _id: string,
-    first_name: string,
-    last_name: string,
-    email: string,
-    bookmarks: string[]
-  },
+  user: User,
   access_token: string
 }
 
 interface UseBookmarkProps {
   id: string
-  auth: Auth,
+  auth?: Auth,
 } 
 
 interface InputProps {
@@ -34,3 +36,8 @@ interface InputProps {
   label: string
   id: string
 }
+
+interface NavProps {
+  user: User,
+  handleLogout: () => void
+} 

@@ -20,12 +20,13 @@ const Navbar = () => {
       })
       console.log(response.data.message) // cookie cleared
       // navigate to auth or refresh page, show toast message
+      navigate('/auth')
     } catch (error) {
       let errorMessage = 'Something went wrong: '
       if (error instanceof Error) {
         errorMessage += error
       }
-      console.error(message)
+      console.error(errorMessage)
     }
   }
 

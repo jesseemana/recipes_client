@@ -2,7 +2,7 @@ import useAuth from '../../hooks/useAuth';
 import useBookmark from '../../hooks/useBookmark'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 
-const FavButton = ({id}: {id: string}) => {
+const FavButton = ({id}: {id: string | number}) => {
   const { auth } = useAuth()
   const { bookmarked, toggleBookmark } = useBookmark({id, auth})
 

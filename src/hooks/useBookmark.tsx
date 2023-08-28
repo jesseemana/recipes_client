@@ -2,7 +2,7 @@ import axios from '../api/axios'
 import { useMemo } from 'react'
 import { toast } from 'react-hot-toast'
 
-const useBookmark = ({id, auth}: UseBookmarkProps) => {
+const useBookmark = ({id, auth}: BookmarkProps) => {
   const userId = auth?.user._id
   const token = auth?.access_token
 

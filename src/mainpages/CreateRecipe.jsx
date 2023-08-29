@@ -1,11 +1,11 @@
 import { useState } from 'react'
-import InputField from '../components/Inputs/InputField'
-import Upload from '../components/Inputs/Upload'
 import axios from '../api/axios'
-import useDocumentTitle from '../hooks/useDocumentTitle'
-import Heading from '../components/Inputs/Heading'
-import Button from '../components/Buttons/Button'
 import useAuth from '../hooks/useAuth'
+import Button from '../components/Buttons/Button'
+import Heading from '../components/Inputs/Heading'
+import useDocumentTitle from '../hooks/useDocumentTitle'
+import InputField from '../components/Inputs/InputField.tsx'
+import Upload from '../components/Inputs/Upload'
 
 const CreateRecipe = () => {
   const { auth } = useAuth()
@@ -24,6 +24,7 @@ const CreateRecipe = () => {
   const [source, setSource] = useState('')
   const [picturePath, setPicturePath] = useState('')
   const [pictureId, setPictureId] = useState('')
+
   // console.log(auth)
   const user = auth.user
   const token = auth.access_token
@@ -40,11 +41,11 @@ const CreateRecipe = () => {
 
       formData.append('user', user._id)
       formData.append('name', name)
-      formData.append('ingridients', ingridients)
-      formData.append('category', category)
       formData.append('time', time)
       formData.append('file', image) // FOR MULTER
+      formData.append('category', category)
       formData.append('procedure', procedure)
+      formData.append('ingridients', ingridients)
       
       await axios.post('/recipes', formData, {
         headers: {
@@ -57,7 +58,7 @@ const CreateRecipe = () => {
       let errorMessage = 'Something went wrong: '
       if (error instanceof Error)
         errorMessage += error
-      console.log(errorMessage)
+      console.error(errorMessage)
     } finally {
       setSubmitting(false)
     }
@@ -66,13 +67,11 @@ const CreateRecipe = () => {
   const handleImg = (e) => {
     const file = e.target?.files[0]
     setImage(file)
-
     const previewFile = (file) => {
       const reader = new FileReader()
       reader.readAsDataURL(file)
       reader.onloadend = () => setSource(reader.result)
     }
-    
     previewFile(file)
   }
   // UPLOAD FUNCTIONALITY ONE END
@@ -96,7 +95,7 @@ const CreateRecipe = () => {
   //     let errorMessage = 'Something went wrong: '
   //     if (error instanceof Error)
   //       errorMessage += error
-  //     console.log(errorMessage)
+  //     console.error(errorMessage)
   //   } finally {
   //     setUploading(false)
   //   }
@@ -126,12 +125,12 @@ const CreateRecipe = () => {
   return (
     <div className='max-w-full px-[4%] flex justify-center items-center bg-gray-50 height'>
       <div className='bg-white rounded-md shadow-lg border w-[600px] xl:w-[740px]'>
-        <Heading label={'add a recipe'} />
+        <Heading label='add a recipe' />
         <form onSubmit={handleSubmit} encType='multipart/form-data' className='flex flex-col p-4 gap-y-2 h'>
           <InputField 
-            htmlFor={'name'}
-            label={'name:'}
-            id={'name'}
+            htmlFor='name'
+            label='name:'
+            id='name'
             type='text'
             value={name}
             placeholder='name'
@@ -139,9 +138,9 @@ const CreateRecipe = () => {
           />
 
           <InputField 
-            htmlFor={'ingridients'}
-            label={'ingridients:'}
-            id={'ingridients'}
+            htmlFor='ingridients'
+            label='ingridients:'
+            id='ingridients'
             type='text'
             value={ingridients}
             placeholder='e.g. rice, water, sugar'
@@ -175,9 +174,9 @@ const CreateRecipe = () => {
           </select>
 
           <InputField 
-            htmlFor={'time'}
-            label={'time to prepare(minutes):'}
-            id={'time'}
+            htmlFor='time'
+            label='time to prepare(minutes):'
+            id='time'
             type='text'
             value={time}
             placeholder='e.g. 10, 20, 60'
@@ -225,4 +224,4 @@ const CreateRecipe = () => {
   )
 }
 
-export default CreateRecipe     
+export default CreateRecipe   

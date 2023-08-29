@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom'
 import axios from '../api/axios'
 import Button from '../components/Buttons/Button'
 import Heading from '../components/Inputs/Heading'
-import InputField from '../components/Inputs/InputField'
+import InputField from '../components/Inputs/InputField.tsx'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 
 const ChangePassword = () => {

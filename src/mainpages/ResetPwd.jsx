@@ -2,11 +2,12 @@ import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import Button from '../components/Buttons/Button'
 import Heading from '../components/Inputs/Heading'
-import InputField from '../components/Inputs/InputField'
+import InputField from '../components/Inputs/InputField.tsx'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import axios from '../api/axios'
 
 const ResetPwd = () => {  
+  
   useDocumentTitle('Reset Password')
 
   const [email, setEmail] = useState('')
@@ -23,7 +24,7 @@ const ResetPwd = () => {
       let errorMessage = 'Something went wrong: '
       if (error instanceof Error)
         errorMessage += error
-      console.log(errorMessage)
+      console.error(errorMessage)
     } finally {
       setEmail('')
       setSubmitting(false)

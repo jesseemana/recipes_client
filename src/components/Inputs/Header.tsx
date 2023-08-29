@@ -1,12 +1,11 @@
 interface HeaderProps {
   title: string
   subtitle: string
-  center: boolean
 }
 
-const Header = ({title, subtitle, center}: HeaderProps) => {
+const Header = ({title, subtitle}: HeaderProps) => {
   return (
-    <div className={`${center ? 'text-center' : 'text-start'} pb-5`}>
+    <div className={`text-start pb-5`}>
       <div className='text-2xl font-bold capitalize'>
         {title}
       </div>

@@ -9,7 +9,7 @@ const RecipeCard = ({
   user,
   data,
   isOpen,
-  actionId,
+  actionId= '',
   disabled,
   setIsOpen,
   primaryAction,
@@ -22,7 +22,7 @@ const RecipeCard = ({
   const handleDelete = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation()
     if (disabled) return
-    primaryAction(actionId)
+    primaryAction?.(actionId)
   }
 
   const handleEdit = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -59,7 +59,7 @@ const RecipeCard = ({
         </div>
         <div className='flex justify-between items-center'>
           <p className='font-medium text-neutral-700 text-lg'>#{data.category}</p>
-          {actionId && (
+          {primaryAction && (
             <div
               // ref={menuRef}
               // onClick={toggleOpen}

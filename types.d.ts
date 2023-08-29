@@ -12,7 +12,7 @@ interface Auth {
 }
 
 interface ChildrenProps {
-  children: React.ReactElement
+  children: React.ReactNode
 }
 
 interface ButtonProps {
@@ -23,8 +23,8 @@ interface ButtonProps {
 }
 
 interface BookmarkProps {
-  id: string | number
   auth: Auth,
+  id: string | number
 } 
 
 interface InputProps {
@@ -41,11 +41,7 @@ interface NavProps {
   user: User,
   handleLogout: () => void
 } 
-
-interface Menu {
-  onClick: () => void
-  icon: React.ReactElement
-} 
+ 
 
 interface Recipe {
   id: number | string
@@ -56,12 +52,19 @@ interface Recipe {
 }
 
 interface RecipeCard {
-  user: User
+  user?: User
   data: Recipe
-  disabled: boolean
-  actionId: string | number
-  primaryAction: (value: string | number) => void
   isOpen?: boolean
-  setIsOpen?: () => void
+  disabled?: boolean
+  setIsOpen?: Dispatch<SetStateAction<boolean>>
+  actionId?: string | number
   primaryActionLabel?: string
+  primaryAction?: (value: string | number) => void
+}
+
+interface Feed {
+  user: User
+  pages: number
+  currentPage: number
+  setCurrentPage: React.Dispatch<SetStateAction<number>>
 }

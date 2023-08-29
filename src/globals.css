@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* @layer base{
+    body {
+        @apply bg-gray-50 scroll-smooth
+    }
+} */
+.dropdown {
+    @apply absolute right-0 top-full mt-3 w-full p-5 rounded-lg bg-white min-w-[210px] flex flex-col gap-2 justify-end items-end;
+}
+
+.height {
+    @apply min-h-[100vh] pt-[80px] pb-[70px] md:pt-[90px] md:pb-[90px] lg:pb-[50px] xl:pt-[100px]
+}

@@ -1,3 +1,8 @@
+interface Menu {
+  onClick: () => void
+  icon: React.ReactElement
+}
+
 const Menu = ({onClick, icon}: Menu) => {
   return (
     <div

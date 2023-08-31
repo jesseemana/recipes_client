@@ -1,9 +1,11 @@
 import { useRef } from 'react'
+import Alert from './Alert'
 import FavButton from './Buttons/FavButton'
 import { FiEdit } from 'react-icons/fi'
 import { BsClock } from 'react-icons/bs'
-import { AiOutlineDelete } from 'react-icons/ai'
 import { useNavigate } from 'react-router-dom'
+import { AiOutlineDelete } from 'react-icons/ai'
+
 
 const RecipeCard = ({
   user,
@@ -19,10 +21,10 @@ const RecipeCard = ({
 
   const navigate = useNavigate()
 
-  const handleDelete = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation()
+  const handleDelete = () => {
     if (disabled) return
     primaryAction?.(actionId)
+    // refresh page
   }
 
   const handleEdit = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -68,12 +70,13 @@ const RecipeCard = ({
               <div onClick={handleEdit}>
                 <FiEdit size={20} />
               </div>
-              {/* USE REACT SWEET ALERT TO PROMPT DELETE QUESTION */}
-              <div onClick={handleDelete}>
-                <AiOutlineDelete 
-                  size={22} 
-                  className='text-rose-500' 
-                />
+              <div onClick={(e:React.MouseEvent<HTMLDivElement, MouseEvent>) => e.stopPropagation()}>
+                <Alert onClick={handleDelete}>
+                  <AiOutlineDelete 
+                    size={22} 
+                    className='text-rose-500' 
+                  />
+                </Alert>
               </div>
               {/* 
               *****OPENS UP ON EVERY RECIPE COMPONENT ON THE PAGE INSTEAD OF THE SINGLE COMPONENT THAT WAS TRIGERRED*****

@@ -8,6 +8,8 @@ import ResetPwd from './mainpages/ResetPwd'
 import AuthUser from './mainpages/AuthUser'
 import Bookmarks from './mainpages/Bookmarks'
 import EditRecipe from './mainpages/EditRecipe'
+import Login from './mainpages/Login'
+import Register from './mainpages/Register'
 import Navbar from './components/Navbar/Navbar'
 import UserRecipes from './mainpages/UserRecipes'
 import RequireAuth from './components/RequireAuth'
@@ -19,7 +21,7 @@ import Loader from './components/Loaders/Loader'
 import { lazy, Suspense } from 'react'
 import { ErrorBoundary } from 'react-error-boundary'
 import ErrorFallback from './components/ErrorFallback'
-import {ThemeProvider} from './context/ThemeProvider';
+import { ThemeProvider } from './context/ThemeProvider'
 // const Home = lazy(() => import('./main pages/Home'))
 // const Recipe = lazy(() => import('./mainpages/Recipe'))
 // const UserRecipes = lazy(() => import('./mainpages/UserRecipes'))
@@ -40,6 +42,8 @@ function App() {
             <Route path='/recipe/:id' element={<Recipe />} />
             <Route path='/reset-password/:id/:token' element={<ChangePassword />} />
             <Route path='/profile/:id' element={<Profile />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/register' element={<Register />} />
 
             {/* PROTECTED ROUTES */}
             <Route element={<RequireAuth />}>

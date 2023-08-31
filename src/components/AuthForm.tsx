@@ -12,8 +12,11 @@ interface AuthForm {
   lastName: string
   password: string
   confirmPassword: string
+  register?: unknown
+  error?: string
   handleChange: () => void
-  handleSubmit: () => void
+  submitForm: (e: React.FormEvent) => void
+  // handleSubmit: (e: React.FormEvent) => void
   setEmail: Dispatch<SetStateAction<string>>
   setFirstName: Dispatch<SetStateAction<string>>
   setLastName: Dispatch<SetStateAction<string>>
@@ -29,8 +32,11 @@ const Form = ({
   password, 
   confirmPassword, 
   submitting,
+  error,
+  register,
   handleChange,  
-  handleSubmit, 
+  submitForm, 
+  // handleSubmit,
   setEmail, 
   setFirstName, 
   setLastName, 
@@ -40,7 +46,7 @@ const Form = ({
   return (
     <div className='flex justify-center items-center bg-gray-50 h-[100vh]'>
       <form 
-        onSubmit={handleSubmit}
+        onSubmit={submitForm}
         className='flex flex-col gap-y-3 transition-all w-[300px] md:w-auto px-5 py-4 rounded-sm shadow-lg bg-white'
       >
         {isLogin ? <><Heading label='login' /></> : <><Heading label='create account' /></>}
@@ -53,9 +59,10 @@ const Form = ({
                 label='first name:'
                 id='first name'
                 type='text'
-                value={firstName}
                 placeholder='first name'
-                onChange={(e) => setFirstName(e.target.value)}
+                // inputProps={...register(firstName)}
+                // value={firstName}
+                // onChange={(e) => setFirstName(e.target.value)}
               />
             </div>
                     
@@ -65,9 +72,10 @@ const Form = ({
                 label='last name:'
                 id='last name'
                 type='text'
-                value={lastName}
-                placeholder='last name'
-                onChange={(e) => setLastName(e.target.value)}
+                placeholder='last name' 
+                // inputProps={inputProps}
+                // value={lastName}
+                // onChange={(e) => setLastName(e.target.value)}
               />
             </div>
           </div>
@@ -78,9 +86,10 @@ const Form = ({
           label='email:'
           id='email'
           type='text'
-          value={email}
           placeholder='email@example.com'
-          onChange={(e) => setEmail(e.target.value)}
+          // inputProps={inputProps}
+          // value={email}
+          // onChange={(e) => setEmail(e.target.value)}
         />
             
         <InputField 
@@ -88,9 +97,10 @@ const Form = ({
           label='password:'
           id='password'
           type='password'
-          value={password}
           placeholder='password'
-          onChange={(e) => setPassword(e.target.value)}
+          // inputProps={inputProps}
+          // value={password}
+          // onChange={(e) => setPassword(e.target.value)}
         />
 
         <InputField 
@@ -98,9 +108,10 @@ const Form = ({
           label='confirm password:'
           id='confirm password'
           type='password'
-          value={confirmPassword}
           placeholder='confirm password'
-          onChange={(e) => setConfirmPassword(e.target.value)}
+          // inputProps={inputProps}
+          // value={confirmPassword}
+          // onChange={(e) => setConfirmPassword(e.target.value)}
         />
                 
         <Link to={'/reset'}>
@@ -114,9 +125,9 @@ const Form = ({
         />
 
         <div className='flex gap-1'>
-          <div className='text-gray-500 text-sm md:text-[17px]'>
+          <p className='text-gray-500 text-sm md:text-[17px]'>
             {isLogin ? `Don't have an account?`: 'Already have an account?'}
-          </div>
+          </p>
           <Button
             type='button'
             disabled={submitting}

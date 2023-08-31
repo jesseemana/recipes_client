@@ -1,4 +1,4 @@
-const InputField = ({type, value, placeholder, onChange, htmlFor, label, id}: InputProps) => {
+const InputField = ({type, placeholder, htmlFor, label, id, inputProps, error,}: InputProps) => {
   return (
     <>
       <label 
@@ -10,12 +10,13 @@ const InputField = ({type, value, placeholder, onChange, htmlFor, label, id}: In
       <input
         id={id}
         type={type}
-        value={value}
-        onChange={onChange} 
+        // ref={ref}
         placeholder={placeholder}
+        {...(inputProps ?? {})}
         autoComplete='off'
         className='py-2 px-1 text-gray-600 border border-gray-300 rounded-sm outline-[#38D6C4] file:cursor-pointer file:border-0 file:text-gray-600'
       />
+      {error && <span className="text-red-600">{error}</span>}
     </>
   )
 }

@@ -2,8 +2,8 @@ import RecipeCard from '../components/RecipeCard'
 import useDocumentTitle from '../hooks/useDocumentTitle'
 import Pagination from '../components/Buttons/Pagination'
 import PageLayout from '../components/Wrappers/PageLayout'
-import Loader from '../components/Loaders/Loader'
-import SkeletonCard from '../components/Loaders/Skeleton/SkeletonCard'
+import SkeletonCard from '../components/Loaders/SkeletonCard'
+// import Loader from '../components/Loaders/Loader'
 import { useState, useEffect } from 'react'
 import axios from 'axios'
 
@@ -34,12 +34,38 @@ const Feed = ({user, pages, currentPage, setCurrentPage}: Feed) => {
   }, [])
 
   // if (loading) {
-  //   return [...Array(10).keys()].map(i => (
-  //     <SkeletonCard key={i} />
-  //   ))
+  //   return (
+  //     [...Array(10).keys()].map((i) => (
+  //       <div className='flex'>
+  //         <SkeletonCard key={i} />
+  //       </div>
+  //     ))
+  //   )
   // }
 
-  if (loading) return <Loader />
+  if (loading) {
+    return (
+      <PageLayout>
+        <SkeletonCard  />
+        <SkeletonCard  />
+        <SkeletonCard  />
+        <SkeletonCard  />
+        <SkeletonCard  />
+        <SkeletonCard  />
+        <SkeletonCard  />
+        <SkeletonCard  />
+        <SkeletonCard  />
+        <SkeletonCard  />
+        <SkeletonCard  />
+        <SkeletonCard  />
+        <SkeletonCard  />
+        <SkeletonCard  />
+        <SkeletonCard  />
+      </PageLayout>
+    )
+  }
+
+  // if (loading) return <Loader />
 
   return (
     <PageLayout>
@@ -61,4 +87,4 @@ const Feed = ({user, pages, currentPage, setCurrentPage}: Feed) => {
   )
 }
 
-export default Feed 
+export default Feed  

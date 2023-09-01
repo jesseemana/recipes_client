@@ -13,31 +13,27 @@ const ResetPwd = () => {
   const [email, setEmail] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
-  async function sendEmail() {
+  // SEND SERVER ERRROS FOR INVALID EMAILS
+
+  async function sendEmail(e) {
+    e.preventDefault()
     setSubmitting(true)
     try {
       await axios.post(`/reset`, JSON.stringify({email}), {
         headers: {'Content-Type': 'application/json'},
         withCredentials: true
       })
+      toast.success('Email sent')
     } catch (error) {
       let errorMessage = 'Something went wrong: '
       if (error instanceof Error)
         errorMessage += error
       console.error(errorMessage)
+      toast.error('Email not sent')
     } finally {
       setEmail('')
       setSubmitting(false)
     }
-  }
-
-  function toggleSendEmail(e) {
-    e.preventDefault()
-    toast.promise(sendEmail(), {
-      loading: 'sending...',
-      success: 'email sent',
-      error: `couldn't send email` 
-    })
   }
 
   return (
@@ -53,20 +49,12 @@ const ResetPwd = () => {
             placeholder='enter your email' 
             onChange={(e) => setEmail(e.target.value)}
           />
-          {email ? (
-            <Button 
-              disabled={submitting} 
-              type='submit'
-              label='send email'
-              onClick={toggleSendEmail} 
-            /> 
-            ):(
-            <Button 
-              disabled  
-              type='button'
-              label='send email'
-            />
-          )}
+          <Button 
+            disabled={!email || submitting} 
+            type={'submit'}
+            label={submitting ? 'sending...' : 'send email'}
+            onClick={sendEmail} 
+          /> 
         </form>
       </div>
     </div>

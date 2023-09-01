@@ -5,7 +5,6 @@ import Recipe from './mainpages/Recipe'
 import Profile from './mainpages/Profile'
 import NotFound from './mainpages/NotFound'
 import ResetPwd from './mainpages/ResetPwd'
-import AuthUser from './mainpages/AuthUser'
 import Bookmarks from './mainpages/Bookmarks'
 import EditRecipe from './mainpages/EditRecipe'
 import Login from './mainpages/Login'
@@ -37,21 +36,21 @@ function App() {
           <Routes>
             <Route path='/' element={<Navigate to='/feed'/>} />
             <Route path='/feed' element={<Home />} />
-            <Route path='/auth' element={<AuthUser />} />
             <Route path='/reset' element={<ResetPwd />} />
             <Route path='/recipe/:id' element={<Recipe />} />
-            <Route path='/reset-password/:id/:token' element={<ChangePassword />} />
             <Route path='/profile/:id' element={<Profile />} />
             <Route path='/login' element={<Login />} />
             <Route path='/register' element={<Register />} />
+            <Route path='/reset-password/:id/:token' element={<ChangePassword />} />
+            <Route path='/create' element={<CreateRecipe />} />
 
             {/* PROTECTED ROUTES */}
             <Route element={<RequireAuth />}>
               <Route path='/bookmarks' element={<Bookmarks />} />
               <Route path='/edit/:id' element={<EditRecipe />} />
-              <Route path='/create' element={<CreateRecipe />} />
               <Route path='/user/:id' element={<UserRecipes />} />
-              <Route path='/auth' element={<Navigate to='/feed'/>} />
+              <Route path='/login' element={<Navigate to='/feed'/>} />
+              <Route path='/register' element={<Navigate to='/feed'/>} />
             </Route>
 
             <Route path='*' element={<NotFound />} />
@@ -66,4 +65,4 @@ function App() {
 export default App  
 {/* <Route path='/bookmarks' element={<Suspense fallback={<Loader />}> <Bookmarks /> </Suspense>} />
 <Route path='/user/:id' element={<Suspense fallback={<Loader />}> <UserRecipes /> </Suspense>} />
-<Route path='/profile/:id' element={<Suspense fallback={<Loader />}> <Profile /> </Suspense>} /> */}
+<Route path='/profile/:id' element={<Suspense fallback={<Loader />}> <Profile /> </Suspense>} /> */} 

@@ -1,22 +1,21 @@
-const InputField = ({type, placeholder, htmlFor, label, id, inputProps, error,}: InputProps) => {
+const InputField = (props: InputProps) => {
   return (
     <>
       <label 
-        htmlFor={htmlFor} 
+        htmlFor={props.htmlFor} 
         className='text-sm md:text-[15px] capitalize text-gray-500'
       >
-        {label}
+        {props.label}
       </label>
       <input
-        id={id}
-        type={type}
-        // ref={ref}
-        placeholder={placeholder}
-        {...(inputProps ?? {})}
+        id={props.id}
+        type={props.type}
+        placeholder={props.placeholder}
+        {...(props.inputProps ?? {})}
         autoComplete='off'
         className='py-2 px-1 text-gray-600 border border-gray-300 rounded-sm outline-[#38D6C4] file:cursor-pointer file:border-0 file:text-gray-600'
       />
-      {error && <span className="text-red-600">{error}</span>}
+      {props.error && <span className='text-red-600 text-sm'>{props.error}</span>}
     </>
   )
 }

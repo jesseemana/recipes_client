@@ -4,8 +4,7 @@ import { toast } from 'react-hot-toast'
 import useDocumentTitle from '@/hooks/useDocumentTitle'
 import axios from '@/api/axios'
 import useAuth from '@/hooks/useAuth'
-import { LoginFields, LoginForm } from '@/components/LoginForm'
-
+import { LoginFields, LoginForm } from '@/components/Auth/LoginForm'
 
 const Login = () => {
   useDocumentTitle('Login')
@@ -30,7 +29,7 @@ const Login = () => {
       // console.log(response.data.user)
       // console.log(response.data.accessToken)
       toast.success('logged in')
-    } catch (error) {
+    } catch (error: unknown) {
       let errorMessage = 'Something went wrong: '
       if (error instanceof Error) {
         errorMessage += error
@@ -44,8 +43,8 @@ const Login = () => {
 
   return (
     <LoginForm
-      submitting={submitting}
       onSubmit={onSubmit}
+      submitting={submitting}
     />
   )
 }

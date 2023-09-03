@@ -2,8 +2,7 @@ import axios from '@/api/axios'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
-import { RegisterFields, RegisterForm } from '@/components/RegisterForm'
-
+import { RegisterFields, RegisterForm } from '@/components/Auth/RegisterForm'
 
 const Register = () => {
   const navigate = useNavigate()
@@ -11,7 +10,7 @@ const Register = () => {
   const [submitting, setSubmitting] = useState(false)
 
   const create = async (data: RegisterFields) => {
-    console.log(data)
+    // console.log(data)
     setSubmitting(true)
     try {
       await axios.post('/auth/register', 
@@ -25,7 +24,7 @@ const Register = () => {
         withCredentials: true
       })
       navigate('/login')
-      toast.success('user created, please login')
+      toast.success('User created, please login')
     } catch (error: unknown) {
       let errorMessage = 'Something went wrong: '
       if (error instanceof Error) {

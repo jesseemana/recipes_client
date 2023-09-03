@@ -6,10 +6,10 @@ function SkeletonLoader({
 }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
-      className={cn('animate-pulse rounded-md bg-gray-100 dark:bg-gray-300', className)}
+      className={cn('animate-pulse rounded-[3px] bg-gray-100 dark:bg-gray-300', className)}
       {...props}
     />
   )
 }
 
-export { SkeletonLoader }
+export { SkeletonLoader } 

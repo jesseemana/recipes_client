@@ -1,15 +1,17 @@
 import MenuItem from './MenuItem'
-import { Link}from 'react-router-dom'
+import { useNavigate }from 'react-router-dom'
 import { BsBookmark } from 'react-icons/bs'
 import { MdOutlineAddBox } from 'react-icons/md'
 import { BiLogOut, BiLogIn, } from 'react-icons/bi'
 import { useState, useRef, useEffect } from 'react'
 import { AiOutlineMenu, AiOutlineUser } from 'react-icons/ai'
 
-const MainNav = ({user, handleLogout}) => {
+const MainNav = ({ user, handleLogout }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const menuRef = useRef()
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     const handler = (e) => {
@@ -25,15 +27,15 @@ const MainNav = ({user, handleLogout}) => {
 
   return (
     <nav className='hidden lg:flex fixed p-3 w-full px-[3%] bg-white shadow-sm z-10 justify-between items-center'>
-      <Link 
-        to='/feed'
+      <h1 
+        onClick={() => navigate('/feed')}
         className='text-lg md:text-xl text-[#38D6C4] font-normal uppercase'
       >
         logoooo.
-      </Link>
+      </h1>
       <div ref={menuRef} className='relative border rounded-full'>
         <div 
-          onClick={() => setIsOpen((prev ) => !prev)} 
+          onClick={() => setIsOpen((prev) => !prev)} 
           className='cursor-pointer flex items-center gap-1 pr-1'
         >
           <img 
@@ -49,32 +51,32 @@ const MainNav = ({user, handleLogout}) => {
               {user ? (
                 <>
                   <MenuItem
-                    route='/profile/:id'
                     label='my recipes'
+                    onClick={() => navigate('/profile/:id')}
                     // icon={<AiOutlineUser />}
                   />
                   <MenuItem
-                    route='/create'
                     label='add recipe'
+                    onClick={() => navigate('/create')}
                     // icon={<MdOutlineAddBox />}
                   />
                   <MenuItem
-                    route='/bookmarks'
                     label='bookmarks'
+                    onClick={() => navigate('/bookmarks')}
                     // icon={<BsBookmark />}
                   />
                   <hr />
                   <MenuItem
-                    onClick={handleLogout}
                     label='logout'
                     icon={<BiLogOut />}
+                    onClick={handleLogout}
                   />
                 </>
                 ):(
                 <MenuItem
-                  route='/auth'
                   label='login'
                   icon={<BiLogIn />}
+                  onClick={() => navigate('/login')}
                 />
               )}
             </div>

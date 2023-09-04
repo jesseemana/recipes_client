@@ -24,12 +24,21 @@ const MobileNav = ({user, handleLogout}: NavProps) => {
             <Menu 
               key={index} 
               icon={item.icon} 
+              label={item.label}
               onClick={() => navigate(item.route)}
             />
           ))}
           {user 
-            ? (<Menu onClick={handleLogout} icon={<CgLogOut />} />)
-            : (<Menu onClick={() => navigate('/auth')} icon={<CgLogIn />} />)
+            ? (<Menu 
+                label='logout' 
+                icon={<CgLogOut />} 
+                onClick={handleLogout} 
+              />)
+            : (<Menu 
+                label='login' 
+                icon={<CgLogIn />} 
+                onClick={() => navigate('/login')} 
+              />)
           }
         </div>
       </div>
@@ -42,18 +51,22 @@ export default MobileNav
 export const menuitems = [
   {
     route: '/feed',
+    label: 'home',
     icon: <BsHouse />
   },
   {
     route: '/bookmarks',
+    label: 'bookmarks',
     icon: <BsBookmark />
   },
   {
     route: '/create',
+    label: 'create',
     icon: <MdOutlineAddBox />
   },
   {
     route: '/profile/:id',
+    label: 'my recipes',
     icon: <AiOutlineUser />
   },
-] 
+]   

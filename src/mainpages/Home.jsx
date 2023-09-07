@@ -1,10 +1,10 @@
-import Feed from './Feed'
+import GetRecipes from '../api/GetRecipes'
 import Content from '../components/Wrappers/Content'
 
 const Home = () => {
   return (
     <Content>
-      <Feed />
+      <GetRecipes />
     </Content>
   )
 }

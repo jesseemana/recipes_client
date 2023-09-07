@@ -36,7 +36,7 @@ export const LoginForm = ({ onSubmit, submitting }: AuthProps) => {
       <Content>
         <form 
           onSubmit={handleSubmit(onSubmit)} 
-          className='flex flex-col gap-2 transition-all w-[340px] px-5 py-4 rounded-sm shadow-lg bg-white'
+          className='flex flex-col gap-2 transition-all w-[300px] md:w-auto px-5 py-4 rounded-sm shadow-lg bg-white'
         >
           <Heading label='login' />
 
@@ -70,7 +70,7 @@ export const LoginForm = ({ onSubmit, submitting }: AuthProps) => {
             error={errors.confirm_password?.message as string}
           />
 
-          <Link to={'/reset'} className='text-[#38D6C4] text-center underline capitalize'>forgot password?</Link>
+          <Link to={'/reset'} className='text-[#38D6C4] text-center text-sm md:text-md underline capitalize'>forgot password?</Link>
 
           <Button
             type='submit'
@@ -92,4 +92,4 @@ export const LoginForm = ({ onSubmit, submitting }: AuthProps) => {
       </Content>
     </div>
   )
-} 
+}   

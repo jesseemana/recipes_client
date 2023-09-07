@@ -1,5 +1,5 @@
-import MainNav from './MainNav'
-import MobileNav from './MobileNav'
+import MainNav from './LargeNav/Nav'
+import MobileNav from './MobileNav/Nav'
 import axios from '../../api/axios'
 import useAuth from '../../hooks/useAuth'
 import { useNavigate } from 'react-router-dom'

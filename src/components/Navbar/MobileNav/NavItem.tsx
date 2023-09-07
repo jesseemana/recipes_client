@@ -4,7 +4,7 @@ interface Menu {
   icon: React.ReactElement
 }
 
-const Menu = ({onClick, icon, label}: Menu) => {
+const NavItem = ({onClick, icon, label}: Menu) => {
   return (
     <div
       onClick={onClick} 
@@ -16,4 +16,4 @@ const Menu = ({onClick, icon, label}: Menu) => {
   )
 }
 
-export default Menu 
+export default NavItem 

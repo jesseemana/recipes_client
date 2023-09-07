@@ -1,4 +1,4 @@
-import MenuItem from './MenuItem'
+import NavItem from './NavItem'
 import { useNavigate }from 'react-router-dom'
 import { BsBookmark } from 'react-icons/bs'
 import { MdOutlineAddBox } from 'react-icons/md'
@@ -6,7 +6,7 @@ import { BiLogOut, BiLogIn, } from 'react-icons/bi'
 import { useState, useRef, useEffect } from 'react'
 import { AiOutlineMenu, AiOutlineUser } from 'react-icons/ai'
 
-const MainNav = ({ user, handleLogout }) => {
+const Nav = ({ user, handleLogout }) => {
   const [isOpen, setIsOpen] = useState(false)
 
   const menuRef = useRef()
@@ -27,12 +27,12 @@ const MainNav = ({ user, handleLogout }) => {
 
   return (
     <nav className='hidden lg:flex fixed p-3 w-full px-[3%] bg-white shadow-sm z-10 justify-between items-center'>
-      <h1 
+      <div
         onClick={() => navigate('/feed')}
-        className='text-lg md:text-xl text-[#38D6C4] font-normal uppercase'
+        className='text-lg md:text-xl text-[#38D6C4] font-normal uppercase cursor-default'
       >
         logoooo.
-      </h1>
+      </div>
       <div ref={menuRef} className='relative border rounded-full'>
         <div 
           onClick={() => setIsOpen((prev) => !prev)} 
@@ -50,30 +50,30 @@ const MainNav = ({ user, handleLogout }) => {
             <div className='flex flex-col cursor-pointer capitalize'>
               {user ? (
                 <>
-                  <MenuItem
+                  <NavItem
                     label='my recipes'
                     onClick={() => navigate('/profile/:id')}
                     // icon={<AiOutlineUser />}
                   />
-                  <MenuItem
+                  <NavItem
                     label='add recipe'
                     onClick={() => navigate('/create')}
                     // icon={<MdOutlineAddBox />}
                   />
-                  <MenuItem
+                  <NavItem
                     label='bookmarks'
                     onClick={() => navigate('/bookmarks')}
                     // icon={<BsBookmark />}
                   />
                   <hr />
-                  <MenuItem
+                  <NavItem
                     label='logout'
                     icon={<BiLogOut />}
                     onClick={handleLogout}
                   />
                 </>
                 ):(
-                <MenuItem
+                <NavItem
                   label='login'
                   icon={<BiLogIn />}
                   onClick={() => navigate('/login')}
@@ -87,4 +87,4 @@ const MainNav = ({ user, handleLogout }) => {
   ) 
 }
 
-export default MainNav 
+export default Nav 

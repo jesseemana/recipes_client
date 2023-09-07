@@ -1,11 +1,11 @@
-import Menu from './Menu'
+import NavItem from './NavItem'
 import { useNavigate } from 'react-router-dom'
 import { AiOutlineUser } from 'react-icons/ai'
 import { MdOutlineAddBox } from 'react-icons/md'
 import { CgLogOut, CgLogIn  } from 'react-icons/cg'
 import { BsBookmark, BsHouse } from 'react-icons/bs'
 
-const MobileNav = ({user, handleLogout}: NavProps) => {
+const Nav = ({ user, handleLogout }: NavProps) => {
   const navigate = useNavigate()
 
   return (
@@ -18,35 +18,37 @@ const MobileNav = ({user, handleLogout}: NavProps) => {
           logooo
         </div>
       </div>
-      <div className='fixed w-full p-4 bg-white z-20 bottom-0 border'>
-        <div className='flex justify-between -mb-4'>
+      <div className='fixed w-full p-3 bg-white z-20 bottom-0 border'>
+        <div className='flex justify-between -mb-4 px-1 md:px-4'>
           {menuitems.map((item, index) => (
-            <Menu 
+            <NavItem 
               key={index} 
               icon={item.icon} 
               label={item.label}
               onClick={() => navigate(item.route)}
             />
           ))}
-          {user 
-            ? (<Menu 
-                label='logout' 
-                icon={<CgLogOut />} 
-                onClick={handleLogout} 
-              />)
-            : (<Menu 
-                label='login' 
-                icon={<CgLogIn />} 
-                onClick={() => navigate('/login')} 
-              />)
-          }
+          {user ? (
+            <NavItem 
+              label='logout' 
+              icon={<CgLogOut />} 
+              onClick={handleLogout} 
+            />
+            ):(
+            <NavItem 
+              label='login' 
+              icon={<CgLogIn />} 
+              onClick={() => navigate('/login')} 
+            />
+          )}
         </div>
       </div>
     </div>
   )
 }
 
-export default MobileNav  
+export default Nav 
+
 
 export const menuitems = [
   {

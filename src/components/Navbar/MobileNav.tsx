@@ -10,7 +10,7 @@ const MobileNav = ({user, handleLogout}: NavProps) => {
 
   return (
     <div className='lg:hidden'>
-      <div className='fixed w-full p-4 bg-white z-20 shadow-sm flex justify-center'>
+      <div className='fixed w-full p-3 bg-white z-20 shadow-sm flex justify-center'>
         <div
           onClick={() => navigate('/feed')}
           className='text-lg md:text-2xl text-[#38D6C4] font-normal uppercase'
@@ -19,7 +19,7 @@ const MobileNav = ({user, handleLogout}: NavProps) => {
         </div>
       </div>
       <div className='fixed w-full p-4 bg-white z-20 bottom-0 border'>
-        <div className='flex justify-between'>
+        <div className='flex justify-between -mb-4'>
           {menuitems.map((item, index) => (
             <Menu 
               key={index} 

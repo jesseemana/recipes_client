@@ -11,7 +11,7 @@ const Menu = ({onClick, icon, label}: Menu) => {
       className='text-lg md:text-3xl text-gray-500 flex flex-col justify-center items-center capitalize'
     >
       {icon}
-      <p className='text-sm'>{label}</p>
+      <p className='text-[13px]'>{label}</p>
     </div>
   )
 }

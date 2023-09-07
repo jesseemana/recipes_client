@@ -3,10 +3,12 @@ import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import { RegisterFields, RegisterForm } from '@/components/Auth/RegisterForm'
+import useDocumentTitle from '@/hooks/useDocumentTitle'
 
 const Register = () => {
-  const navigate = useNavigate()
+  useDocumentTitle('Create Account')
 
+  const navigate = useNavigate()
   const [submitting, setSubmitting] = useState(false)
 
   const create = async (data: RegisterFields) => {

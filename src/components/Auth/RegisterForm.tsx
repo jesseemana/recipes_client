@@ -37,11 +37,11 @@ export const RegisterForm = ({ onSubmit, submitting }: AuthProps) => {
       <Content>
         <form 
           onSubmit={handleSubmit(onSubmit)} 
-          className='flex flex-col gap-2 transition-all w-[340px] md:w-auto lg:w-[500px] px-5 py-4 rounded-sm shadow-lg bg-white'
+          className='flex flex-col gap-2 transition-all w-[300px] md:w-auto lg:w-[500px] px-5 py-5 rounded-sm shadow-lg bg-white'
         >
-          <Heading label='register' />
+          <Heading label='create account' />
 
-          <div className='flex flex-col gap-4 items-start md:flex-row gap-x-4'>
+          <div className='flex flex-col md:flex-row gap-4 items-start'>
             <div className='flex flex-col w-full gap-3'>
               <InputField 
                 id='first name'
@@ -117,4 +117,4 @@ export const RegisterForm = ({ onSubmit, submitting }: AuthProps) => {
       </Content>
     </div>
   )
-} 
+}   

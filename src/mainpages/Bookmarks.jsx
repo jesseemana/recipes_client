@@ -1,11 +1,12 @@
 import { useState, useEffect } from 'react'
-import useAuth from '../hooks/useAuth'
-import Content from '../components/Wrappers/Content'
-import Header from '../components/Inputs/Header'
-import Loader from '../components/Loaders/Loader'
-import RecipeCard from '../components/RecipeCard'
-import useDocumentTitle from '../hooks/useDocumentTitle'
-import PageLayout from '../components/Wrappers/PageLayout'
+import useAuth from '@/hooks/useAuth'
+import Header from '@/components/Inputs/Header'
+import Loader from '@/components/Loaders/Loader'
+import RecipeCard from '@/components/RecipeCard'
+import EmptyState from '@/components/EmptyState'
+import Content from '@/components/Wrappers/Content'
+import useDocumentTitle from '@/hooks/useDocumentTitle'
+import PageLayout from '@/components/Wrappers/PageLayout'
 // import useAxiosPrivate from '../hooks/useAxiosPrivate'
 import axios from '../api/axios'
 
@@ -15,7 +16,7 @@ const Bookmarks = () => {
 
   useDocumentTitle('Bookmarks')
 
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
   const [bookmarks, setBookmarks] = useState([])
 
   const userId = auth?.user._id
@@ -25,7 +26,6 @@ const Bookmarks = () => {
   useEffect(() => {
     // const isMounted = true
     // const controller = new AbortController()
-
     const getBookmarks = async () => {
       setLoading(true)
       try {
@@ -48,7 +48,6 @@ const Bookmarks = () => {
     }
 
     getBookmarks()
-
     // return function() {
     //   isMounted = false
     //   controller.abort()
@@ -57,9 +56,24 @@ const Bookmarks = () => {
 
   let content
 
-  if (loading) content = <Loader />
+  if (loading) {
+    content = (
+      <div className='h-[100vh] grid place-items-center'>
+        <Loader />
+      </div>
+    )
+  }
 
-  content = (
+  else if (bookmarks.length === 0) {
+    content = (
+      <EmptyState 
+        title='No bookmarks' 
+        subtitle={`You don't have any recipes bookmarked.`} 
+      />
+    )
+  }
+
+  else content = (
     <Content>
       <Header
         title='my bookmarks'

@@ -1,24 +1,26 @@
-import { useState, useEffect } from 'react'
 import { toast } from 'react-hot-toast'
+import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
-import useAuth from '../hooks/useAuth'
-import Header from '../components/Inputs/Header'
-import RecipeCard from '../components/RecipeCard'
-import Content from '../components/Wrappers/Content'
-import useDocumentTitle from '../hooks/useDocumentTitle'
-import PageLayout from '../components/Wrappers/PageLayout'
-// import axios from '../api/axios'
+import useAuth from '@/hooks/useAuth'
+import Header from '@/components/Inputs/Header'
+import Loader from '@/components/Loaders/Loader'
+import RecipeCard from '@/components/RecipeCard'
+import EmptyState from '@/components/EmptyState'
+import Content from '@/components/Wrappers/Content'
+import useDocumentTitle from '@/hooks/useDocumentTitle'
+import PageLayout from '@/components/Wrappers/PageLayout'
+// import axios from '@/api/axios'
 import axios from 'axios'
 
 const Profile = () => {
+  useDocumentTitle('My Profile')
+
   const { id } = useParams()
   const { auth } = useAuth()
 
-  useDocumentTitle('My Profile')
-
   const [recipes, setRecipes] = useState([])
   const [isOpen, setIsOpen] = useState(false)
-  const [loading, setLoading] = useState(false)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     const getRecipes = async () => {
@@ -49,12 +51,32 @@ const Profile = () => {
       let errorMessage = 'Something went wrong: '
       if (error instanceof Error)
         errorMessage += error
-      console.log(errorMessage)
+      console.error(errorMessage)
       toast.error('Failed to delete')
     }
   }
+
+  let content: React.ReactElement 
+
+  if (loading) {
+    content = (
+      <div className='h-[100vh] grid place-items-center'>
+        <Loader />
+      </div>
+    )
+  }
+
+  else if (recipes.length === 0) {
+    content = (
+      <EmptyState 
+        getStarted
+        title='No recipes' 
+        subtitle={`You haven't added any recipes yet.`} 
+      />
+    )
+  }
   
-  return (
+  else content = (
     <Content>
       <Header
         title='my recipes'
@@ -75,6 +97,8 @@ const Profile = () => {
       </PageLayout>
     </Content>
   )
+
+  return content
 }
 
 export default Profile 

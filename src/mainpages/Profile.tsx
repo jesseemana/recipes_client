@@ -47,7 +47,7 @@ const Profile = () => {
     try {
       await axios.delete(`/recipes/${id}`)
       toast.success('Deleted')
-    } catch (error) {
+    } catch (error: unknown) {
       let errorMessage = 'Something went wrong: '
       if (error instanceof Error)
         errorMessage += error

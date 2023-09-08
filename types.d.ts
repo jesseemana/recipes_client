@@ -12,14 +12,14 @@ interface Auth {
 }
 
 interface ChildrenProps {
-  children: React.ReactNode
+  children: ReactNode
 }
 
 interface ButtonProps {
   label: string
   disabled?: boolean
   type: 'button' | 'submit' | 'reset'
-  onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void
 }
 
 interface BookmarkProps {
@@ -27,14 +27,17 @@ interface BookmarkProps {
   id: string | number
 } 
 
-interface InputProps {
+type InputProps = {
   id: string
   label: string
-  type?: string 
-  value?: string 
+  type: 'text' | 'password' 
+  error: string
   htmlFor: string
   placeholder: string
-  onChange: (value: React.ChangeEvent<HTMLInputElement>) => void
+  inputProps: unknown
+  // ref?: LegacyRef<HTMLInputElement> 
+  // value?: string 
+  // onChange?: (value: ChangeEvent<HTMLInputElement>) => void
 }
 
 interface NavProps {
@@ -42,7 +45,6 @@ interface NavProps {
   handleLogout: () => void
 } 
  
-
 interface Recipe {
   id: number | string
   category: string
@@ -65,6 +67,12 @@ interface RecipeCard {
 interface Feed {
   user: User
   pages: number
+  recipes: []
   currentPage: number
-  setCurrentPage: React.Dispatch<SetStateAction<number>>
+  setCurrentPage: Dispatch<SetStateAction<number>>
 }
+
+interface AuthProps {
+  submitting: boolean
+  onSubmit: (data: LoginFields) => Promise<void>
+} 

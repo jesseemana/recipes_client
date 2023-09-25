@@ -3,7 +3,7 @@ interface User {
   first_name: string,
   last_name: string,
   email: string,
-  bookmarks: [string | number]
+  bookmarks: [string]
 }
 
 interface Auth {
@@ -24,7 +24,7 @@ interface ButtonProps {
 
 interface BookmarkProps {
   auth: Auth,
-  id: string | number
+  id: string
 } 
 
 type InputProps = {
@@ -45,11 +45,11 @@ interface NavProps {
   handleLogout: () => void
 } 
  
-interface Recipe {
-  id: number | string
-  category: string
-  image: string
+type Recipe = {
+  _id: string
   name: string
+  category: string
+  picture_path: string
   time: number
 }
 

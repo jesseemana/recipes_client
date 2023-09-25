@@ -1,5 +1,5 @@
 import axios from '../api/axios'
-import Loader from '@/components/Loaders/Loader'
+import Loading from '@/components/Loading'
 import useAuth from '../hooks/useAuth'
 import useBookmark from '../hooks/useBookmark'
 import useDocumentTitle from '../hooks/useDocumentTitle'
@@ -51,9 +51,7 @@ const Recipe = () => {
 
   if (loading) {
     content = (
-      <div className='h-[100vh] grid place-items-center'>
-        <Loader />
-      </div> 
+      <Loading />
     )
   }
 

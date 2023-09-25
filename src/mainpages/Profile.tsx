@@ -2,15 +2,14 @@ import { toast } from 'react-hot-toast'
 import { useState, useEffect } from 'react'
 import { useParams } from 'react-router-dom'
 import useAuth from '@/hooks/useAuth'
+import Loading from '@/components/Loading'
 import Header from '@/components/Inputs/Header'
-import Loader from '@/components/Loaders/Loader'
 import RecipeCard from '@/components/RecipeCard'
 import EmptyState from '@/components/EmptyState'
 import Content from '@/components/Wrappers/Content'
 import useDocumentTitle from '@/hooks/useDocumentTitle'
 import PageLayout from '@/components/Wrappers/PageLayout'
-// import axios from '@/api/axios'
-import axios from 'axios'
+import axios from '@/api/axios'
 
 const Profile = () => {
   useDocumentTitle('My Profile')
@@ -26,7 +25,7 @@ const Profile = () => {
     const getRecipes = async () => {
       setLoading(true)
       try {
-        const response = await axios.get(`http://localhost:3030/recipes/`)
+        const response = await axios.get(`/recipes/`)
         const results = await response?.data
         if (results)
           setRecipes(results)
@@ -60,9 +59,7 @@ const Profile = () => {
 
   if (loading) {
     content = (
-      <div className='h-[100vh] grid place-items-center'>
-        <Loader />
-      </div>
+      <Loading />
     )
   }
 
@@ -86,10 +83,10 @@ const Profile = () => {
         {recipes.map((recipe: Recipe) => (
           <RecipeCard
             data={recipe}
-            key={recipe.id}
+            key={recipe._id}
             isOpen={isOpen}
             setIsOpen={setIsOpen}
-            actionId={recipe.id}
+            actionId={recipe._id}
             primaryAction={onDelete}
             primaryActionLabel='Delete'
           />
@@ -101,4 +98,4 @@ const Profile = () => {
   return content
 }
 
-export default Profile 
+export default Profile  

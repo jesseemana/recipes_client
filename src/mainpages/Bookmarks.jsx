@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import useAuth from '@/hooks/useAuth'
 import Header from '@/components/Inputs/Header'
-import Loader from '@/components/Loaders/Loader'
+import Loading from '@/components/Loading'
 import RecipeCard from '@/components/RecipeCard'
 import EmptyState from '@/components/EmptyState'
 import Content from '@/components/Wrappers/Content'
@@ -58,9 +58,7 @@ const Bookmarks = () => {
 
   if (loading) {
     content = (
-      <div className='h-[100vh] grid place-items-center'>
-        <Loader />
-      </div>
+      <Loading />
     )
   }
 

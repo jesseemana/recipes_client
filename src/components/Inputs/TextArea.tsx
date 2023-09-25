@@ -1,7 +1,6 @@
 interface TextAreaProps {
   id: string
   rows: number
-  name: string
   error: string
   label: string
   htmlFor: string
@@ -9,7 +8,7 @@ interface TextAreaProps {
   inputProps: unknown
 }
 
-const TextArea = ({ htmlFor, label, id, name, rows,  placeholder, inputProps, error }: TextAreaProps) => {
+const TextArea = ({ htmlFor, label, id, rows,  placeholder, inputProps, error }: TextAreaProps) => {
   return (
     <>
       <label 
@@ -20,7 +19,6 @@ const TextArea = ({ htmlFor, label, id, name, rows,  placeholder, inputProps, er
       </label>
       <textarea 
         id={id}
-        name={name}
         rows={rows}
         placeholder={placeholder}
         {...(inputProps ?? {})}

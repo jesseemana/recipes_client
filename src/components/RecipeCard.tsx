@@ -1,4 +1,3 @@
-import { useRef } from 'react'
 import Alert from './Alert'
 import FavButton from './Buttons/FavButton'
 import { FiEdit } from 'react-icons/fi'
@@ -10,15 +9,13 @@ import { AiOutlineDelete } from 'react-icons/ai'
 const RecipeCard = ({
   user,
   data,
-  isOpen,
-  actionId= '',
   disabled,
+  actionId= '',
+  isOpen,
   setIsOpen,
   primaryAction,
   primaryActionLabel,
 }: RecipeCard) => {
-  const menuRef = useRef()
-
   const navigate = useNavigate()
 
   const handleDelete = () => {
@@ -29,7 +26,7 @@ const RecipeCard = ({
 
   const handleEdit = (e: React.MouseEvent<HTMLDivElement>) => {
     e.stopPropagation()
-    navigate(`/edit/${data.id}`)
+    navigate(`/edit/${data._id}`)
   }
 
   // const toggleOpen = (e: React.MouseEvent<HTMLDivElement>) => {
@@ -39,34 +36,30 @@ const RecipeCard = ({
 
   return (
     <div
-      onClick={() => navigate(`/recipe/${data.id}`)}
-      className='group'
+      onClick={() => navigate(`/recipe/${data._id}`)}
+      className='group hover:cursor-pointer'
     >
       <div className='flex flex-col gap-2 text-xl md:text-lg lg:text-md'>
         <div className='w-full relative overflow-hidden rounded-xl border aspect-square'>
           <img 
-            src={data.image} 
+            src={data.picture_path} 
             alt={`a picture of ${data.name}`} 
-            className='object-cover h-full w-full group-hover:scale-110 transition '
+            className='object-cover h-full w-full group-hover:scale-110 transition'
             loading='lazy'
           />
           <div className='absolute top-3 right-3'>
-            {user && <FavButton id={data.id} />}
+            {user && <FavButton id={data._id} />}
           </div>
         </div>
         <p className='capitalize font-semibold text-gray-700'>{data.name}</p>
         <div className='flex items-center gap-1 text-gray-600 lg:text-[15px]'>
           <BsClock />
-          <p className='font-normal'>{data.time}min</p>
+          <p className='font-normal'>{data.time}</p>
         </div>
         <div className='flex justify-between items-center'>
           <p className='font-medium text-neutral-700 text-lg'>#{data.category}</p>
           {primaryAction && (
-            <div
-              // ref={menuRef}
-              // onClick={toggleOpen}
-              className='relative hover:cursor-pointer flex gap-2 text-gray-600'
-            >
+            <div className='relative hover:cursor-pointer flex gap-2 text-gray-600'>
               <div onClick={handleEdit}>
                 <FiEdit size={20} />
               </div>

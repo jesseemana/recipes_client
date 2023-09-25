@@ -51,7 +51,7 @@ type Recipe = {
   category: string
   picture_path: string
   time: number
-  user?: strign
+  user?: string
   procedure?: string
   ingridients?: string
 }

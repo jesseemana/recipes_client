@@ -51,6 +51,9 @@ type Recipe = {
   category: string
   picture_path: string
   time: number
+  user?: strign
+  procedure?: string
+  ingridients?: string
 }
 
 interface RecipeCard {

@@ -1,5 +1,5 @@
-import GetRecipes from '../api/GetRecipes'
-import Content from '../components/Wrappers/Content'
+import GetRecipes from '@/api/GetRecipes'
+import Content from '@/components/Wrappers/Content'
 
 const Home = () => {
   return (

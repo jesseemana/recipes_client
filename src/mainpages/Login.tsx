@@ -1,33 +1,37 @@
-import { forwardRef, useEffect, useRef, useState } from 'react'
-import { Link } from 'react-router-dom'
+import { useState } from 'react'
 import { toast } from 'react-hot-toast'
-import useDocumentTitle from '@/hooks/useDocumentTitle'
+import { LoginForm } from '@/components/Auth/LoginForm'
+import { AuthFields } from '@/components/Auth/RegisterForm'
+
 import axios from '@/api/axios'
 import useAuth from '@/hooks/useAuth'
-import { LoginFields, LoginForm } from '@/components/Auth/LoginForm'
+import useDocumentTitle from '@/hooks/useDocumentTitle'
 
 const Login = () => {
   useDocumentTitle('Login')
 
   const { setAuth } = useAuth()
+
   const [submitting, setSubmitting] = useState(false)
 
-  const onSubmit = async (data: LoginFields) => {
+  const onSubmit = async (data: AuthFields) => {
     setSubmitting(true)
     try {
       const response = await axios.post('/auth/login', 
-        JSON.stringify({ email: data.email, password: data.password }), {
+        JSON.stringify({ 
+          email: data.email, 
+          password: data.password 
+        }), {
         headers: { 'Content-Type': 'application/json' },
         withCredentials: true
       })
+      console.log(response.data)
       if (response.data)
         setAuth({ 
           user: response.data.user, 
-          access_token: response.data.accessToken 
+          access_token: response.data.access_token 
         })
       // navigate to home or replace here
-      // console.log(response.data.user)
-      // console.log(response.data.accessToken)
       toast.success('logged in')
     } catch (error: unknown) {
       let errorMessage = 'Something went wrong: '
@@ -35,7 +39,7 @@ const Login = () => {
         errorMessage += error
       }
       console.error(errorMessage)
-      toast.error(`couldn't log in`)
+      toast.error(`Couldn't log in`)
     } finally {
       setSubmitting(false)
     }
@@ -49,4 +53,4 @@ const Login = () => {
   )
 }
 
-export default Login 
+export default Login   

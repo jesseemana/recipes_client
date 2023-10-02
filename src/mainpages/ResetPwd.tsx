@@ -1,9 +1,9 @@
-import { z } from 'zod'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { AuthSchema } from '@/model/model'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
+import { AuthFields } from '@/components/Auth/RegisterForm'
 
 import axios from '@/api/axios'
 import Button from '@/components/Buttons/Button'
@@ -16,10 +16,9 @@ const ResetPwd = () => {
 
   const [submitting, setSubmitting] = useState(false)
 
-  type Email = z.infer<typeof AuthSchema>
   // SEND SERVER ERRROS FOR INVALID EMAILS
 
-  const sendEmail: SubmitHandler<Email> = async (data) => {
+  const sendEmail: SubmitHandler<AuthFields> = async (data) => {
     setSubmitting(true)
     try {
       await axios.post(`/reset`, JSON.stringify({ email: data.email }), {
@@ -38,7 +37,7 @@ const ResetPwd = () => {
     }
   }
 
-  const { register, handleSubmit, formState: { errors } } = useForm<Email>({
+  const { register, handleSubmit, formState: { errors } } = useForm<AuthFields>({
     resolver: zodResolver(AuthSchema)
   })
 

@@ -1,10 +1,10 @@
-import { z } from 'zod'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { AuthSchema } from '@/model/model'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
+import { AuthFields } from '@/components/Auth/RegisterForm'
 
 import axios from '../api/axios'
 import Button from '@/components/Buttons/Button'
@@ -19,11 +19,9 @@ const ChangePassword = () => {
   
   useDocumentTitle('Change Password')
 
-  type ResetFields = z.infer<typeof AuthSchema>
-
   const [submitting, setSubmitting] = useState(false)
 
-  const resetPwd: SubmitHandler<ResetFields> = async (data) => {
+  const resetPwd: SubmitHandler<AuthFields> = async (data) => {
     setSubmitting(true)
     try {
       await axios.patch(`reset/:${id}/:${token}`, 
@@ -44,7 +42,7 @@ const ChangePassword = () => {
     }
   }
 
-  const { register, handleSubmit, formState: { errors } } = useForm<ResetFields>({
+  const { register, handleSubmit, formState: { errors } } = useForm<AuthFields>({
     resolver: zodResolver(AuthSchema)
   })
   

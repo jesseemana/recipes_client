@@ -2,17 +2,17 @@ import axios from '@/api/axios'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
-import { RegisterFields, RegisterForm } from '@/components/Auth/RegisterForm'
 import useDocumentTitle from '@/hooks/useDocumentTitle'
+import { AuthFields, RegisterForm } from '@/components/Auth/RegisterForm'
 
 const Register = () => {
   useDocumentTitle('Create Account')
 
   const navigate = useNavigate()
+  
   const [submitting, setSubmitting] = useState(false)
 
-  const create = async (data: RegisterFields) => {
-    // console.log(data)
+  const create = async (data: AuthFields) => {
     setSubmitting(true)
     try {
       await axios.post('/auth/register', 
@@ -22,7 +22,7 @@ const Register = () => {
           email: data.email, 
           password: data.password
         }), {
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         withCredentials: true
       })
       navigate('/login')

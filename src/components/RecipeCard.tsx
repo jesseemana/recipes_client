@@ -6,16 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { AiOutlineDelete } from 'react-icons/ai'
 
 
-const RecipeCard = ({
-  user,
-  data,
-  disabled,
-  actionId= '',
-  isOpen,
-  setIsOpen,
-  primaryAction,
-  primaryActionLabel,
-}: RecipeCard) => {
+const RecipeCard = ({ user, data, disabled, actionId='', primaryAction }: RecipeCard) => {
   const navigate = useNavigate()
 
   const handleDelete = () => {
@@ -28,11 +19,6 @@ const RecipeCard = ({
     e.stopPropagation()
     navigate(`/edit/${data._id}`)
   }
-
-  // const toggleOpen = (e: React.MouseEvent<HTMLDivElement>) => {
-  //   e.stopPropagation()
-  //   setIsOpen((prev) => !prev)
-  // }
 
   return (
     <div
@@ -71,28 +57,6 @@ const RecipeCard = ({
                   />
                 </Alert>
               </div>
-              {/* 
-              *****OPENS UP ON EVERY RECIPE COMPONENT ON THE PAGE INSTEAD OF THE SINGLE COMPONENT THAT WAS TRIGERRED*****
-              <CgOptions className='text-gray-700' />
-               {isOpen ? (
-                <div className='absolute bg-white rounded-md shadow-md w-[120px] right-0 bottom-10 md:bottom-6 text-md'>
-                  <p
-                    onClick={() => navigate(`/edit/${data.id}`)} 
-                    className='px-2 py-2 md:py-1 capitalize text-gray-700 hover:bg-neutral-100 hover:rounded-sm transition'
-                  >
-                    Edit
-                  </p>
-                  <p
-                    onClick={handleDelete} 
-                    className='px-2 py-2 md:py-1 capitalize text-gray-700 hover:bg-neutral-100 hover:rounded-sm transition'
-                  >
-                    {primaryActionLabel}
-                  </p>
-                </div>
-                ):(
-                <div></div>
-              )} 
-              */}
             </div>
           )}
         </div>
@@ -101,4 +65,36 @@ const RecipeCard = ({
   )
 }
 
-export default RecipeCard 
+export default RecipeCard   
+
+// isOpen,
+// setIsOpen,
+// primaryActionLabel,
+
+// const toggleOpen = (e: React.MouseEvent<HTMLDivElement>) => {
+//   e.stopPropagation()
+//   setIsOpen((prev) => !prev)
+// }
+
+{/* 
+  *****OPENS UP ON EVERY RECIPE COMPONENT ON THE PAGE INSTEAD OF THE SINGLE COMPONENT THAT WAS TRIGERRED*****
+  <CgOptions className='text-gray-700' />
+   {isOpen ? (
+    <div className='absolute bg-white rounded-md shadow-md w-[120px] right-0 bottom-10 md:bottom-6 text-md'>
+      <p
+        onClick={() => navigate(`/edit/${data.id}`)} 
+        className='px-2 py-2 md:py-1 capitalize text-gray-700 hover:bg-neutral-100 hover:rounded-sm transition'
+      >
+        Edit
+      </p>
+      <p
+        onClick={handleDelete} 
+        className='px-2 py-2 md:py-1 capitalize text-gray-700 hover:bg-neutral-100 hover:rounded-sm transition'
+      >
+        {primaryActionLabel}
+      </p>
+    </div>
+    ):(
+    <div></div>
+  )} 
+*/}   

@@ -3,7 +3,7 @@ import { useMemo } from 'react'
 import { toast } from 'react-hot-toast'
 
 const useBookmark = ({id, auth}: BookmarkProps) => {
-  const userId = auth?.user._id
+  const user_id = auth?.user._id
   const token = auth?.access_token
 
   const bookmarked = useMemo(() => {
@@ -14,12 +14,12 @@ const useBookmark = ({id, auth}: BookmarkProps) => {
     e.stopPropagation()
     try {
       if (bookmarked) {
-        await axios.delete(`/bookmarks/${id}/${userId}`, {
+        await axios.delete(`/bookmarks/${id}/${user_id}`, {
           headers: {'Authorization': `Bearer ${token}`}
         })
         toast.success('Bookmark removed')
       } else {
-        await axios.post(`/bookmarks/${id}/${userId}`, {
+        await axios.post(`/bookmarks/${id}/${user_id}`, {
           headers: {'Authorization': `Bearer ${token}`}
         })
         toast.success('Bookmarked')

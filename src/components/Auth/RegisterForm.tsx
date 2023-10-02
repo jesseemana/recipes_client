@@ -1,35 +1,21 @@
 import { z } from 'zod'
 import { useForm } from 'react-hook-form'
+import { AuthSchema } from '@/model/model'
 import { useNavigate} from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
+
 import Button from '@/components/Buttons/Button'
 import Heading from '@/components/Inputs/Heading'
 import Content from '@/components/Wrappers/Content'
 import InputField from '@/components/Inputs/InputField'
 
-const RegisterSchema = z.object({
-  first_name: z.string().min(3).max(24),
-  last_name: z.string().min(3).max(24),
-  email: z.string().email().toLowerCase(),
-  password: z.string().min(6).max(24),
-  confirm_password: z.string().min(6).max(24)
-}).refine(
-  (form) => {
-    return form.password === form.confirm_password
-  },
-  {
-    message: `Passwords don't match`,
-    path: ['confirm_password']
-  }
-)
-
-export type RegisterFields = z.infer<typeof RegisterSchema>
+export type AuthFields = z.infer<typeof AuthSchema>
 
 export const RegisterForm = ({ onSubmit, submitting }: AuthProps) => {
   const navigate = useNavigate()
 
-  const { register, handleSubmit, formState: { errors } } = useForm<RegisterFields>({
-    resolver: zodResolver(RegisterSchema)
+  const { register, handleSubmit, formState: { errors } } = useForm<AuthFields>({
+    resolver: zodResolver(AuthSchema)
   })
 
   return (

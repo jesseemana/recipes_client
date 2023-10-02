@@ -1,10 +1,10 @@
-import useAuth from '../../hooks/useAuth';
-import useBookmark from '../../hooks/useBookmark'
+import useAuth from '@/hooks/useAuth'
+import useBookmark from '@/hooks/useBookmark'
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai'
 
-const FavButton = ({id}: {id: string | number}) => {
+const FavButton = ({id}: { id: string }) => {
   const { auth } = useAuth()
-  const { bookmarked, toggleBookmark } = useBookmark({id, auth})
+  const { bookmarked, toggleBookmark } = useBookmark({ id, auth })
 
   return (
     <div 

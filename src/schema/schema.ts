@@ -11,10 +11,10 @@ export const RecipeSchema = z.object({
 
 export const AuthSchema = z.object({
   first_name: z.string()
-    .min(3, 'Name must at least be 3 characters long')
+    .min(3, 'Must be 3 at least characters long')
     .max(24, 'Name cannot contain more thamn 24 characters').trim().optional(),
   last_name: z.string()
-    .min(3, 'Name must at least be 3 characters long')
+    .min(3, 'Must be 3 at least characters long')
     .max(24, 'Name cannot contain more thamn 24 characters').trim().optional(),
   email: z.string().email('Please enter a valid email').toLowerCase().trim().optional(),
   password: z.string()

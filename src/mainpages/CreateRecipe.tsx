@@ -1,7 +1,7 @@
 import { z } from 'zod'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { RecipeSchema } from '@/model/model'
+import { RecipeSchema } from '@/schema/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
 

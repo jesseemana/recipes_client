@@ -1,6 +1,6 @@
 import { z } from 'zod'
 import axios from '../api/axios'
-import { RecipeSchema } from '@/model/model'
+import { RecipeSchema } from '@/schema/schema'
 
 const RecipeResults = z.array(RecipeSchema)
 

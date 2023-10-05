@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { AuthSchema } from '@/model/model'
+import { AuthSchema } from '@/schema/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { AuthFields } from '@/components/Auth/RegisterForm'

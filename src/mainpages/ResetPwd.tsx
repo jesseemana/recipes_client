@@ -1,15 +1,17 @@
+import { TypeOf } from 'zod'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { AuthSchema } from '@/schema/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
-import { AuthFields } from '@/components/Auth/RegisterForm'
 
 import axios from '@/api/axios'
 import Button from '@/components/Buttons/Button'
 import Heading from '@/components/Inputs/Heading'
 import useDocumentTitle from '@/hooks/useDocumentTitle'
 import InputField from '@/components/Inputs/InputField'
+
+type EmailField = Omit<TypeOf<typeof AuthSchema>, 'first_name' | 'last_name' | 'password' | 'confirm_password'>
 
 const ResetPwd = () => {  
   useDocumentTitle('Reset Password')
@@ -18,7 +20,7 @@ const ResetPwd = () => {
 
   // SEND SERVER ERRROS FOR INVALID EMAILS
 
-  const sendEmail: SubmitHandler<AuthFields> = async (data) => {
+  const sendEmail: SubmitHandler<EmailField> = async (data) => {
     setSubmitting(true)
     try {
       await axios.post(`/reset`, JSON.stringify({ email: data.email }), {
@@ -37,7 +39,7 @@ const ResetPwd = () => {
     }
   }
 
-  const { register, handleSubmit, formState: { errors } } = useForm<AuthFields>({
+  const { register, handleSubmit, formState: { errors } } = useForm<EmailField>({
     resolver: zodResolver(AuthSchema)
   })
 

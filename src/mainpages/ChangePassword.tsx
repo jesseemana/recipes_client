@@ -1,16 +1,18 @@
+import { TypeOf } from 'zod'
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { AuthSchema } from '@/schema/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
-import { AuthFields } from '@/components/Auth/RegisterForm'
 
 import axios from '../api/axios'
 import Button from '@/components/Buttons/Button'
 import Heading from '@/components/Inputs/Heading'
 import InputField from '@/components/Inputs/InputField'
 import useDocumentTitle from '@/hooks/useDocumentTitle'
+
+type PasswordFields = Omit<TypeOf<typeof AuthSchema>, 'first_name' | 'last_name' | 'email'>
 
 const ChangePassword = () => {
   const { id, token } = useParams()
@@ -21,7 +23,7 @@ const ChangePassword = () => {
 
   const [submitting, setSubmitting] = useState(false)
 
-  const resetPwd: SubmitHandler<AuthFields> = async (data) => {
+  const resetPwd: SubmitHandler<PasswordFields> = async (data) => {
     setSubmitting(true)
     try {
       await axios.patch(`reset/:${id}/:${token}`, 
@@ -42,7 +44,7 @@ const ChangePassword = () => {
     }
   }
 
-  const { register, handleSubmit, formState: { errors } } = useForm<AuthFields>({
+  const { register, handleSubmit, formState: { errors } } = useForm<PasswordFields>({
     resolver: zodResolver(AuthSchema)
   })
   

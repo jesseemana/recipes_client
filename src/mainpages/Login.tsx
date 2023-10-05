@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
-import { LoginForm } from '@/components/Auth/LoginForm'
-import { AuthFields } from '@/components/Auth/RegisterForm'
+import { LoginFields, LoginForm } from '@/components/Auth/LoginForm'
 
 import axios from '@/api/axios'
 import useAuth from '@/hooks/useAuth'
@@ -14,7 +13,7 @@ const Login = () => {
 
   const [submitting, setSubmitting] = useState(false)
 
-  const onSubmit = async (data: AuthFields) => {
+  const onSubmit = async (data: LoginFields) => {
     setSubmitting(true)
     try {
       const response = await axios.post('/auth/login', 

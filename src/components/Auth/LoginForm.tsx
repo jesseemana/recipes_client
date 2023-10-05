@@ -1,7 +1,7 @@
+import { TypeOf } from 'zod'
 import { Link } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
 import { AuthSchema } from '@/schema/schema'
-import { AuthFields } from './RegisterForm'
 import { useNavigate} from 'react-router-dom'
 import { zodResolver } from '@hookform/resolvers/zod'
 
@@ -10,10 +10,12 @@ import Heading from '@/components/Inputs/Heading'
 import Content from '@/components/Wrappers/Content'
 import InputField from '@/components/Inputs/InputField'
 
+export type LoginFields = Omit<TypeOf<typeof AuthSchema>, 'first_name' | 'last_name'>
+
 export const LoginForm = ({ onSubmit, submitting }: AuthProps) => {
   const navigate = useNavigate()
 
-  const { register, handleSubmit, setFocus, formState: { errors } } = useForm<AuthFields>({
+  const { register, handleSubmit, setFocus, formState: { errors } } = useForm<LoginFields>({
     resolver: zodResolver(AuthSchema)
   })
 

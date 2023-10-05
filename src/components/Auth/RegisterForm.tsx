@@ -96,7 +96,7 @@ export const RegisterForm = ({ onSubmit, submitting }: AuthProps) => {
               type='button'
               disabled={submitting}
               label='login' 
-              onClick={() => navigate('/login')}
+              onClick={() => navigate('/auth/login')}
             />
           </div>
         </form>

@@ -35,7 +35,7 @@ const Nav = ({ user, handleLogout }: NavProps) => {
             <NavItem 
               label='login' 
               icon={<CgLogIn />} 
-              onClick={() => navigate('/login')} 
+              onClick={() => navigate('/auth/ogin')} 
             />
           )}
         </div>

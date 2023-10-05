@@ -59,7 +59,7 @@ export const LoginForm = ({ onSubmit, submitting }: AuthProps) => {
           />
 
           <Link 
-            to={'/reset'} 
+            to={'/auth/reset'} 
             className='text-[#38D6C4] text-center text-sm md:text-[15px] underline capitalize'
           >
             forgot password?
@@ -78,7 +78,7 @@ export const LoginForm = ({ onSubmit, submitting }: AuthProps) => {
               type='button'
               disabled={submitting}
               label='create account'
-              onClick={() => navigate('/register')}
+              onClick={() => navigate('/auth/register')}
             />
           </div>
         </form>

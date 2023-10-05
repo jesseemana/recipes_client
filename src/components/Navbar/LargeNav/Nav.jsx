@@ -76,7 +76,7 @@ const Nav = ({ user, handleLogout }) => {
                 <NavItem
                   label='login'
                   icon={<BiLogIn />}
-                  onClick={() => navigate('/login')}
+                  onClick={() => navigate('/auth/login')}
                 />
               )}
             </div>

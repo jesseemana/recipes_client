@@ -28,12 +28,12 @@ function App() {
           <Routes>
             <Route path='/' element={<Navigate to='/feed'/>} />
             <Route path='/feed' element={<Home />} />
-            <Route path='/login' element={<Login />} />
-            <Route path='/register' element={<Register />} />
-            <Route path='/reset' element={<ResetPwd />} />
+            <Route path='/auth/login' element={<Login />} />
+            <Route path='/auth/register' element={<Register />} />
+            <Route path='/auth/reset' element={<ResetPwd />} />
             <Route path='/recipe/:id' element={<Recipe />} />
             <Route path='/profile/:id' element={<Profile />} />
-            <Route path='/reset-password/:id/:token' element={<ChangePassword />} />
+            <Route path='/auth/reset-password/:id/:token' element={<ChangePassword />} />
             <Route path='/create' element={<CreateRecipe />} />
 
             {/* PROTECTED ROUTES */}

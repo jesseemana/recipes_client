@@ -9,12 +9,12 @@ import Heading from '@/components/Inputs/Heading'
 import Content from '@/components/Wrappers/Content'
 import InputField from '@/components/Inputs/InputField'
 
-export type AuthFields = z.infer<typeof AuthSchema>
+export type RegisterFields = z.infer<typeof AuthSchema>
 
 export const RegisterForm = ({ onSubmit, submitting }: AuthProps) => {
   const navigate = useNavigate()
 
-  const { register, handleSubmit, formState: { errors } } = useForm<AuthFields>({
+  const { register, handleSubmit, formState: { errors } } = useForm<RegisterFields>({
     resolver: zodResolver(AuthSchema)
   })
 

@@ -1,6 +1,6 @@
 import { TypeOf } from 'zod'
-import { useState } from 'react'
 import { toast } from 'react-hot-toast'
+import { useState, useEffect } from 'react'
 import { AuthSchema } from '@/schema/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
@@ -16,6 +16,7 @@ type EmailField = Omit<TypeOf<typeof AuthSchema>, 'first_name' | 'last_name' | '
 const ResetPwd = () => {  
   useDocumentTitle('Reset Password')
 
+  const [error, setError] = useState<string>('')
   const [submitting, setSubmitting] = useState(false)
 
   // SEND SERVER ERRROS FOR INVALID EMAILS
@@ -34,19 +35,25 @@ const ResetPwd = () => {
         errorMessage += error
       console.error(errorMessage)
       toast.error('Email not sent')
+      setError(error.message)
     } finally {
       setSubmitting(false)
     }
-  }
+  }   
 
-  const { register, handleSubmit, formState: { errors } } = useForm<EmailField>({
+  const { register, handleSubmit, setFocus, formState: { errors } } = useForm<EmailField>({
     resolver: zodResolver(AuthSchema)
   })
+
+  useEffect(() => {
+    setFocus('email')
+  }, [setFocus])
 
   return (
     <div className='max-w-full px-[4%] bg-gray-50 flex items-center justify-center h-[100vh]'>
       <div className='bg-white px-2 py-4 shadow-md rounded-md'>
-        <Heading label='reset your password' />
+        <Heading label='reset your password' /> <hr/>
+        {/* <p className='bg-red-600 text-white text-sm text-center'>{error}</p> */}
         <form onSubmit={handleSubmit(sendEmail)} className='flex flex-col w-[280px] md:w-[320px] gap-y-2 py-2 px-1'>
           <InputField 
             id='email'

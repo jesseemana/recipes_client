@@ -1,6 +1,6 @@
 import { TypeOf } from 'zod'
-import { useState } from 'react'
 import { toast } from 'react-hot-toast'
+import { useState, useEffect } from 'react'
 import { AuthSchema } from '@/schema/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
@@ -15,12 +15,12 @@ import useDocumentTitle from '@/hooks/useDocumentTitle'
 type PasswordFields = Omit<TypeOf<typeof AuthSchema>, 'first_name' | 'last_name' | 'email'>
 
 const ChangePassword = () => {
+  useDocumentTitle('Change Password')
+  
   const { id, token } = useParams()
 
   const navigate = useNavigate()
   
-  useDocumentTitle('Change Password')
-
   const [submitting, setSubmitting] = useState(false)
 
   const resetPwd: SubmitHandler<PasswordFields> = async (data) => {
@@ -32,7 +32,7 @@ const ChangePassword = () => {
         withCredentials: true
       })
       toast.success('Password updated')
-      navigate('/auth')
+      navigate('/auth/login')
     } catch (error: unknown) {
       let errorMessage = 'Something went wrong: '
       if (error instanceof Error)
@@ -44,9 +44,13 @@ const ChangePassword = () => {
     }
   }
 
-  const { register, handleSubmit, formState: { errors } } = useForm<PasswordFields>({
+  const { register, handleSubmit, setFocus, formState: { errors } } = useForm<PasswordFields>({
     resolver: zodResolver(AuthSchema)
   })
+
+  useEffect(() => {
+    setFocus('password')
+  }, [setFocus])
   
   return (
     <div className='max-w-full px-[4%] bg-gray-50 flex items-center justify-center h-[100vh]'>
@@ -61,7 +65,7 @@ const ChangePassword = () => {
             type='password'
             label='password:'
             htmlFor='password'
-            placeholder='password'
+            placeholder='********'
             inputProps={register('password')}
             error={errors.password?.message as string}
           />
@@ -71,7 +75,7 @@ const ChangePassword = () => {
             type='password'
             label='confirm password:'
             htmlFor='confirm password'
-            placeholder='confirm password'
+            placeholder='********'
             inputProps={register('confirm_password')}
             error={errors.confirm_password?.message as string}
           />
@@ -87,4 +91,4 @@ const ChangePassword = () => {
   )
 }
 
-export default ChangePassword   
+export default ChangePassword    

@@ -11,31 +11,30 @@ import Heading from '@/components/Inputs/Heading'
 import useDocumentTitle from '@/hooks/useDocumentTitle'
 import InputField from '@/components/Inputs/InputField'
 
-type EmailField = Omit<TypeOf<typeof AuthSchema>, 'first_name' | 'last_name' | 'password' | 'confirm_password'>
+type EmailField = Pick<TypeOf<typeof AuthSchema>, 'email'>
 
 const ResetPwd = () => {  
   useDocumentTitle('Reset Password')
 
-  const [error, setError] = useState<string>('')
+  const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
-
-  // SEND SERVER ERRROS FOR INVALID EMAILS
 
   const sendEmail: SubmitHandler<EmailField> = async (data) => {
     setSubmitting(true)
     try {
       await axios.post(`/reset`, JSON.stringify({ email: data.email }), {
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         withCredentials: true
       })
       toast.success('Email sent')
     } catch (error: unknown) {
       let errorMessage = 'Something went wrong: '
-      if (error instanceof Error)
+      if (error instanceof Error) {
         errorMessage += error
+        setError(error.message)
+      }
       console.error(errorMessage)
       toast.error('Email not sent')
-      setError(error.message)
     } finally {
       setSubmitting(false)
     }
@@ -53,8 +52,10 @@ const ResetPwd = () => {
     <div className='max-w-full px-[4%] bg-gray-50 flex items-center justify-center h-[100vh]'>
       <div className='bg-white px-2 py-4 shadow-md rounded-md'>
         <Heading label='reset your password' /> <hr/>
-        {/* <p className='bg-red-600 text-white text-sm text-center'>{error}</p> */}
-        <form onSubmit={handleSubmit(sendEmail)} className='flex flex-col w-[280px] md:w-[320px] gap-y-2 py-2 px-1'>
+        <form 
+          onSubmit={handleSubmit(sendEmail)} 
+          className='flex flex-col w-[280px] md:w-[320px] gap-y-2 py-2 px-1'
+        >
           <InputField 
             id='email'
             htmlFor='email'
@@ -64,6 +65,9 @@ const ResetPwd = () => {
             inputProps={register('email')}
             error={errors.email?.message as string}
           />
+
+          <p className='bg-red-600 text-white text-sm text-center'>{error}</p>
+
           <Button 
             type={'submit'}
             disabled={submitting} 

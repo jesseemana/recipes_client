@@ -6,13 +6,13 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, SubmitHandler } from 'react-hook-form'
 import { useNavigate, useParams } from 'react-router-dom'
 
-import axios from '../api/axios'
+import axios from '@/api/axios'
 import Button from '@/components/Buttons/Button'
 import Heading from '@/components/Inputs/Heading'
 import InputField from '@/components/Inputs/InputField'
 import useDocumentTitle from '@/hooks/useDocumentTitle'
 
-type PasswordFields = Omit<TypeOf<typeof AuthSchema>, 'first_name' | 'last_name' | 'email'>
+export type PasswordFields = Pick<TypeOf<typeof AuthSchema>, 'password' | 'confirm_password'>
 
 const ChangePassword = () => {
   useDocumentTitle('Change Password')
@@ -21,6 +21,7 @@ const ChangePassword = () => {
 
   const navigate = useNavigate()
   
+  const [error, setError] = useState('')
   const [submitting, setSubmitting] = useState(false)
 
   const resetPwd: SubmitHandler<PasswordFields> = async (data) => {
@@ -28,15 +29,17 @@ const ChangePassword = () => {
     try {
       await axios.patch(`reset/:${id}/:${token}`, 
         JSON.stringify({ password: data.password }), {
-        headers: {'Content-Type': 'application/json'},
+        headers: { 'Content-Type': 'application/json' },
         withCredentials: true
       })
       toast.success('Password updated')
       navigate('/auth/login')
     } catch (error: unknown) {
       let errorMessage = 'Something went wrong: '
-      if (error instanceof Error)
+      if (error instanceof Error) {
         errorMessage += error
+        setError(error.message)
+      }
       console.log(errorMessage)
       toast.error(`Couldn't change password`)
     } finally {
@@ -44,7 +47,7 @@ const ChangePassword = () => {
     }
   }
 
-  const { register, handleSubmit, setFocus, formState: { errors } } = useForm<PasswordFields>({
+  const { register, setFocus, handleSubmit, formState: { errors } } = useForm<PasswordFields>({
     resolver: zodResolver(AuthSchema)
   })
 
@@ -79,6 +82,8 @@ const ChangePassword = () => {
             inputProps={register('confirm_password')}
             error={errors.confirm_password?.message as string}
           />
+
+          <p className='bg-red-600 text-white text-sm text-center'>{error}</p>
 
           <Button
             type='submit'

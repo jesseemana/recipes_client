@@ -29,18 +29,17 @@ function App() {
             <Route path='/' element={<Navigate to='/feed'/>} />
             <Route path='/feed' element={<Home />} />
             <Route path='/auth/login' element={<Login />} />
-            <Route path='/auth/register' element={<Register />} />
             <Route path='/auth/reset' element={<ResetPwd />} />
+            <Route path='/auth/register' element={<Register />} />
             <Route path='/recipe/:id' element={<Recipe />} />
-            <Route path='/profile/:id' element={<Profile />} />
             <Route path='/auth/reset-password/:id/:token' element={<ChangePassword />} />
-            <Route path='/create' element={<CreateRecipe />} />
 
             {/* PROTECTED ROUTES */}
             <Route element={<RequireAuth />}>
               <Route path='/bookmarks' element={<Bookmarks />} />
               <Route path='/edit/:id' element={<EditRecipe />} />
               <Route path='/user/:id' element={<UserRecipes />} />
+              <Route path='/profile/:id' element={<Profile />} />
               <Route path='/login' element={<Navigate to='/feed'/>} />
               <Route path='/register' element={<Navigate to='/feed'/>} />
               <Route path='/create-recipe' element={<CreateRecipe />} />

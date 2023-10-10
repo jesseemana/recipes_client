@@ -1,5 +1,5 @@
-import { z, TypeOf } from 'zod'
-import { useState } from 'react'
+import { TypeOf } from 'zod'
+import { useEffect, useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { RecipeSchema } from '@/schema/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
@@ -12,25 +12,28 @@ import Heading from '@/components/Inputs/Heading'
 import TextArea from '@/components/Inputs/TextArea'
 import InputField from '@/components/Inputs/InputField'
 import useDocumentTitle from '@/hooks/useDocumentTitle'
-// import Upload from '@/components/Inputs/Upload'
 
-type RecipeFields = z.infer<typeof RecipeSchema> 
+type RecipeFields = TypeOf<typeof RecipeSchema> 
 
 const CreateRecipe = () => {
-  const { auth } = useAuth()
-
   useDocumentTitle('Add Recipe')
 
-  const [image, setImage] = useState('')
-  const [source, setSource] = useState('')
-  const [submitting, setSubmitting] = useState(false)
+  const { auth } = useAuth()
 
   const user = auth.user
   const token = auth.access_token
 
-  const { register, handleSubmit, formState: { errors } } = useForm<RecipeFields>({
+  const [image, setImage] = useState(null)
+  const [source, setSource] = useState('')
+  const [submitting, setSubmitting] = useState(false)
+
+  const { register, handleSubmit, setFocus, formState: { errors } } = useForm<RecipeFields>({
     resolver: zodResolver(RecipeSchema)
   })
+
+  useEffect(() => {
+    setFocus('name')
+  }, [setFocus])
  
   const createRecipe: SubmitHandler<RecipeFields> = async (data) => {
     setSubmitting(true)
@@ -40,7 +43,7 @@ const CreateRecipe = () => {
       formData.append('user', user._id)
       formData.append('name', data.name)
       formData.append('time', data.time)
-      formData.append('file', source)
+      formData.append('file', image)
       formData.append('category', data.category)
       formData.append('procedure', data.procedure)
       formData.append('ingridients', data.ingridients)
@@ -62,9 +65,9 @@ const CreateRecipe = () => {
     } finally {
       setSubmitting(false)
     }
-  }
+  }   
   
-  const handleImage = (e) => {
+  const handleImage = (e: any) => {
     const file = e.target?.files[0]
     setImage(file)
 
@@ -75,7 +78,7 @@ const CreateRecipe = () => {
     }
 
     previewFile(file)
-  }
+  }   
 
   return (
     <div className='flex justify-center items-center bg-gray-50 form_height'>
@@ -129,14 +132,16 @@ const CreateRecipe = () => {
             error={errors.time?.message as string}
           />
 
-          <label htmlFor='choose file' className='text-sm md:text-[15px] capitalize text-gray-500'>
+          <label htmlFor='file' className='text-sm md:text-[15px] capitalize text-gray-500'>
             attach image:
           </label>
           <input  
-            type='file' 
-            className='border-0 cursor-pointer' 
+            id='file'
+            type='file'
+            accept='.jpg, .png, .jpeg'
             onChange={handleImage}
-          />
+            className='border-0 cursor-pointer' 
+          />  
 
           {source && (<img src={source} alt='selected image for upload' className='w-24 h-24' />)}
 
@@ -162,44 +167,3 @@ const CreateRecipe = () => {
 }
 
 export default CreateRecipe   
-
-// UPLOAD FUNCTIONALITY TWO START 
-// const uploadImage = async (base64EncodedImage) => {
-//   setUploading(true)
-//   try {
-//     const response = await axios.post('/upload', JSON.stringify({data: base64EncodedImage}), {
-//       headers: {
-//         'Content-Type': 'application/json',
-//         'Authorization': `Bearer ${token}`
-//       }
-//     })
-//     const results = await response?.data
-//     if (results) {
-//       setPictureId(results.public_url)
-//       setPicturePath(results.secure_url)
-//     }
-//   } catch (error) {
-//     let errorMessage = 'Something went wrong: '
-//     if (error instanceof Error)
-//       errorMessage += error
-//     console.error(errorMessage)
-//   } finally {
-//     setUploading(false)
-//   }
-// }
-
-// const handleImgUpld = async (e) => {
-//   const file = e.target?.files[0]
-    
-//   const previewFile = (file) => {
-//     const reader = new FileReader()
-//     reader.readAsDataURL(file)
-//     reader.onloadend = () => setSource(reader.result)
-//   }
-
-//   previewFile(file)
-
-//   if (!source) return
-//   uploadImage(source)
-// }
-// UPLOAD FUNCTIONALITY TWO END   

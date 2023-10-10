@@ -2,9 +2,9 @@ interface Menu {
   label: string
   onClick: () => void
   icon: React.ReactElement
-}
+} 
 
-const NavItem = ({onClick, icon, label}: Menu) => {
+const NavItem = ({ onClick, icon, label }: Menu) => {
   return (
     <div
       onClick={onClick} 

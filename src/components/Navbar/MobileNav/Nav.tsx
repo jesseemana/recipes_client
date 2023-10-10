@@ -35,7 +35,7 @@ const Nav = ({ user, handleLogout }: NavProps) => {
             <NavItem 
               label='login' 
               icon={<CgLogIn />} 
-              onClick={() => navigate('/auth/ogin')} 
+              onClick={() => navigate('/auth/login')}
             />
           )}
         </div>
@@ -44,7 +44,7 @@ const Nav = ({ user, handleLogout }: NavProps) => {
   )
 }
 
-export default Nav 
+export default Nav  
 
 export const menuitems = [
   {

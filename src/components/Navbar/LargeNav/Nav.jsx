@@ -29,7 +29,7 @@ const Nav = ({ user, handleLogout }) => {
     <nav className='hidden lg:flex fixed p-3 w-full px-[3%] bg-white shadow-sm z-10 justify-between items-center'>
       <div
         onClick={() => navigate('/feed')}
-        className='text-lg md:text-xl text-[#38D6C4] font-normal uppercase cursor-default'
+        className='text-lg md:text-xl text-[#38D6C4] font-normal uppercase hover:cursor-pointer'
       >
         logoooo.
       </div>

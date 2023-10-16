@@ -30,7 +30,7 @@ const useFetchRecipes = () => {
     }
   }
   
-  return { recipes, loading, getRecipes, totalPages, currentPage, setCurrentPage }
+  return { user, recipes, loading, totalPages, currentPage, getRecipes, setCurrentPage }
 }
 
 export default useFetchRecipes  

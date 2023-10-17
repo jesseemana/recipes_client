@@ -4,7 +4,7 @@ import Pagination from '@/components/Buttons/Pagination'
 import PageLayout from '@/components/Wrappers/PageLayout'
 
 const Feed = ({ user, recipes, pages, currentPage, setCurrentPage }: Feed) => {
-  useDocumentTitle('Feed')
+  useDocumentTitle('Gourmands Hub')
 
   return (
     <PageLayout>

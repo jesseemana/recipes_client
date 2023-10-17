@@ -1,11 +1,8 @@
 import RecipeCard from '@/components/RecipeCard'
-import useDocumentTitle from '@/hooks/useDocumentTitle'
 import Pagination from '@/components/Buttons/Pagination'
 import PageLayout from '@/components/Wrappers/PageLayout'
 
 const Feed = ({ user, recipes, pages, currentPage, setCurrentPage }: Feed) => {
-  useDocumentTitle('Gourmands Hub')
-
   return (
     <PageLayout>
       {recipes.map((recipe: Recipe) => (

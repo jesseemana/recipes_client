@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { toast } from 'react-hot-toast'
 import { useNavigate } from 'react-router-dom'
 import useDocumentTitle from '@/hooks/useDocumentTitle'
-import { AuthFields, RegisterForm } from '@/components/Auth/RegisterForm'
+import { RegisterFields, RegisterForm } from '@/components/Auth/RegisterForm'
 
 const Register = () => {
   useDocumentTitle('Create Account')
@@ -12,7 +12,7 @@ const Register = () => {
   
   const [submitting, setSubmitting] = useState(false)
 
-  const create = async (data: AuthFields) => {
+  const create = async (data: RegisterFields) => {
     setSubmitting(true)
     try {
       await axios.post('/auth/register', 

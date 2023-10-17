@@ -1,50 +1,118 @@
-import axios from '@/api/axios'
-import { useState } from 'react'
-import { toast } from 'react-hot-toast'
-import { useNavigate } from 'react-router-dom'
+import { TypeOf } from 'zod'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
+import { AuthSchema } from '@/schema/schema'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+import Button from '@/components/Buttons/Button'
+import Heading from '@/components/Inputs/Heading'
+import useHandleAuth from '@/hooks/useHandleAuth'
+import Content from '@/components/Wrappers/Content'
 import useDocumentTitle from '@/hooks/useDocumentTitle'
-import { RegisterFields, RegisterForm } from '@/components/Auth/RegisterForm'
+import InputField from '@/components/Inputs/InputField'
+
+export type RegisterFields = TypeOf<typeof AuthSchema>
+
 
 const Register = () => {
-  useDocumentTitle('Create Account')
+  useDocumentTitle('Register')
 
-  const navigate = useNavigate()
-  
-  const [submitting, setSubmitting] = useState(false)
+  const { submitting, navigate, onRegister } = useHandleAuth()
 
-  const create = async (data: RegisterFields) => {
-    setSubmitting(true)
-    try {
-      await axios.post('/auth/register', 
-        JSON.stringify({
-          first_name: data.first_name, 
-          last_name: data.last_name, 
-          email: data.email, 
-          password: data.password
-        }), {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true
-      })
-      navigate('/login')
-      toast.success('User created, please login')
-    } catch (error: unknown) {
-      let errorMessage = 'Something went wrong: '
-      if (error instanceof Error) {
-        errorMessage += error
-      }
-      console.error(errorMessage)
-      toast.error('Error creating user')
-    } finally {
-      setSubmitting(false)
-    }
-  }
+  const { register, handleSubmit, setFocus, formState: { errors } } = useForm<RegisterFields>({
+    resolver: zodResolver(AuthSchema)
+  })
+
+  useEffect(() => {
+    setFocus('first_name')
+  }, [setFocus])
 
   return (
-    <RegisterForm 
-      onSubmit={create} 
-      submitting={submitting} 
-    />
-  )
-}
+    <div className='flex justify-center items-center h-[100vh] bg-gray-50'>
+      <Content>
+        <div className='rounded-sm shadow-lg bg-white px-5 py-5'>
+          <Heading label='create account' /> <hr />
+          <form 
+            onSubmit={handleSubmit(onRegister)} 
+            className='flex flex-col gap-2 transition-all w-[300px] md:w-auto lg:w-[500px] px-4 py-4'
+          >
+            <div className='flex flex-col md:flex-row gap-4 items-start'>
+              <div className='flex flex-col w-full gap-3'>
+                <InputField 
+                  id='first name'
+                  type='text'
+                  label='first name:'
+                  htmlFor='first name'
+                  placeholder='first name' 
+                  inputProps={register('first_name')}
+                  error={errors.first_name?.message as string}
+                />
+              </div>
 
-export default Register 
+              <div className='flex flex-col w-full gap-3'>
+                <InputField 
+                  id='last name'
+                  type='text'
+                  label='last name:'
+                  htmlFor='last name'
+                  placeholder='last name' 
+                  inputProps={register('last_name')}
+                  error={errors.last_name?.message as string}
+                />
+              </div>
+            </div>
+
+            <InputField 
+              id='email'
+              type='text'
+              label='email:'
+              htmlFor='email'
+              placeholder='email@example.com' 
+              inputProps={register('email')}
+              error={errors.email?.message as string}
+            />
+
+            <InputField 
+              id='password'
+              type='password'
+              label='password:'
+              htmlFor='password'
+              placeholder='********' 
+              inputProps={register('password')}
+              error={errors.password?.message as string}
+            />
+
+            <InputField
+              id='confirm password'
+              type='password'
+              label='confirm password:'
+              htmlFor='confirm password'
+              placeholder='********'            
+              inputProps={register('confirm_password')}
+              error={errors.confirm_password?.message as string}
+            />
+
+            <Button
+              type='submit'
+              disabled={submitting}
+              label={submitting ? 'registering...' : 'register'} 
+            />
+
+            {/* SHOULD COME AS A PROP OF REACT ELEMENT TYPE */}
+            <div className='flex gap-2 items-center'>
+              <p className='text-gray-500 text-sm md:text-[17px] capitalize'>already have an account?</p>
+              <Button 
+                type='button'
+                disabled={submitting}
+                label='login' 
+                onClick={() => navigate('/auth/login')}
+              />
+            </div>
+          </form>
+        </div>
+      </Content>
+    </div>
+  )
+}   
+
+export default Register   

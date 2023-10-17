@@ -1,44 +1,21 @@
 import { TypeOf } from 'zod'
-import { toast } from 'react-hot-toast'
-import { useState, useEffect } from 'react'
+import { useEffect } from 'react'
+import { useForm } from 'react-hook-form'
 import { AuthSchema } from '@/schema/schema'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { useForm, SubmitHandler } from 'react-hook-form'
 
-import axios from '@/api/axios'
+import useAuthReset from '@/hooks/useAuthReset'
 import Button from '@/components/Buttons/Button'
 import Heading from '@/components/Inputs/Heading'
 import useDocumentTitle from '@/hooks/useDocumentTitle'
 import InputField from '@/components/Inputs/InputField'
 
-type EmailField = Pick<TypeOf<typeof AuthSchema>, 'email'>
+export type EmailField = Pick<TypeOf<typeof AuthSchema>, 'email'>
 
-const ResetPwd = () => {  
-  useDocumentTitle('Reset Password')
+const ResetPwd = () => {
+  useDocumentTitle('Reset Password') 
 
-  const [error, setError] = useState('')
-  const [submitting, setSubmitting] = useState(false)
-
-  const sendEmail: SubmitHandler<EmailField> = async (data) => {
-    setSubmitting(true)
-    try {
-      await axios.post(`/reset`, JSON.stringify({ email: data.email }), {
-        headers: { 'Content-Type': 'application/json' },
-        withCredentials: true
-      })
-      toast.success('Email sent')
-    } catch (error: unknown) {
-      let errorMessage = 'Something went wrong: '
-      if (error instanceof Error) {
-        errorMessage += error
-        setError(error.message)
-      }
-      console.error(errorMessage)
-      toast.error('Email not sent')
-    } finally {
-      setSubmitting(false)
-    }
-  }   
+  const { submitting, error, sendEmail } = useAuthReset() 
 
   const { register, handleSubmit, setFocus, formState: { errors } } = useForm<EmailField>({
     resolver: zodResolver(AuthSchema)
@@ -58,9 +35,9 @@ const ResetPwd = () => {
         >
           <InputField 
             id='email'
-            htmlFor='email'
-            label='email:'
             type='text' 
+            label='email:'
+            htmlFor='email'
             placeholder='enter your email' 
             inputProps={register('email')}
             error={errors.email?.message as string}
@@ -69,7 +46,7 @@ const ResetPwd = () => {
           <p className='bg-red-600 text-white text-sm text-center'>{error}</p>
 
           <Button 
-            type={'submit'}
+            type='submit'
             disabled={submitting} 
             label={submitting ? 'sending...' : 'send email'}
           /> 
@@ -79,4 +56,5 @@ const ResetPwd = () => {
   )
 }
 
-export default ResetPwd  
+
+export default ResetPwd   

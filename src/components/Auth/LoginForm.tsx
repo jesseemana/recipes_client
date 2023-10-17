@@ -53,7 +53,7 @@ export const LoginForm = ({ onSubmit, submitting }: AuthProps) => {
               error={errors.password?.message as string}
             />
 
-            <InputField
+            {/* <InputField
               id='confirm password'
               type='password'
               label='confirm password:'
@@ -61,7 +61,7 @@ export const LoginForm = ({ onSubmit, submitting }: AuthProps) => {
               placeholder='********'            
               inputProps={register('confirm_password')}
               error={errors.confirm_password?.message as string}
-            />
+            /> */}
 
             <Link 
               to={'/auth/reset'} 

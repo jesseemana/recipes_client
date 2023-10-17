@@ -24,7 +24,7 @@ const useFetchRecipes = () => {
       let errorMessage = 'Something went wrong: '
       if (error instanceof Error)
         errorMessage += error
-      console.log(errorMessage)
+      console.error(errorMessage)
     } finally {
       setLoading(false)
     }
@@ -33,4 +33,4 @@ const useFetchRecipes = () => {
   return { user, recipes, loading, totalPages, currentPage, getRecipes, setCurrentPage }
 }
 
-export default useFetchRecipes  
+export default useFetchRecipes    

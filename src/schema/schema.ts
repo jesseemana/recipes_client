@@ -41,3 +41,14 @@ export const AuthSchema = object({
     path: ['confirm_password']
   }
 )     
+
+export const LoginSchema = object({
+  email: string().nonempty({ message: 'Provide an email' })
+    .email('Please enter a valid email').toLowerCase().trim().optional(),
+  password: string().nonempty({ message: 'Password is required' })
+    .regex(new RegExp(".*[A-Z].*"), "Password must contain at least one uppercase character")
+    .regex(new RegExp(".*[a-z].*"), "Password must contain at least one lowercase character")
+    .regex(new RegExp(".*\\d.*"), "Password must contain at least one number")
+    .regex(new RegExp(".*[`~<>?,./!@#$%^&*()\\-_+=\"'|{}\\[\\];:\\\\].*"), "Password must contain at least one special character")
+    .min(8, "Password must be at least 8 characters long").optional(),
+})     
